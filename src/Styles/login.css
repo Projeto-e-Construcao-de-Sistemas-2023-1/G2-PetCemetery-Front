@@ -1,0 +1,135 @@
+/*
+
+DESIGN DEFINITIVO E MAIS PROFISSIONAL
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
+
+body {
+  background-color: #f7f7f7;
+  font-family: 'Roboto Slab', serif;
+}
+
+.login-container {
+  margin: 50px auto;
+  max-width: 400px;
+  padding: 40px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #343a40;
+}
+
+label {
+  display: block;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  color: #343a40;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 30px;
+  border: none;
+  border-radius: 5px;
+  background-color: #343a40;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #23272b;
+}
+*/
+
+/* ESTILO QUE FICOU PARECENDO NETFLIX*/
+@font-face {
+    font-family: 'Creepster';
+    src: url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+}
+
+body {
+    background-color: #1a1a1a;
+    font-family: 'Creepster', cursive;
+  }
+  
+  .login-container {
+    margin: 50px auto;
+    max-width: 400px;
+    padding: 40px;
+    background-color: #2d2d2d;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+  }
+  
+  h1 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+  }
+  
+  label {
+    display: block;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+  
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+  }
+  
+  button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e60000;
+    color: #ffffff;
+    cursor: pointer;
+    text-shadow: none;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #ff4d4d;
+  }
