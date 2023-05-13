@@ -6,6 +6,7 @@ import Login from './Paginas/Login';
 import SobreNos from './Paginas/SobreNos';
 import Home from './Paginas/Home';
 import PaginaInicial from './Paginas/PaginaInicial';
+import ContratacaoPlanos from './Paginas/ContratacaoPlanos';
 import { BrowserRouter as Router, Switch, Route, Link, useHistory, createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const paginas = createBrowserRouter([
@@ -17,6 +18,10 @@ const paginas = createBrowserRouter([
   ,{
     path:"/PaginaInicial",
     element : <PaginaInicial/>
+  }
+  ,{
+    path:"/ContratacaoPlanos",
+    element : <ContratacaoPlanos/>
   }
   ,{
     path:"/Login",
