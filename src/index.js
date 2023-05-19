@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Login from './Paginas/Login';
-import SobreNos from './Paginas/SobreNos';
+import QuemSomos from './Paginas/QuemSomos';
 import Home from './Paginas/Home';
 import PaginaInicial from './Paginas/PaginaInicial';
 import ContratacaoPlanos from './Paginas/ContratacaoPlanos';
@@ -28,8 +28,8 @@ const paginas = createBrowserRouter([
     element : <Login/>
   },
   {
-    path:"/SobreNos",
-    element : <SobreNos/>
+    path:"/QuemSomos",
+    element : <QuemSomos/>
   },
   {
     path:"/Home",

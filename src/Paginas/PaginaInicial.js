@@ -2,28 +2,39 @@ import React from 'react';
 import '../Styles/pagina-inicial.css';
 import { Link } from 'react-router-dom';
 import logo from '../logo.png';
+import { Stack, Button, Typography } from '@mui/material';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function PaginaInicial() {
   return (
-    <div className="container">
-      <h1>Pet Cemetery</h1>
-      <img src={logo} alt="logo" className='logoImg'></img>
-      <p>Faça login ou crie uma conta para começar a alugar jazigos para animais.</p>
-      <div>
-        <Link to="/Login">
-            <button>Entrar</button>
-        </Link>
-        <button>Cadastrar</button>
+    <ThemeProvider theme={mainTheme}>
+      <CssBaseline />
+      <Container component="main" maxWidth="xs">
+        <Box sx={{ position: "fixed", top: 0, right: 0, zIndex: 2000, padding: 2 }}>
+          <Stack spacing={2} direction='row'>
+            <Button variant="contained" href="/Login">Login</Button>
+            <Button variant="contained" color="secondary" href="/Cadastro">Cadastro</Button>
+          </Stack>
+        </Box>
 
-        <button>Quem somos</button>
+        <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
+          <Typography variant="h1">Pet Cemetery</Typography>
+          <img src={logo} alt="logo" className='logoImg'></img>
 
-        <Link to="/ContratacaoPlanos">
-          <button>Conheça nossos planos</button>
-        </Link>
-
-        <button>Contato</button>
-      </div>
-    </div>
+          <Stack spacing={2} direction='column' divider={<Divider orientation="horizontal" flexItem />}>
+            <Button variant="contained" href="/QuemSomos">Quem somos</Button>
+            <Button variant="contained" href="/ContratacaoPlanos">Conheça nossos planos</Button>
+            <Button variant="contained" href="/Contato">Contato</Button>
+          </Stack>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
 }
 
