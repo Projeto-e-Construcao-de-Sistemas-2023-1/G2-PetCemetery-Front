@@ -1,6 +1,6 @@
 import React from 'react';
 import '../Styles/quem-somos.css';
-import { Button, Typography } from '@mui/material';
+import { AppBar, Button, Toolbar, Typography, Stack } from '@mui/material';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,6 +13,18 @@ function QuemSomos() {
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <Container component="main">
+        
+        <AppBar position='static'>
+          <Toolbar>
+            <Stack direction='row' spacing={2}>
+              <Button color='inherit'>Home</Button>
+              <Button color='inherit'>Quem Somos</Button>
+              <Button color='inherit'>Planos</Button>
+              <Button color='inherit'>Contato</Button>
+            </Stack>
+          </Toolbar>
+        </AppBar>
+
         <Box sx={{ position: "fixed", top: 0, left: 0, zIndex: 2000, padding: 2 }}>
           <Button variant="contained" href="/">Voltar</Button>
         </Box>
