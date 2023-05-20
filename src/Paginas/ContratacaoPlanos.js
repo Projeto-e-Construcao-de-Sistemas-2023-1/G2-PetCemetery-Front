@@ -6,7 +6,6 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import styled from '@emotion/styled';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function ContratacaoPlanos() {

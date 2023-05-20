@@ -1,38 +1,68 @@
 import React, { useState } from 'react';
 import '../Styles/login.css';
-import { useNavigate  } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import logo from '../logo.png';
+import { Stack, Button, Typography } from '@mui/material';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
+const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function Login() {
+  var emailInput = "", passwordInput = "";
+
   const navegacao = useNavigate();
   navegacao('/Login')
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [email] = useState('');
+  const [senha] = useState('');
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Vou fazer o back End aqu idepois pra mandar a chamada pro pessoal do springboot
-    console.log(`Email: ${email}, Senha: ${senha}`);
+  const handleEmail = (e) => {
+    emailInput = e.target.value;
+    console.log(emailInput);
   }
 
-  /* O link que tá no botao de login irá sair depois que a validação estiver na lógica ali na função do login*/
+  const handlePassword = (e) => {
+    passwordInput = e.target.value;
+    console.log(passwordInput);
+  }
+
+  const handleLogin = (e) => { }
+  const handleCadastro = (e) => { }
+
   return (
-    <div className="login-container"> {}
-      <h1>Login</h1>
-      <form className="login-form" onSubmit={handleSubmit}> {}
-        <label>
-          Email:
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </label>
-        <label>
-          Senha:
-          <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
-        </label>
-        <Link to="/Home">
-          <button type="submit">Login</button>
-        </Link>
-      </form>
-    </div>
+
+    <ThemeProvider theme={mainTheme}>
+      <CssBaseline />
+      <img src={logo} alt="logo" class='logo'></img>
+      <Container component="main" maxWidth="xs">
+        <Box sx={{ position: "fixed", top: 0, left: 0, zIndex: 2000, padding: 2 }}>
+          <Button variant="contained" href="/">Voltar</Button>
+        </Box>
+        <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
+          <Box sx={{ margin: 2 }}>
+            <Typography variant="h2" align='center'>Login</Typography>
+            <Divider orientation="horizontal" flexItem />
+
+            <TextField margin="normal" required fullWidth id="email" label="Email" name="email" autoComplete="email" autoFocus onChange={handleEmail} />
+            <TextField margin="normal" required fullWidth name="password" label="Senha" type="password" id="password" autoComplete="current-password" onChange={handlePassword} />
+
+            <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <Stack spacing={2} direction='row'>
+                <Button variant="contained" onClick={() => { handleLogin(); }}>Login</Button>
+                <Button variant="contained" color="secondary" onClick={() => { handleCadastro(); }}>Cadastro</Button>
+              </Stack>
+              <Box sx={{ margin: 2 }}>
+                <Button variant="contained" href="/Home">Login com Google</Button>
+              </Box>
+            </Box>
+
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
 }
 
