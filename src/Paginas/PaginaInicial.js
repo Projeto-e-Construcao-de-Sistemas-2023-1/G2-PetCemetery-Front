@@ -23,7 +23,7 @@ function PaginaInicial() {
 
         <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
           <Typography variant="h1">Pet Cemetery</Typography>
-          <img src={logo} alt="logo" className='logoImg'></img>
+          <img src={logo} alt="logo" className='logoImg' />
 
           <Stack spacing={2} direction='column' divider={<Divider orientation="horizontal" flexItem />}>
             <Button variant="contained" href="/QuemSomos">Quem somos</Button>

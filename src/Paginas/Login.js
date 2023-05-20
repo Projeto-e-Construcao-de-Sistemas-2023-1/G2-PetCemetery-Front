@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../Styles/login.css';
+import NavBar from '../components/NavBar';
 import logo from '../logo.png';
 import { useNavigate } from 'react-router-dom';
 import { Stack, Button, Typography } from '@mui/material';
@@ -36,14 +37,11 @@ function Login() {
   const handleGoogle = (e) => { navigate('/Home'); }
 
   return (
-
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <img src={logo} alt="logo" class='logo'></img>
+      <NavBar />
+      <img src={logo} alt="logo" className='logo'></img>
       <Container component="main" maxWidth="xs">
-        <Box sx={{ position: "fixed", top: 0, left: 0, zIndex: 2000, padding: 2 }}>
-          <Button variant="contained" href="/">Voltar</Button>
-        </Box>
         <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
           <Box sx={{ margin: 2 }}>
             <Typography variant="h2" align='center'>Login</Typography>

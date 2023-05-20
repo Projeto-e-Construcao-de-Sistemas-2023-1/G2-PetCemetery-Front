@@ -6,23 +6,15 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
+import NavBar from '../components/NavBar';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function QuemSomos() {
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <AppBar position='static'>
-          <Toolbar>
-            <Stack direction='row' spacing={2}>
-              <Button color='inherit'>Home</Button>
-              <Button color='inherit'>Quem Somos</Button>
-              <Button color='inherit'>Planos</Button>
-              <Button color='inherit'>Contato</Button>
-            </Stack>
-          </Toolbar>
-        </AppBar>
-        
+      <NavBar/>
+
       <Container component="main">
         <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
           <Box sx={{ margin: 2 }}>
