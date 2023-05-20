@@ -1,21 +1,26 @@
 import React from 'react';
 import '../Styles/home.css';
 import { Link } from 'react-router-dom';
+import { Stack, Button, Typography } from '@mui/material';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
+const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function Home() {
   return (
-    <div>
-      <h1>Bem-vindo ao cemitério de animais</h1>
-      <p>Encontre o jazigo perfeito para o seu amigo peludo</p>
-      <div>
-        <Link to="/PaginaInicial">
-            <button onClick={() => console.log('Encerrar sessão')}>Encerrar sessão</button>
-        </Link>
-        <Link to="/SobreNos">
-          <button>Sobre nós</button>
-        </Link>
-      </div>
-    </div>
+    <ThemeProvider theme={mainTheme}>
+      <CssBaseline />
+      <Container component="main" maxWidth="xs">
+        
+        <Typography variant="h2" align='left'>Meus Jazigos</Typography>
+
+
+      </Container>
+    </ThemeProvider>
   );
 }
 

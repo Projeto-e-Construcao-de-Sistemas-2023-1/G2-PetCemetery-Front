@@ -48,20 +48,21 @@ function Login() {
           <Box sx={{ margin: 2 }}>
             <Typography variant="h2" align='center'>Login</Typography>
             <Divider orientation="horizontal" flexItem />
+          </Box>
 
-            <TextField margin="normal" required fullWidth id="email" label="Email" name="email" autoComplete="email" autoFocus onChange={handleEmail} />
-            <TextField margin="normal" required fullWidth name="password" label="Senha" type="password" id="password" autoComplete="current-password" onChange={handlePassword} />
+          <TextField margin="normal" required fullWidth id="email" label="Email" name="email" autoComplete="email" autoFocus onChange={handleEmail} />
+          <TextField margin="normal" required fullWidth name="password" label="Senha" type="password" id="password" autoComplete="current-password" onChange={handlePassword} />
 
-            <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <Stack spacing={2} direction='row'>
-                <Button variant="contained" onClick={() => { handleLogin(); }}>Login</Button>
-                <Button variant="contained" color="secondary" onClick={() => { handleCadastro(); }}>Cadastro</Button>
-              </Stack>
-              <Box sx={{ margin: 2 }}>
-                <Button variant="contained" onClick={() => { handleGoogle(); }}>Login com Google</Button>
-              </Box>
+          <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+            <Stack spacing={2} direction='row'>
+              <Button variant="contained" onClick={() => { handleLogin(); }}>Login</Button>
+              <Button variant="contained" color="secondary" onClick={() => { handleCadastro(); }}>Cadastro</Button>
+            </Stack>
+            <Box sx={{ margin: 2 }}>
+              <Button variant="contained" onClick={() => { handleGoogle(); }}>Login com Google</Button>
             </Box>
           </Box>
+
         </Box>
       </Container>
     </ThemeProvider>

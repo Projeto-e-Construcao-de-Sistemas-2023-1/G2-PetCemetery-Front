@@ -12,9 +12,7 @@ function QuemSomos() {
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <Container component="main">
-        
-        <AppBar position='static'>
+      <AppBar position='static'>
           <Toolbar>
             <Stack direction='row' spacing={2}>
               <Button color='inherit'>Home</Button>
@@ -24,13 +22,10 @@ function QuemSomos() {
             </Stack>
           </Toolbar>
         </AppBar>
-
-        <Box sx={{ position: "fixed", top: 0, left: 0, zIndex: 2000, padding: 2 }}>
-          <Button variant="contained" href="/">Voltar</Button>
-        </Box>
-
+        
+      <Container component="main">
         <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-          <Box sx={{ margin: 2}}>
+          <Box sx={{ margin: 2 }}>
             <Typography variant="h2">Quem Somos</Typography>
             <Divider orientation="horizontal" flexItem />
           </Box>

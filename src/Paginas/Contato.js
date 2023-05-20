@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Styles/quem-somos.css';
+import '../Styles/contato.css';
 import { Button, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
