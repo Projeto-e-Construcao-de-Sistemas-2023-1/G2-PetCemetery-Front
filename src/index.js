@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Login from './Paginas/Login';
+import Cadastro from './Paginas/Cadastro';
 import QuemSomos from './Paginas/QuemSomos';
 import Home from './Paginas/Home';
 import PaginaInicial from './Paginas/PaginaInicial';
@@ -13,32 +14,36 @@ import { BrowserRouter as Router, Switch, Route, Link, useHistory, createBrowser
 const paginas = createBrowserRouter([
 
   {
-    path:"/",
-    element : <PaginaInicial/>
+    path: "/",
+    element: <PaginaInicial />
   }
-  ,{
-    path:"/PaginaInicial",
-    element : <PaginaInicial/>
+  , {
+    path: "/PaginaInicial",
+    element: <PaginaInicial />
   }
-  ,{
-    path:"/Contato",
-    element : <Contato/>
+  , {
+    path: "/Contato",
+    element: <Contato />
   }
-  ,{
-    path:"/ContratacaoPlanos",
-    element : <ContratacaoPlanos/>
+  , {
+    path: "/ContratacaoPlanos",
+    element: <ContratacaoPlanos />
   }
-  ,{
-    path:"/Login",
-    element : <Login/>
+  , {
+    path: "/Login",
+    element: <Login />
+  },
+  , {
+    path: "/Cadastro",
+    element: <Cadastro />
   },
   {
-    path:"/QuemSomos",
-    element : <QuemSomos/>
+    path: "/QuemSomos",
+    element: <QuemSomos />
   },
   {
-    path:"/Home",
-    element : <Home/>
+    path: "/Home",
+    element: <Home />
   }
 
 ])

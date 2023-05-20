@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../Styles/login.css';
-import { useNavigate } from 'react-router-dom';
 import logo from '../logo.png';
+import { useNavigate } from 'react-router-dom';
 import { Stack, Button, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -12,6 +12,7 @@ import TextField from '@mui/material/TextField';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function Login() {
+  const navigate = useNavigate();
   var emailInput = "", passwordInput = "";
 
   const navegacao = useNavigate();
@@ -28,9 +29,11 @@ function Login() {
     passwordInput = e.target.value;
     console.log(passwordInput);
   }
+  //TODO refazer usando useState e state variables.
 
-  const handleLogin = (e) => { }
-  const handleCadastro = (e) => { }
+  const handleLogin = (e) => { navigate('/Home'); }
+  const handleCadastro = (e) => { navigate('/Cadastro'); }
+  const handleGoogle = (e) => { navigate('/Home'); }
 
   return (
 
@@ -55,10 +58,9 @@ function Login() {
                 <Button variant="contained" color="secondary" onClick={() => { handleCadastro(); }}>Cadastro</Button>
               </Stack>
               <Box sx={{ margin: 2 }}>
-                <Button variant="contained" href="/Home">Login com Google</Button>
+                <Button variant="contained" onClick={() => { handleGoogle(); }}>Login com Google</Button>
               </Box>
             </Box>
-
           </Box>
         </Box>
       </Container>
