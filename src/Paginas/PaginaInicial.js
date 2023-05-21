@@ -17,7 +17,7 @@ function PaginaInicial() {
       <NavBar page={1} />
       <Container component="main" maxWidth="xs">
 
-        <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
+        <Box sx={{ marginTop: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
           <Typography variant="h1">Pet Cemetery</Typography>
           <img src={logo} alt="logo" className='logoImg' />
 
