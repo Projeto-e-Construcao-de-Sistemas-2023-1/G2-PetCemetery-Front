@@ -13,7 +13,7 @@ function QuemSomos() {
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <NavBar/>
+      <NavBar page={2}/>
 
       <Container component="main">
         <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>

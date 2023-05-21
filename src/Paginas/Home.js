@@ -16,7 +16,7 @@ function Home() {
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <Container component="main">
-        <NavBar />
+        <NavBar page={1} />
 
         <Typography variant="h2" align='left'>Meus Jazigos</Typography>
 

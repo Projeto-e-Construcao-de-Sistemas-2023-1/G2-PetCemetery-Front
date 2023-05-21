@@ -1,6 +1,7 @@
 import React from 'react';
 import '../Styles/pagina-inicial.css';
 import logo from '../logo.png';
+import NavBar from '../components/NavBar';
 import { Stack, Button, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -13,6 +14,7 @@ function PaginaInicial() {
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
+      <NavBar />
       <Container component="main" maxWidth="xs">
         <Box sx={{ position: "fixed", top: 0, right: 0, zIndex: 2000, padding: 2 }}>
           <Stack spacing={2} direction='row'>

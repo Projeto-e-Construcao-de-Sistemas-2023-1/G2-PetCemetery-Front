@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../Styles/contratacao-planos.css';
+import NavBar from '../components/NavBar';
 import { Button, Typography, FormControlLabel, Checkbox } from '@mui/material';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -26,11 +27,8 @@ function ContratacaoPlanos() {
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
+      <NavBar page={3} />
       <Container component="main">
-        <Box sx={{ position: "fixed", top: 0, left: 0, zIndex: 2000, padding: 2 }}>
-          <Button variant="contained" href="/">Voltar</Button>
-        </Box>
-
         <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Box sx={{ margin: 2 }}>
             <Typography variant="h2" align='center'>Conheça nossos planos de personalização</Typography>
