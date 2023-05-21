@@ -1,11 +1,11 @@
+import { Button, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react';
 import '../Styles/quem-somos.css';
-import { AppBar, Button, Toolbar, Typography, Stack } from '@mui/material';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import Divider from '@mui/material/Divider';
 import NavBar from '../components/NavBar';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 

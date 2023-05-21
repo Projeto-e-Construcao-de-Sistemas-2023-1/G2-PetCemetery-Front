@@ -1,9 +1,6 @@
+import { AppBar, Button, Stack, Toolbar } from '@mui/material';
 import React from 'react';
 import './navbar.css';
-import logo from '../logo.png';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import { AppBar, Button, Toolbar, Typography, Stack } from '@mui/material';
 
 function NavBar(props) {
     var color1, color2, color3, color4;
@@ -40,7 +37,7 @@ function NavBar(props) {
             break;
 
     }
-    return (
+    return ( //TODO: Adicionar botao de login e cadastro aparecendo em todas as telas que tem o menu. se estiver logado, mostrar botao de logout.
         <React.Fragment>
             <AppBar position='static' sx={{ top: 0, left: 0, right: 0, position: 'fixed', width: '100%' }}>
                 <Toolbar sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }} >
