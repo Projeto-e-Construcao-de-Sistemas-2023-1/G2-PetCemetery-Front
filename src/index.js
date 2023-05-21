@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import Login from './Paginas/Login';
 import Cadastro from './Paginas/Cadastro';
 import QuemSomos from './Paginas/QuemSomos';
+import EditarPerfil from './Paginas/EditarPerfil';
 import Home from './Paginas/Home';
 import PaginaInicial from './Paginas/PaginaInicial';
 import ContratacaoPlanos from './Paginas/ContratacaoPlanos';
@@ -36,6 +37,10 @@ const paginas = createBrowserRouter([
   , {
     path: "/Cadastro",
     element: <Cadastro />
+  },
+  , {
+    path: "/EditarPerfil",
+    element: <EditarPerfil />
   },
   {
     path: "/QuemSomos",

@@ -1,23 +1,21 @@
+import { Button, Stack, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import TextField from '@mui/material/TextField';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../Styles/login.css';
 import NavBar from '../components/NavBar';
 import logo from '../logo.png';
-import { useNavigate } from 'react-router-dom';
-import { Stack, Button, Typography } from '@mui/material';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import TextField from '@mui/material/TextField';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function Login() {
   const navigate = useNavigate();
   var emailInput = "", passwordInput = "";
 
-  const navegacao = useNavigate();
-  navegacao('/Login')
   const [email] = useState('');
   const [senha] = useState('');
 
@@ -56,7 +54,8 @@ function Login() {
               <Button variant="contained" onClick={() => { handleLogin(); }}>Login</Button>
               <Button variant="contained" color="secondary" onClick={() => { handleCadastro(); }}>Cadastro</Button>
             </Stack>
-            <Box sx={{ margin: 2 }}>
+            <Divider orientation="horizontal" flexItem sx={{ margin: 2 }} />
+            <Box>
               <Button variant="contained" onClick={() => { handleGoogle(); }}>Login com Google</Button>
             </Box>
           </Box>

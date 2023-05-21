@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import TextField from '@mui/material/TextField';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
@@ -16,9 +17,11 @@ function Home() {
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <Container component="main">
-        <NavBar page={1} />
+        <NavBar isLoggedIn={true} />
 
         <Typography variant="h2" align='left'>Meus Jazigos</Typography>
+        <NotificationsActiveIcon align='right'/>
+
 
 
       </Container>

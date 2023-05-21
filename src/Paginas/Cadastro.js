@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import '../Styles/cadastro.css';
-import { useNavigate } from 'react-router-dom';
-import { Stack, Button, Typography, Grid } from '@mui/material';
-import Container from '@mui/material/Container';
+import { Button, Grid, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
+import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../Styles/cadastro.css';
+import NavBar from '../components/NavBar';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function Cadastro() {
@@ -34,11 +35,8 @@ function Cadastro() {
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
+      <NavBar />
       <Container component="main" maxWidth="xs">
-        <Box sx={{ position: "fixed", top: 0, left: 0, zIndex: 2000, padding: 2 }}>
-          <Button variant="contained" href="/">Voltar</Button>
-        </Box>
-
         <Box sx={{ margin: 2 }}>
           <Typography variant="h2" align='center'>Cadastro</Typography>
           <Divider orientation="horizontal" flexItem />
