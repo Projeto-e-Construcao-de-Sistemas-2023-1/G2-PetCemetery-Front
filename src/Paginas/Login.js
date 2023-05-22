@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import loginPost from '../components/api';
 import '../Styles/login.css';
 import NavBar from '../components/NavBar';
 import logo from '../logo.png';
@@ -30,7 +31,10 @@ function Login() {
   }
   //TODO refazer usando useState e state variables.
 
-  const handleLogin = (e) => { navigate('/Home'); }
+  const handleLogin = (e) => {
+    navigate('/Home');
+    //loginPost(emailInput, passwordInput);
+  }
   const handleCadastro = (e) => { navigate('/Cadastro'); }
   const handleGoogle = (e) => { navigate('/Home'); }
 

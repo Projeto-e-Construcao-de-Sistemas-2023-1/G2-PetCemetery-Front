@@ -1,12 +1,12 @@
+import { Checkbox, FormControlLabel, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { useState } from 'react';
 import '../Styles/contratacao-planos.css';
 import NavBar from '../components/NavBar';
-import { Button, Typography, FormControlLabel, Checkbox } from '@mui/material';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function ContratacaoPlanos() {
@@ -29,7 +29,7 @@ function ContratacaoPlanos() {
       <CssBaseline />
       <NavBar page={3} />
       <Container component="main">
-        <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Box sx={{ margin: 2 }}>
             <Typography variant="h2" align='center'>Conheça nossos planos de personalização</Typography>
             <Divider orientation="horizontal" flexItem />
