@@ -21,8 +21,7 @@ function InfoScreen() {
             <Divider orientation="horizontal" flexItem />
           </Box>
 
-
-          <Button variant="contained" href="/QuemSomos">Home</Button>
+          <Button variant="contained" href="/Home">Home</Button>
 
         </Box>
       </Container>

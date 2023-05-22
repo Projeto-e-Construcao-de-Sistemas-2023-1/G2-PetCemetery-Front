@@ -14,6 +14,10 @@ import InfoScreen from './Paginas/InfoScreen';
 import Contato from './Paginas/Contato';
 import { BrowserRouter as Router, Switch, Route, Link, useHistory, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import AdquirirJazigo from './Paginas/AdquirirJazigo';
+import VisualizarDespesas from './Paginas/VisualizarDespesas';
+import AgendarLembrete from './Paginas/AgendarLembrete';
+import AgendarReuniao from './Paginas/AgendarReuniao';
+import RealizarDoacoes from './Paginas/RealizarDoacoes';
 //TODO já criar o esqueleto de TODAS as paginas possiveis
 //TODO ver se vale a pena criar componente para Titulo com Divider
 const paginas = createBrowserRouter([
@@ -53,6 +57,22 @@ const paginas = createBrowserRouter([
   , {
     path: "/AdquirirJazigo",
     element: <AdquirirJazigo />
+  },
+  , {
+    path: "/VisualizarDespesas",
+    element: <VisualizarDespesas />
+  },
+  , {
+    path: "/AgendarLembrete",
+    element: <AgendarLembrete />
+  },
+  , {
+    path: "/AgendarReuniao",
+    element: <AgendarReuniao />
+  },
+  , {
+    path: "/RealizarDoacoes",
+    element: <RealizarDoacoes />
   },
   , {
     path: "/InfoScreen",
