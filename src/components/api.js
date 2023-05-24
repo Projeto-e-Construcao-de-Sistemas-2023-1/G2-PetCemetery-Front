@@ -15,7 +15,7 @@ export const loginPost = async (email, senha) => {
         const response = await apiCall.post('/api/login', { email, senha });
         return response.data;
     } catch (error) {
-        throw new Error('Login failed. Please try again.');
+        console.log(error);
     }
 };
 
@@ -25,6 +25,6 @@ export const cadastroPost = async (email, senha, senharepeat, nome, cpf, telefon
         const response = await apiCall.post('/api/cadastro', { email, senha, senharepeat, nome, cpf, telefone, rua, numero, complemento, cep });
         return response.data;
     } catch (error) {
-        throw new Error('Cadastro failed. Please try again.');
+        console.log(error);
     }
 }

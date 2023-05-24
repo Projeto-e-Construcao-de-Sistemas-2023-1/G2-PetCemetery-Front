@@ -14,12 +14,9 @@ const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function Cadastro() {
   const navigate = useNavigate();
-  var emailInput , senhaInput, nomeInput, cpfInput, telefoneInput, ruaInput, numeroInput, complementoInput, cepInput, repitaSenhaInput;
+  var emailInput, senhaInput, nomeInput, cpfInput, telefoneInput, ruaInput, numeroInput, complementoInput, cepInput, repitaSenhaInput;
 
-  const navegacao = useNavigate();
-  navegacao('/Login')
-  const [email] = useState('');
-  const [senha] = useState('');
+  const [errMsg, setErrMsg] = useState("");
 
   const handleEmail = (e) => {
     emailInput = e.target.value;
@@ -71,8 +68,28 @@ function Cadastro() {
     console.log(repitaSenhaInput);
   }
 
-  const handleCadastro = (e) => {
-    cadastroPost(emailInput, senhaInput, repitaSenhaInput, nomeInput, cpfInput, telefoneInput, ruaInput, numeroInput, complementoInput, cepInput);
+  const handleCadastro = async (e) => {
+    let resp = await cadastroPost(emailInput, senhaInput, repitaSenhaInput, nomeInput, cpfInput, telefoneInput, ruaInput, numeroInput, complementoInput, cepInput);
+    console.log(resp);
+
+    resp = resp.split(';');
+
+    if (resp[0] == "OK") {
+      console.log("cpf do cliente: " + resp[1])
+      navigate('/Home');
+    }
+    else if (resp[0] == "ERR") {
+      console.log("ERRO! motivo: " + resp[1]);
+      if (resp[1] == "senhas_diferentes") { setErrMsg("As senhas digitadas não são iguais"); }
+      else if (resp[1] == "email_invalido") { setErrMsg("O email digitado não é válido"); }
+      else if (resp[1] == "email_ja_cadastrado") { setErrMsg("O email digitado já está cadastrado"); }
+      else if (resp[1] == "campo_vazio") { setErrMsg("Preencha todos os campos"); }
+      else { setErrMsg("Erro desconhecido"); }
+    }
+    else {
+      console.log("Erro na formatacao de resposta do servidor");
+      setErrMsg("Erro na formatação de resposta do servidor");
+    }
   }
 
   return (
@@ -127,6 +144,8 @@ function Cadastro() {
       <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <Button variant="contained" onClick={() => { handleCadastro(); }}>Cadastro</Button>
       </Box>
+
+      <Typography variant="h6" color="error" align='center'>{errMsg}</Typography>
 
     </ThemeProvider>
   );

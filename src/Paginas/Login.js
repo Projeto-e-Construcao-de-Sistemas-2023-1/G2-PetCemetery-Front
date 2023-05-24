@@ -16,9 +16,7 @@ const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 function Login() {
   const navigate = useNavigate();
   var emailInput = "", passwordInput = "";
-
-  const [email] = useState('');
-  const [senha] = useState('');
+  const [errMsg, setErrMsg] = useState("");
 
   const handleEmail = (e) => {
     emailInput = e.target.value;
@@ -31,10 +29,30 @@ function Login() {
   }
   //TODO refazer usando useState e state variables.
 
-  const handleLogin = (e) => {
-    //navigate('/Home');
-    loginPost(emailInput, passwordInput);
+  const handleLogin = async (e) => { //formato: STATUS;tipo_cliente;cpf
+    let resp = await loginPost(emailInput, passwordInput);
+    console.log(resp);
+
+    resp = resp.split(';');
+
+    if (resp[0] == "OK") {
+      if (resp[1] == "cliente") {
+        navigate('/Home');
+      } else if (resp[1] == "admin") {
+        navigate('/HomeAdmin');
+      }
+    }
+    else if (resp[0] == "ERR") {
+      console.log("ERRO! motivo: " + resp[1]);
+      if(resp[1] == "email_invalido") setErrMsg("Email inválido");
+      else if(resp[1] == "senha_invalida") setErrMsg("Senha inválida");
+    }
+    else {
+      console.log("Erro na formatacao de resposta do servidor");
+      setErrMsg("Erro na formatação de resposta do servidor");
+    }
   }
+
   const handleCadastro = (e) => { navigate('/Cadastro'); }
   const handleGoogle = (e) => { navigate('/Home'); }
 
@@ -63,7 +81,7 @@ function Login() {
               <Button variant="contained" onClick={() => { handleGoogle(); }}>Login com Google</Button>
             </Box>
           </Box>
-
+          <Typography variant="h6" color="error" align='center'>{errMsg}</Typography>
         </Box>
       </Container>
     </ThemeProvider>
