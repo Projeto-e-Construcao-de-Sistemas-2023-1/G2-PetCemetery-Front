@@ -1,19 +1,20 @@
-import React from 'react';
-import '../Styles/home.css';
-import { Link } from 'react-router-dom';
-import NavBar from '../components/NavBar';
-import { Stack, Button, Typography, Grid } from '@mui/material';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import { Button, Grid, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import TextField from '@mui/material/TextField';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../Styles/home.css';
+import NavBar from '../components/NavBar';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function Home() {
+  const cpf = 12321;
+  //mandar requisicao pro back, mandar o cpf e o back vai retornar os dados relevantes à pagina
+
+  //CPF: {cpf}, pagina: home
+
   const navigate = useNavigate();
   return (
     <ThemeProvider theme={mainTheme}>

@@ -51,7 +51,7 @@ function Login() {
           </Box>
 
           <TextField margin="normal" required fullWidth id="email" label="Email" name="email" autoComplete="email" autoFocus onChange={handleEmail} />
-          <TextField margin="normal" required fullWidth name="senha" label="Senha" type="senha" id="senha" autoComplete="current-password" onChange={handlePassword} />
+          <TextField margin="normal" required fullWidth name="senha" label="Senha" type="password" id="senha" autoComplete="current-password" onChange={handlePassword} />
 
           <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <Stack spacing={2} direction='row'>
