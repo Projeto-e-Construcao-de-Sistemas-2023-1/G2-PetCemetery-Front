@@ -1,0 +1,25 @@
+.cardContainer {
+    width: 400px;
+    padding: 20px;
+  }
+  
+  .cardContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .cardImage {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }

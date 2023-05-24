@@ -27,7 +27,7 @@ function Home() {
             </Grid>
             <Grid container spacing={2} direction="column" alignItems="left">
               <Grid item>
-                <Button variant="outlined">Jazigo Vazio</Button>
+                <Button variant="outlined" onClick={() => { navigate('/DetalhesJazigo') }}>Vasco      15/04/2023</Button>
               </Grid>
               <Grid item>
                 <Button variant="outlined">Jazigo Vazio</Button>
