@@ -7,10 +7,10 @@ import TextField from '@mui/material/TextField';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import loginPost from '../components/api';
 import '../Styles/login.css';
 import NavBar from '../components/NavBar';
 import logo from '../logo.png';
+import { loginPost } from '../components/api';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function Login() {
@@ -32,8 +32,8 @@ function Login() {
   //TODO refazer usando useState e state variables.
 
   const handleLogin = (e) => {
-    navigate('/Home');
-    //loginPost(emailInput, passwordInput);
+    //navigate('/Home');
+    loginPost(emailInput, passwordInput);
   }
   const handleCadastro = (e) => { navigate('/Cadastro'); }
   const handleGoogle = (e) => { navigate('/Home'); }
@@ -51,7 +51,7 @@ function Login() {
           </Box>
 
           <TextField margin="normal" required fullWidth id="email" label="Email" name="email" autoComplete="email" autoFocus onChange={handleEmail} />
-          <TextField margin="normal" required fullWidth name="password" label="Senha" type="password" id="password" autoComplete="current-password" onChange={handlePassword} />
+          <TextField margin="normal" required fullWidth name="senha" label="Senha" type="senha" id="senha" autoComplete="current-password" onChange={handlePassword} />
 
           <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <Stack spacing={2} direction='row'>

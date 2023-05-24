@@ -11,7 +11,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
-import { DatePicker } from '@mui/x-date-pickers';
+
 
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
@@ -39,12 +39,6 @@ const AgendarExumacao = () => {
                             Agendar Exumação
                         </Typography>
 
-                        <DatePicker
-                            label="Selecione a data"
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                            renderInput={(params) => <TextField {...params} />}
-                        />
                         <Typography variant="body1" gutterBottom>
                             Preço: R$ {precoExumacao.toFixed(2)}
                         </Typography>
