@@ -16,7 +16,7 @@ const PersonalizarJazigo = () => {
     return (
         <ThemeProvider theme={mainTheme}>
             <CssBaseline />
-            <NavBar page={1} isLoggedIn={true} />
+            <NavBar isLoggedIn={true} />
             <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
                 <Card>
                     <CardContent>

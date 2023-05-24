@@ -31,49 +31,32 @@ const DetalhesJazigo = () => {
     return (
         <ThemeProvider theme={mainTheme}>
             <CssBaseline />
-            <NavBar page={1} isLoggedIn={true} />
+            <NavBar isLoggedIn={true} />
             <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
                 <Card>
                     <Box p={2} textAlign="center">
-                        <Typography variant="h5" component="h1" gutterBottom>
-                            Detalhes do Jazigo
-                        </Typography>
-                        <Typography variant="body1" gutterBottom>
-                            Nome: {animal.nome}
-                        </Typography>
-                        <Typography variant="body1" gutterBottom>
-                            Nascimento: {animal.nascimento}
-                        </Typography>
-                        <Typography variant="body1" gutterBottom>
-                            Espécie: {animal.especie}
-                        </Typography>
-                        <Typography variant="body1" gutterBottom>
-                            Proprietário: {animal.proprietario}
-                        </Typography>
-                        <Typography variant="body1" gutterBottom>
-                            Endereço: {animal.endereco}
-                        </Typography>
-                        <Typography variant="body1" gutterBottom>
-                            Última Visita: {animal.ultimaVisita}
-                        </Typography>
-                        <Typography variant="body1" gutterBottom>
-                            Data de Enterro: {animal.dataEnterro}
-                        </Typography>
-                        <Typography variant="body1" gutterBottom>
-                            Plano Contratado: {animal.planoContratado}
-                        </Typography>
-                        <Typography variant="body1" gutterBottom>
-                            Mensagem na Lápide: {animal.mensagemLapide}
-                        </Typography>
+                        <Typography variant="h5" component="h1" gutterBottom>Detalhes do Jazigo</Typography>
+                        <Stack direction="row" spacing={2} margin={2} justifyContent="center" divider={<Divider orientation="vertical" flexItem />}>
+                            <Typography variant="body1">Nome: {animal.nome}</Typography>
+                            <Typography variant="body1">Nascimento: {animal.nascimento}</Typography>
+                            <Typography variant="body1">Espécie: {animal.especie}</Typography>
+                            <Typography variant="body1">Proprietário: {animal.proprietario}</Typography>
+                            <Typography variant="body1">Endereço: {animal.endereco}</Typography>
+                            <Typography variant="body1">Última Visita: {animal.ultimaVisita}</Typography>
+                            <Typography variant="body1">Data de Enterro: {animal.dataEnterro}</Typography>
+                            <Typography variant="body1">Plano Contratado: {animal.planoContratado}</Typography>
+                            <Typography variant="body1">Mensagem na Lápide: {animal.mensagemLapide}</Typography>
+                        </Stack>
+
                         <img src={animal.imagemAnimal} alt="Imagem do Animal" width={200} />
-                        <Box mt={2}>
+                        <Stack direction="row" spacing={2}>
                             <Button variant="contained" color="primary" onClick={() => { navigate('/AgendarExumacao') }}>
                                 Agendar exumação
                             </Button>
                             <Button variant="contained" color="secondary" onClick={() => { navigate('/PersonalizarJazigo') }}>
                                 Personalizar Jazigo
                             </Button>
-                        </Box>
+                        </Stack>
                     </Box>
                 </Card>
             </Box>

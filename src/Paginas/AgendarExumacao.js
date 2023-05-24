@@ -11,7 +11,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
-import { DatePicker } from '@mui/lab';
+import { DatePicker } from '@mui/x-date-pickers';
 
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
@@ -31,13 +31,14 @@ const AgendarExumacao = () => {
     return (
         <ThemeProvider theme={mainTheme}>
             <CssBaseline />
-            <NavBar page={1} isLoggedIn={true} />
+            <NavBar isLoggedIn={true} />
             <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
                 <Card>
                     <Box p={2} textAlign="center">
                         <Typography variant="h5" component="h1" gutterBottom>
                             Agendar Exumação
                         </Typography>
+
                         <DatePicker
                             label="Selecione a data"
                             value={selectedDate}
