@@ -23,6 +23,7 @@ import AgendarExumacao from './Paginas/AgendarExumacao';
 import PersonalizarJazigo from './Paginas/PersonalizarJazigo';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import MapaJazigos from './Paginas/MapaJazigos';
 //TODO já criar o esqueleto de TODAS as paginas possiveis
 //TODO ver se vale a pena criar componente para Titulo com Divider
 
@@ -103,6 +104,10 @@ const paginas = createBrowserRouter([
   , {
     path: "/InfoScreen",
     element: <InfoScreen />
+  },
+  , {
+    path: "/MapaJazigos",
+    element: <MapaJazigos />
   },
   {
     path: "/QuemSomos",

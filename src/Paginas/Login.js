@@ -28,6 +28,7 @@ function Login() {
     console.log(passwordInput);
   }
   //TODO refazer usando useState e state variables.
+  //TODO sistema de cpfs para clientes
 
   const handleLogin = async (e) => { //formato: STATUS;tipo_cliente;cpf
     let resp = await loginPost(emailInput, passwordInput);
@@ -44,8 +45,8 @@ function Login() {
     }
     else if (resp[0] == "ERR") {
       console.log("ERRO! motivo: " + resp[1]);
-      if(resp[1] == "email_invalido") setErrMsg("Email inválido");
-      else if(resp[1] == "senha_invalida") setErrMsg("Senha inválida");
+      if (resp[1] == "email_invalido") setErrMsg("Email inválido");
+      else if (resp[1] == "senha_invalida") setErrMsg("Senha inválida");
     }
     else {
       console.log("Erro na formatacao de resposta do servidor");

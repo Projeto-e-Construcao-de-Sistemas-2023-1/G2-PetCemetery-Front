@@ -27,4 +27,14 @@ export const cadastroPost = async (email, senha, senharepeat, nome, cpf, telefon
     } catch (error) {
         console.log(error);
     }
-}
+};
+
+export const getGravesOccupationStatus = async () => {
+    console.log("entrou no getGravesOccupationStatus");
+    try {
+        const response = await apiCall.get('/api/jazigos_disponiveis');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
