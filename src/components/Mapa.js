@@ -21,7 +21,7 @@ const Mapa = () => {
 
     const gridItems = Array.from({ length: 72 }, (_, index) => (
         <Grid item key={index} xs={3} sm={2} md={1} lg={1} xl={1}>
-            {<IconButton id={index} onClick={() => {clickedGrave(index)}} > <img src={getCurrOcc(index) ? jverde : jvermelho} alt="icone" /></IconButton>}
+            {<IconButton id={index} onClick={() => {clickedGrave(index)}} > <img src={getCurrOcc(index) ? jvermelho : jverde} alt="icone" /></IconButton>}
         </Grid>
     ));
 
