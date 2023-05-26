@@ -24,6 +24,8 @@ import PersonalizarJazigo from './Paginas/PersonalizarJazigo';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import MapaJazigos from './Paginas/MapaJazigos';
+import ComprarOrnamento from './Paginas/ComprarOrnamento';
+import CompraJazigo from './Paginas/CompraJazigo';
 //TODO já criar o esqueleto de TODAS as paginas possiveis
 //TODO ver se vale a pena criar componente para Titulo com Divider
 
@@ -108,6 +110,14 @@ const paginas = createBrowserRouter([
   , {
     path: "/MapaJazigos",
     element: <MapaJazigos />
+  },
+  , {
+    path: "/ComprarOrnamento",
+    element: <ComprarOrnamento />
+  },
+  , {
+    path: "/CompraJazigo",
+    element: <CompraJazigo />
   },
   {
     path: "/QuemSomos",

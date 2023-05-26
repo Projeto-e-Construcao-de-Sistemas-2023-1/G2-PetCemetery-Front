@@ -10,6 +10,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import TextField from '@mui/material/TextField';
+import Mapa from '../components/Mapa';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AdquirirJazigo() {
@@ -22,6 +23,8 @@ function AdquirirJazigo() {
           <Typography variant="h2" align='center'>Escolha o Jazigo no Mapa</Typography>
           <Divider orientation="horizontal" flexItem />
         </Box>
+
+        <Mapa />
 
       </Container>
 

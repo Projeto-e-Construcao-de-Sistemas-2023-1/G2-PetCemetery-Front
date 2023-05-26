@@ -4,11 +4,14 @@ import React from 'react';
 import jverde from '../jverde.png';
 import jvermelho from '../jvermelho.png';
 import { getGravesOccupationStatus } from '../components/api';
+import { useNavigate } from 'react-router-dom';
 
 const Mapa = () => {
+    const navigate = useNavigate();
 
     function clickedGrave(index) {
         console.log("clicked " + index);
+        navigate("/CompraJazigo");
     }
 
     var mapArray = getGravesOccupationStatus();
