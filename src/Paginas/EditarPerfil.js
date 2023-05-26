@@ -11,7 +11,7 @@ import '../Styles/editar-perfil.css';
 import NavBar from '../components/NavBar';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
-function EditarPerfil() {
+function EditarPerfil({ nome, email }) {
   const navigate = useNavigate();
   const handleDesativar = (e) => { }
 
@@ -29,12 +29,12 @@ function EditarPerfil() {
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '80%' }}>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left', width: '100%' }}>
             <Typography variant="h5">Nome</Typography>
-            <TextField margin="normal" fullWidth id="nome" label="João das Neves" name="nome" disabled InputProps={{ readOnly: true, style: { color: 'white' }, }} InputLabelProps={{ style: { color: 'white' }, }} />
+            <TextField margin="normal" fullWidth id="nome" label="João das Neves" name="nome" disabled InputProps={{ readOnly: true, style: { color: 'white' }, }} InputLabelProps={{ style: { color: 'white' }, }}/>
           </Box>
 
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left', width: '100%' }}>
             <Typography variant="h5">Email</Typography>
-            <TextField margin="normal" fullWidth id="email" label="joaodasneves@example.com" name="email" disabled InputProps={{ readOnly: true, style: { color: 'white' }, }} InputLabelProps={{ style: { color: 'white' }, }} />
+            <TextField margin="normal" fullWidth id="email" label="joaodasneves@example.com" name="email" disabled InputProps={{ readOnly: true, style: { color: 'white' }, }} InputLabelProps={{ style: { color: 'white' }, }}/>
           </Box>
         </Box>
 
