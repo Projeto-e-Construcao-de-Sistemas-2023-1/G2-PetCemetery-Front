@@ -14,6 +14,11 @@ function CompraJazigo() {
   const navigate = useNavigate();
   const [jazigo, setJazigo] = useState(""); // Supondo que jazigoData é um objeto com as informações do jazigo
 
+  const handleJazigo = (jazigo) => {
+    jazigo.name = jazigo.split(";");
+    console.log(emailInput);
+  }
+
   const handleComprar = (e) => { navigate('/ComprarOrnamento'); }
 
   return (
@@ -23,8 +28,8 @@ function CompraJazigo() {
       <Container component="main" maxWidth="xs">
         <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
           <Typography variant="h5" component="h2">Jazigo Selecionado</Typography>
-          <Typography variant="body1" component="p">{`Nome do Jazigo: ${jazigo.name}`}</Typography>
-          <Typography variant="body1" component="p">{`Valor do Jazigo: ${jazigo.price}`}</Typography>
+          <Typography variant="body1" component="p">{`Nome do Jazigo: A-1`}</Typography>
+          <Typography variant="body1" component="p">{`Valor do Jazigo: 30000.0`}</Typography>
           <Divider orientation="horizontal" flexItem sx={{ margin: 2 }} />
           <Stack spacing={2} direction='row'>
             <Button variant="contained" onClick={() => { handleComprar(); }}>Comprar Pacote de Ornamentos</Button>
