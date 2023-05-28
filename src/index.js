@@ -23,7 +23,6 @@ import AgendarExumacao from './pages/AgendarExumacao';
 import PersonalizarJazigo from './pages/PersonalizarJazigo';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import MapaJazigos from './pages/MapaJazigos';
 import ComprarOrnamento from './pages/ComprarOrnamento';
 import CompraJazigo from './pages/CompraJazigo';
 //TODO já criar o esqueleto de TODAS as paginas possiveis
@@ -106,10 +105,6 @@ const paginas = createBrowserRouter([
   , {
     path: "/InfoScreen",
     element: <InfoScreen />
-  },
-  , {
-    path: "/MapaJazigos",
-    element: <MapaJazigos />
   },
   , {
     path: "/ComprarOrnamento",
