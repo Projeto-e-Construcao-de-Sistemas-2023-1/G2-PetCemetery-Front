@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../Styles/detalhes-jazigo.css';
-import imagemCachorro from '../Imagens/cachorro-vasco.jpg';
+import imagemCachorro from '../images/cachorro-vasco.jpg';
 import { Link } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import { Stack, Button, Typography, Grid, Card, Box } from '@mui/material';
