@@ -33,11 +33,11 @@ function AdquirirJazigo() {
   };
 
   const handleComprar = () => {
-    navigate(`/CompraJazigo?cpf=${cpf}&id=${JazigoEscolhido}`);
+    navigate(`/CompraAlugaJazigo?cpf=${cpf}&id=${JazigoEscolhido}&tipo=compra`);
   };
 
   const handleAlugar = () => {
-    navigate(`/AlugaJazigo?cpf=${cpf}&id=${JazigoEscolhido}`);
+    navigate(`/CompraAlugaJazigo?cpf=${cpf}&id=${JazigoEscolhido}&tipo=aluguel`);
   };
 
   return (

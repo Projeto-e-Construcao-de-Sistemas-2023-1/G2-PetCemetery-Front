@@ -142,10 +142,9 @@ function AlterarPerfil() {
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <NavBar isLoggedIn={true} cpf={cpf} />
+      <Titulo texto="Alterar Perfil" />
 
       <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-        <Titulo texto="Alterar Perfil" />
-
         <Grid container spacing={2} direction='column'>
           <Grid container spacing={2} direction='row' alignItems='center'>
             <Grid item xs={6}>
