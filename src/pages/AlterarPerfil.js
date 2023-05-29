@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import '../Styles/alterar-perfil.css';
 import NavBar from '../components/NavBar';
 import { editarPerfilPost } from '../components/api';
+import Titulo from '../components/Titulo';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AlterarPerfil() {
@@ -101,10 +102,7 @@ function AlterarPerfil() {
       <NavBar isLoggedIn={true} />
 
       <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-        <Box sx={{ margin: 2 }}>
-          <Typography variant="h2" align='center'>Alterar Perfil</Typography>
-          <Divider orientation="horizontal" flexItem />
-        </Box>
+        <Titulo texto="Alterar Perfil" />
 
         <Grid container spacing={2}>
           <Grid item xs={6}>

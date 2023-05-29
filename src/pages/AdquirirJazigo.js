@@ -9,10 +9,12 @@ import '../Styles/adquirir-jazigo.css';
 import Mapa from '../components/Mapa';
 import NavBar from '../components/NavBar';
 import ModalPadrao from '../components/ModalPadrao';
-
+import { useNavigate } from 'react-router-dom';
 const mainTheme = createTheme({ palette: { mode: 'dark' } });
 
 function AdquirirJazigo() {
+  const navigate = useNavigate();
+
   const [JazigoEscolhido, setJazigoEscolhido] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -25,6 +27,14 @@ function AdquirirJazigo() {
   const handleModalClose = () => {
     setIsModalOpen(false);
     setJazigoEscolhido(null);
+  };
+
+  const handleComprar = () => {
+    navigate(`/CompraJazigo?id=${JazigoEscolhido}`);
+  };
+
+  const handleAlugar = () => {
+    navigate(`/AlugaJazigo?id=${JazigoEscolhido}`);
   };
 
   return (
@@ -40,15 +50,7 @@ function AdquirirJazigo() {
         </Box>
 
         <Mapa onJazigoSelect={handleEscolha} isModalOpen={isModalOpen} />
-        <ModalPadrao
-          title={"Jazigo " + (JazigoEscolhido + 1)}
-          open={isModalOpen}
-          onClose={handleModalClose}
-          bt1Text="Comprar"
-          bt1Href={handleModalClose}
-          bt2Text="Alugar"
-          bt2Href={handleModalClose}
-        />
+        <ModalPadrao title={"Jazigo " + (JazigoEscolhido + 1)} open={isModalOpen} onClose={handleModalClose} bt1Text="Comprar" bt1Href={handleComprar} bt2Text="Alugar" bt2Href={handleAlugar} />
       </Container>
     </ThemeProvider>
   );

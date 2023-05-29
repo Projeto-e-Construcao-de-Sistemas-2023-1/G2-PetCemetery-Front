@@ -7,6 +7,8 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
+import { useLocation } from 'react-router-dom';
+import Titulo from '../components/Titulo';
 
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
@@ -14,27 +16,29 @@ function CompraJazigo() {
   const navigate = useNavigate();
   const [jazigo, setJazigo] = useState(""); // Supondo que jazigoData é um objeto com as informações do jazigo
 
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const jazigoId = searchParams.get('id');
+
   const handleJazigo = (jazigo) => {
     jazigo.name = jazigo.split(";");
     //console.log(emailInput);
   }
-
-  const handleComprar = (e) => { navigate('/ComprarOrnamento'); }
+  //TODO: Fazer o fetch do preço do jazigo pelo id, e colocar no lugar do 30000
+  const handleComprar = (e) => { navigate(`/ComprarOrnamento?id=${jazigoId}`); }
 
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <NavBar />
       <Container component="main" maxWidth="xs">
-        <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-          <Typography variant="h5" component="h2">Jazigo Selecionado</Typography>
-          <Typography variant="body1" component="p">{`Nome do Jazigo: A-1`}</Typography>
-          <Typography variant="body1" component="p">{`Valor do Jazigo: 30000.0`}</Typography>
+        <Box sx={{ marginTop: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
+          <Titulo texto={"Jazigo " + (+jazigoId + 1)} />
+          <Typography variant="h6">{`Valor do Jazigo: R$ 30000,00`}</Typography>
           <Divider orientation="horizontal" flexItem sx={{ margin: 2 }} />
           <Stack spacing={2} direction='row'>
             <Button variant="contained" onClick={() => { handleComprar(); }}>Comprar Pacote de Ornamentos</Button>
           </Stack>
-          <Divider orientation="horizontal" flexItem sx={{ margin: 2 }} />
         </Box>
       </Container>
     </ThemeProvider>
