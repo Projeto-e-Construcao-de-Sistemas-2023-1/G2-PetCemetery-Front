@@ -16,10 +16,12 @@ const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 function EditarPerfil() {
   const cpf = getUrlParams('cpf');
   const navigate = useNavigate();
-  const handleDesativar = (e) => { }
+  const handleDesativar = (e) => {
+    navigate(`/DesativarConta?cpf=${cpf}`);
+  }
 
-  const [nome, setNome] = React.useState("");
-  const [email, setEmail] = React.useState("");
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
 
   const [errMsg, setErrMsg] = useState("");
 
@@ -44,7 +46,6 @@ function EditarPerfil() {
       setErrMsg("Erro na formatação de resposta do servidor");
     }
   }
-
   handleLoad();
 
   return (
@@ -73,6 +74,8 @@ function EditarPerfil() {
           </Stack>
         </Box>
       </Box>
+
+      <Typography variant="h6" color="error" align='center'>{errMsg}</Typography>
 
     </ThemeProvider>
   );

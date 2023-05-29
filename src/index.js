@@ -26,6 +26,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import ComprarOrnamento from './pages/ComprarOrnamento';
 import CompraJazigo from './pages/CompraJazigo';
 import AlugaJazigo from './pages/AlugaJazigo';
+import DesativarConta from './pages/DesativarConta';
 //TODO já criar o esqueleto de TODAS as paginas possiveis
 //TODO ver se vale a pena criar componente para Titulo com Divider
 
@@ -82,6 +83,10 @@ const paginas = createBrowserRouter([
   , {
     path: "/AlterarPerfil",
     element: <AlterarPerfil />
+  },
+  , {
+    path: "/DesativarConta",
+    element: <DesativarConta />
   },
   , {
     path: "/AdquirirJazigo",
