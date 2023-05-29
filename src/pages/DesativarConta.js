@@ -10,6 +10,7 @@ import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 import { desativarPerfilPost, getExibirPerfil } from '../components/api';
 import { getUrlParams } from '../utils/utils';
+import ModalPadrao from '../components/ModalPadrao';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function DesativarConta() {
@@ -19,6 +20,7 @@ function DesativarConta() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [errMsg, setErrMsg] = useState("");
 
   const handleLoad = async (e) => {
@@ -34,7 +36,7 @@ function DesativarConta() {
     }
     else if (resp[0] == "ERR") {
       console.log("ERRO! motivo: " + resp[1]);
-      if (resp[1] == "conta_desativada") setErrMsg("Conta desativada");
+      if (resp[1] == "conta_desativada") setErrMsg("Essa conta já está desativada");
       else setErrMsg("Erro desconhecido");
     }
     else {
@@ -53,7 +55,7 @@ function DesativarConta() {
 
     if (resp[0] == "OK") {
       console.log("Conta desativada. CPF= " + resp[1]);
-      navigate('/');
+      setIsModalOpen(true);
     }
     else if (resp[0] == "ERR") {
       console.log("ERRO! motivo: " + resp[1]);
@@ -65,6 +67,9 @@ function DesativarConta() {
       setErrMsg("Erro na formatação de resposta do servidor");
     }
   }
+
+  const handleHome = () => { navigate('/'); };
+  const handleCadastro = () => { navigate('/Cadastro'); };
 
   return (
     <ThemeProvider theme={mainTheme}>
@@ -92,6 +97,8 @@ function DesativarConta() {
             <Button variant="contained" color="error" onClick={() => { handleDesativar(); }}>Desativar Conta</Button>
           </Stack>
         </Box>
+
+        <ModalPadrao title={"Conta desativada com sucesso"} open={isModalOpen} bt1Text="Home" bt1Href={handleHome} bt2Text="Cadastro" bt2Href={handleCadastro} colorBorda={"mainTheme.palette.error.main"} />
       </Box>
 
       <Typography variant="h6" color="error" align='center'>{errMsg}</Typography>
