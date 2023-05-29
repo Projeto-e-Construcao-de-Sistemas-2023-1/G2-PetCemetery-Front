@@ -3,7 +3,7 @@ import React from 'react';
 import { ReactComponent as Logo } from '../logo.svg';
 import './navbar.css';
 
-const NavBar = ({ page, isLoggedIn }) => {
+const NavBar = ({ page, isLoggedIn, cpf }) => {
     var color1, color2, color3, color4;
 
     switch (page) {
@@ -64,8 +64,8 @@ const NavBar = ({ page, isLoggedIn }) => {
                         }
                         {isLoggedIn &&
                             <Stack spacing={2} direction='row'>
-                                <Button variant="contained" color="primary" href="/EditarPerfil">Meu Perfil</Button>
-                                <Button variant="contained" color="error" href="/PaginaInicial">Logout</Button>
+                                <Button variant="contained" color="primary" href={`/EditarPerfil?cpf=${cpf}`}>Meu Perfil</Button>
+                                <Button variant="contained" color="error" href={'/'}>Logout</Button>
                             </Stack>
                         }
                     </Box>

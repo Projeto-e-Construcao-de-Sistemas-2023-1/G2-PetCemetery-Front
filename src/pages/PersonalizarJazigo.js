@@ -5,9 +5,13 @@ import React from 'react';
 import '../Styles/detalhes-jazigo.css';
 import NavBar from '../components/NavBar';
 import imagemCachorro from '../images/cachorro-vasco.jpg';
+import { useLocation } from 'react-router-dom';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 const PersonalizarJazigo = () => {
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const cpf = searchParams.get('cpf');
     return (
         <ThemeProvider theme={mainTheme}>
             <CssBaseline />

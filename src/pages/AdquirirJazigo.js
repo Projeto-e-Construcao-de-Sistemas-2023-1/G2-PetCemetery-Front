@@ -8,9 +8,14 @@ import Mapa from '../components/Mapa';
 import ModalPadrao from '../components/ModalPadrao';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
+import { useLocation } from 'react-router-dom';
 const mainTheme = createTheme({ palette: { mode: 'dark' } });
 
 function AdquirirJazigo() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const cpf = searchParams.get('cpf');
+
   const navigate = useNavigate();
 
   const [JazigoEscolhido, setJazigoEscolhido] = useState(null);
@@ -28,17 +33,17 @@ function AdquirirJazigo() {
   };
 
   const handleComprar = () => {
-    navigate(`/CompraJazigo?id=${JazigoEscolhido}`);
+    navigate(`/CompraJazigo?cpf=${cpf}&id=${JazigoEscolhido}`);
   };
 
   const handleAlugar = () => {
-    navigate(`/AlugaJazigo?id=${JazigoEscolhido}`);
+    navigate(`/AlugaJazigo?cpf=${cpf}&id=${JazigoEscolhido}`);
   };
 
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <NavBar isLoggedIn={true} />
+      <NavBar isLoggedIn={true} cpf={cpf} />
       <Titulo texto="Escolha o jazigo no mapa" mW="md" />
       <Container component="main">
         <Mapa onJazigoSelect={handleEscolha} isModalOpen={isModalOpen} />

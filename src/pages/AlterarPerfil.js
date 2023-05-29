@@ -10,70 +10,84 @@ import '../Styles/alterar-perfil.css';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 import { editarPerfilPost } from '../components/api';
+import { useLocation } from 'react-router-dom';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AlterarPerfil() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const cpf = searchParams.get('cpf');
+
   const navigate = useNavigate();
-  var emailInput, senhaInput, nomeInput, cpfInput, telefoneInput, ruaInput, numeroInput, complementoInput, cepInput, repitaSenhaInput;
+
+  const [emailInput, setEmailInput] = useState("");
+  const [senhaInput, setSenhaInput] = useState("");
+  const [nomeInput, setNomeInput] = useState("");
+  const [telefoneInput, setTelefoneInput] = useState("");
+  const [ruaInput, setRuaInput] = useState("");
+  const [numeroInput, setNumeroInput] = useState("");
+  const [complementoInput, setComplementoInput] = useState("");
+  const [cepInput, setCepInput] = useState("");
+  const [repitaSenhaInput, setRepitaSenhaInput] = useState("");
 
   const [errMsg, setErrMsg] = useState("");
 
   const handleEmail = (e) => {
-    emailInput = e.target.value;
+    setEmailInput(e.target.value);
     console.log(emailInput);
   }
 
   const handleNome = (e) => {
-    nomeInput = e.target.value;
+    setNomeInput(e.target.value);
     console.log(nomeInput);
   }
 
-  const handleCpf = (e) => {
-    cpfInput = e.target.value;
-    console.log(cpfInput);
-  }
-
   const handleTelefone = (e) => {
-    telefoneInput = e.target.value;
+    setTelefoneInput(e.target.value);
     console.log(telefoneInput);
   }
 
   const handleRua = (e) => {
-    ruaInput = e.target.value;
+    setRuaInput(e.target.value);
     console.log(ruaInput);
   }
 
   const handleNumero = (e) => {
-    numeroInput = e.target.value;
+    setNumeroInput(e.target.value);
     console.log(numeroInput);
   }
 
   const handleComplemento = (e) => {
-    complementoInput = e.target.value;
+    setComplementoInput(e.target.value);
     console.log(complementoInput);
   }
 
   const handleCep = (e) => {
-    cepInput = e.target.value;
+    setCepInput(e.target.value);
     console.log(cepInput);
   }
 
   const handleSenha = (e) => {
-    senhaInput = e.target.value;
+    setSenhaInput(e.target.value);
     console.log(senhaInput);
   }
 
   const handleRepitaSenha = (e) => {
-    repitaSenhaInput = e.target.value;
+    setRepitaSenhaInput(e.target.value);
     console.log(repitaSenhaInput);
+  }
+
+  const handleCancelar = (e) => {
+    navigate(`/EditarPerfil?cpf=${cpf}`);
   }
 
 
   const handleAlterar = async (e) => {
-    let resp = await editarPerfilPost(nomeInput, emailInput, telefoneInput, ruaInput, numeroInput, complementoInput, cepInput, senhaInput, repitaSenhaInput, cpfInput);
+    let resp = await editarPerfilPost(nomeInput, emailInput, telefoneInput, ruaInput, numeroInput, complementoInput, cepInput, senhaInput, repitaSenhaInput);
     console.log(resp);
 
-    resp = resp.split(';');
+    if (resp != null) resp = resp.split(';');
+    else { console.log("Resposta do back = null"); setErrMsg("Erro na conexão com o servidor. Verifique sua rede"); return; }
 
     if (resp[0] == "OK") {
       console.log("cpf do cliente: " + resp[1]);
@@ -98,55 +112,55 @@ function AlterarPerfil() {
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <NavBar isLoggedIn={true} />
+      <NavBar isLoggedIn={true} cpf={cpf} />
 
       <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
         <Titulo texto="Alterar Perfil" />
 
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <Grid item >
+        <Grid container spacing={2} direction='column'>
+          <Grid container spacing={2} direction='row' alignItems='center'>
+            <Grid item xs={6}>
               <TextField margin="normal" required fullWidth id="nome" label="Nome" name="nome" onChange={handleNome} />
             </Grid>
-            <Grid item>
+            <Grid item xs={6}>
               <TextField margin="normal" required fullWidth name="email" label="Email" type="email" id="email" onChange={handleEmail} />
             </Grid>
-            <Grid item>
-              <TextField margin="normal" required fullWidth name="cpf" label="CPF" id="cpf" onChange={handleCpf} />
-            </Grid>
-            <Grid item>
+          </Grid>
+          <Grid container spacing={2} direction='row' alignItems='center'>
+            <Grid item xs={6}>
               <TextField margin="normal" required fullWidth name="telefone" label="Telefone" id="telefone" onChange={handleTelefone} />
             </Grid>
-            <Grid item>
-              <TextField margin="normal" required fullWidth name="password" label="Senha" type="password" id="password" onChange={handleSenha} />
-            </Grid>
-          </Grid>
-
-          <Grid item xs={6}>
-            <Grid item>
-              <TextField margin="normal" required fullWidth name="rua" label="Rua" id="rua" onChange={handleRua} />
-            </Grid>
-            <Grid item>
-              <TextField margin="normal" required fullWidth name="numero" label="Numero" id="numero" onChange={handleNumero} />
-            </Grid>
-            <Grid item>
-              <TextField margin="normal" required fullWidth name="complemento" label="Complemento" id="complemento" onChange={handleComplemento} />
-            </Grid>
-            <Grid item>
+            <Grid item xs={6}>
               <TextField margin="normal" required fullWidth name="cep" label="CEP" id="cep" onChange={handleCep} />
             </Grid>
-            <Grid item>
-              <TextField margin="normal" required fullWidth name="senharepeat" label="Repita a senha" type="password" id="senharepeat" onChange={handleRepitaSenha} />
+          </Grid>
+          <Grid container spacing={2} direction='row' alignItems='center'>
+            <Grid item xs={6}>
+              <TextField margin="normal" required fullWidth name="rua" label="Rua" id="rua" onChange={handleRua} />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField margin="normal" required fullWidth name="numero" label="Numero" id="numero" onChange={handleNumero} />
+            </Grid>
+          </Grid>
+          <Grid container spacing={2} direction='row' alignItems='center'>
+            <Grid item xs={6}>
+              <TextField margin="normal" fullWidth name="complemento" label="Complemento" id="complemento" onChange={handleComplemento} />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField margin="normal" required fullWidth name="senha" type="password" label="Senha" id="senha" onChange={handleSenha} />
+            </Grid>
+          </Grid>
+          <Grid container spacing={2} direction='row' alignItems='center'>
+            <Grid item xs={6}>
+              <TextField margin="normal" required fullWidth name="senharepeat" type="password" label="Repita a senha" id="senharepeat" onChange={handleRepitaSenha} />
             </Grid>
           </Grid>
         </Grid>
 
-        <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-          <Stack spacing={2} direction='column' divider={<Divider orientation="horizontal" flexItem />}>
-            <Button variant="contained" color="error" onClick={() => { handleAlterar(); }}>Alterar</Button>
-            <Button variant="contained" color="secondary" href='/EditarPerfil'>Cancelar</Button>
-          </Stack>
-        </Box>
+        <Stack spacing={2} sx={{ margin: 2 }} direction='row'>
+          <Button variant="contained" color="error" onClick={() => { handleAlterar(); }}>Alterar</Button>
+          <Button variant="contained" color="secondary" onClick={() => { handleCancelar(); }}>Cancelar</Button>
+        </Stack>
 
         <Typography variant="h6" color="error" align='center'>{errMsg}</Typography>
       </Box>

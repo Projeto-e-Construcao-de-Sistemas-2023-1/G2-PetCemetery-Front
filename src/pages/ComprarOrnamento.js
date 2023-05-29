@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 
@@ -13,6 +13,10 @@ const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function ComprarOrnamento() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const jazigoId = searchParams.get('id');
+  const cpf = searchParams.get('cpf');
 
   const [selectedOrnament, setSelectedOrnament] = useState('Gold');
 
@@ -34,7 +38,7 @@ function ComprarOrnamento() {
             <FormControlLabel control={<Checkbox checked={selectedOrnament === 'Gold'} onChange={handleChange} value="Gold" />} label="Gold: Mensagem, Foto, Flores e Catavento - R$80,00" />
             <Divider orientation="horizontal" flexItem sx={{ margin: 2 }} />
             <Stack spacing={2} direction='row'>
-              <Button variant="contained" onClick={() => { navigate('/ConfirmarCompra'); }}>Comprar</Button>
+              <Button variant="contained" onClick={() => { navigate(`/ConfirmarCompra?cpf=${cpf}&id=${jazigoId}`); }}>Comprar</Button>
             </Stack>
           </Stack>
         </Box>

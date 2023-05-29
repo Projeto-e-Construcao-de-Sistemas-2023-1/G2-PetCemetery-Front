@@ -11,11 +11,14 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
-
-
+import { useLocation } from 'react-router-dom';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 const AgendarExumacao = () => {
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const cpf = searchParams.get('cpf');
+
     const [selectedDate, setSelectedDate] = useState(null);
     const precoExumacao = 400.00;
 

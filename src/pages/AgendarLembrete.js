@@ -1,24 +1,25 @@
-import React from 'react';
-import '../Styles/agendar-lembrete.css';
-import { Link } from 'react-router-dom';
-import NavBar from '../components/NavBar';
-import { Stack, Button, Typography, Grid } from '@mui/material';
 import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import '../Styles/agendar-lembrete.css';
+import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AgendarLembrete() {
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const cpf = searchParams.get('cpf');
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <NavBar isLoggedIn={true} />
+      <NavBar isLoggedIn={true} cpf={cpf} />
       <Titulo texto="Adicione um lembrete de visita" mW="md" />
       <Container component="main">
-        
+
 
       </Container>
 

@@ -1,20 +1,20 @@
-import React from 'react';
-import '../Styles/detalhes-jazigo.css';
-import imagemCachorro from '../images/cachorro-vasco.jpg';
-import { Link } from 'react-router-dom';
-import NavBar from '../components/NavBar';
-import { Stack, Button, Typography, Grid, Card, Box } from '@mui/material';
-import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
+import { Box, Button, Card, Stack, Typography } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import TextField from '@mui/material/TextField';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import '../Styles/detalhes-jazigo.css';
+import NavBar from '../components/NavBar';
+import imagemCachorro from '../images/cachorro-vasco.jpg';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 const DetalhesJazigo = () => {
-    const animal = {
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const cpf = searchParams.get('cpf');
+
+    const animal = { //TODO: puxar do backend os dados do animal
         nome: 'Vasco',
         nascimento: '12/05/2010',
         especie: 'Cachorro',
@@ -31,7 +31,7 @@ const DetalhesJazigo = () => {
     return (
         <ThemeProvider theme={mainTheme}>
             <CssBaseline />
-            <NavBar isLoggedIn={true} />
+            <NavBar isLoggedIn={true} cpf={cpf} />
             <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
                 <Card>
                     <Box p={2} textAlign="center">
@@ -50,10 +50,10 @@ const DetalhesJazigo = () => {
 
                         <img src={animal.imagemAnimal} alt="Imagem do Animal" width={200} />
                         <Stack direction="row" spacing={2}>
-                            <Button variant="contained" color="primary" onClick={() => { navigate('/AgendarExumacao') }}>
+                            <Button variant="contained" color="primary" onClick={() => { navigate(`/AgendarExumacao?cpf=${cpf}`) }}>
                                 Agendar exumação
                             </Button>
-                            <Button variant="contained" color="secondary" onClick={() => { navigate('/PersonalizarJazigo') }}>
+                            <Button variant="contained" color="secondary" onClick={() => { navigate(`/PersonalizarJazigo?cpf=${cpf}`) }}>
                                 Personalizar Jazigo
                             </Button>
                         </Stack>

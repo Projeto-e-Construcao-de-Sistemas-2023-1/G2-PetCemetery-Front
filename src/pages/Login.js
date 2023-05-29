@@ -23,12 +23,12 @@ function Login() {
   const [errMsg, setErrMsg] = useState("");
 
   const handleEmail = (e) => {
-    setEmailInput = e.target.value;
+    setEmailInput(e.target.value);
     console.log(emailInput);
   }
 
   const handlePassword = (e) => {
-    setPasswordInput = e.target.value;
+    setPasswordInput(e.target.value);
     console.log(passwordInput);
   }
 
@@ -38,11 +38,12 @@ function Login() {
     let resp = await loginPost(emailInput, passwordInput);
     console.log(resp);
 
-    resp = resp.split(';');
+    if (resp != null) resp = resp.split(';');
+    else { console.log("Resposta do back = null"); setErrMsg("Erro na conexão com o servidor. Verifique sua rede"); return; }
 
     if (resp[0] == "OK") {
       if (resp[1] == "cliente") {
-        navigate('/Home');
+        navigate(`/Home?cpf=${resp[2]}`);
       } else if (resp[1] == "admin") {
         navigate('/HomeAdmin');
       }

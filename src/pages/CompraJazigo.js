@@ -18,13 +18,14 @@ function CompraJazigo() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const jazigoId = searchParams.get('id');
+  const cpf = searchParams.get('cpf');
 
   const handleJazigo = (jazigo) => {
     jazigo.name = jazigo.split(";");
     //console.log(emailInput);
   }
   //TODO: Fazer o fetch do preço do jazigo pelo id, e colocar no lugar do 30000
-  const handleComprar = (e) => { navigate(`/ComprarOrnamento?id=${jazigoId}`); }
+  const handleComprar = (e) => { navigate(`/ComprarOrnamento?cpf=${cpf}&id=${jazigoId}`); }
 
   return (
     <ThemeProvider theme={mainTheme}>

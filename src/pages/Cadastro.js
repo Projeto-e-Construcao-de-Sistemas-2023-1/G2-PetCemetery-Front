@@ -82,11 +82,11 @@ function Cadastro() {
     console.log(resp);
 
     if (resp != null) resp = resp.split(';');
-    else console.log("Resposta do back = null");
+    else { console.log("Resposta do back = null"); setErrMsg("Erro na conexão com o servidor. Verifique sua rede"); return; }
 
     if (resp[0] == "OK") {
       console.log("cpf do cliente: " + resp[1]);
-      navigate('/Home');
+      navigate(`/Home?cpf=${resp[1]}`);
     }
     else if (resp[0] == "ERR") {
       console.log("ERRO! motivo: " + resp[1]);

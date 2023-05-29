@@ -5,7 +5,7 @@ import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../Styles/editar-perfil.css';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
@@ -14,11 +14,14 @@ const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 function EditarPerfil({ nome, email }) {
   const navigate = useNavigate();
   const handleDesativar = (e) => { }
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const cpf = searchParams.get('cpf');
 
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <NavBar isLoggedIn={true} />
+      <NavBar isLoggedIn={true} cpf={cpf} />
       <Titulo texto="Seu Perfil" />
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '80%' }}>
@@ -35,8 +38,8 @@ function EditarPerfil({ nome, email }) {
 
         <Box sx={{ margin: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
           <Stack spacing={2} direction='column' divider={<Divider orientation="horizontal" flexItem />}>
-            <Button variant="contained" href='/AlterarPerfil'>Alterar Informações da Conta</Button>
-            <Button variant="contained" color="secondary" href='/Home'>Cancelar</Button>
+            <Button variant="contained" href={`/AlterarPerfil?cpf=${cpf}`}>Alterar Informações da Conta</Button>
+            <Button variant="contained" color="secondary" href={`/Home?cpf=${cpf}`}>Cancelar</Button>
             <Button variant="contained" color="error" onClick={() => { handleDesativar(); }}>Desativar Conta</Button>
           </Stack>
         </Box>
