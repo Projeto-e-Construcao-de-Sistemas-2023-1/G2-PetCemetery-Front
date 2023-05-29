@@ -4,10 +4,9 @@ import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../Styles/home.css';
 import NavBar from '../components/NavBar';
-import { useLocation } from 'react-router-dom';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function Home() {

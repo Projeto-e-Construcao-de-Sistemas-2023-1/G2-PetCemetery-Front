@@ -1,11 +1,10 @@
 import { Grid, IconButton } from '@mui/material';
 import Container from '@mui/material/Container';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { getGravesOccupationStatus } from '../components/api';
+import jazul from '../jazul.png';
 import jverde from '../jverde.png';
 import jvermelho from '../jvermelho.png';
-import jazul from '../jazul.png';
 
 const Mapa = ({ onJazigoSelect, isModalOpen }) => {
     const [selectedButton, setSelectedButton] = useState(null);

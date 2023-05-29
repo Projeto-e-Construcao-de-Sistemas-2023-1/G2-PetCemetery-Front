@@ -42,7 +42,17 @@ export const getGravesOccupationStatus = async (cpf) => {
 export const getExibirPerfil = async (cpf) => {
     console.log("entrou no getExibirPerfil");
     try {
-        const response = await apiCall.get(`/api/cliente/${cpf}/exibir-perfil`);
+        const response = await apiCall.post(`/api/cliente/${cpf}/exibir-perfil`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getAlterarPerfil = async (cpf) => {
+    console.log("entrou no getAlterarPerfil");
+    try {
+        const response = await apiCall.post(`/api/cliente/${cpf}/get-alterar-perfil`);
         return response.data;
     } catch (error) {
         console.log(error);

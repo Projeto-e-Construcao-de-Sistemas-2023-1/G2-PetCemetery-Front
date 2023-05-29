@@ -34,7 +34,7 @@ const AgendarExumacao = () => {
     return (
         <ThemeProvider theme={mainTheme}>
             <CssBaseline />
-            <NavBar isLoggedIn={true} />
+            <NavBar isLoggedIn={true} cpf={cpf} />
             <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
                 <Card>
                     <Box p={2} textAlign="center">

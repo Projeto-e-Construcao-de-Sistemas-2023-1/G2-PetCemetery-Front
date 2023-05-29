@@ -2,10 +2,10 @@ import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/mate
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import '../Styles/detalhes-jazigo.css';
 import NavBar from '../components/NavBar';
 import imagemCachorro from '../images/cachorro-vasco.jpg';
-import { useLocation } from 'react-router-dom';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 const PersonalizarJazigo = () => {
@@ -15,7 +15,7 @@ const PersonalizarJazigo = () => {
     return (
         <ThemeProvider theme={mainTheme}>
             <CssBaseline />
-            <NavBar isLoggedIn={true} />
+            <NavBar isLoggedIn={true} cpf={cpf} />
             <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
                 <Card>
                     <CardContent>

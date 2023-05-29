@@ -10,8 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import '../Styles/login.css';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
-import logo from '../logo.png';
 import { loginPost } from '../components/api';
+import logo from '../logo.png';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function Login() {
