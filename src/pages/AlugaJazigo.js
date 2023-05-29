@@ -11,7 +11,7 @@ import Titulo from '../components/Titulo';
 
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
-function CompraJazigo() {
+function AlugaJazigo() {
   const navigate = useNavigate();
   const [jazigo, setJazigo] = useState(""); // Supondo que jazigoData é um objeto com as informações do jazigo
 
@@ -31,13 +31,13 @@ function CompraJazigo() {
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <NavBar />
-      <Titulo texto={"Comprar Jazigo " + (+jazigoId + 1)} />
+      <Titulo texto={"Alugar Jazigo " + (+jazigoId + 1)} />
       <Container component="main" maxWidth="xs">
         <Box sx={{ marginTop: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
           <Typography variant="h6">{`Valor do Jazigo: R$ 30000,00`}</Typography>
           <Divider orientation="horizontal" flexItem sx={{ margin: 2 }} />
           <Stack spacing={2} direction='row'>
-            <Button variant="contained" onClick={() => { handleComprar(); }}>Comprar Pacote de Ornamentos</Button>
+            <Button variant="contained" onClick={() => { handleComprar(); }}>Alugar Pacote de Ornamentos</Button>
           </Stack>
         </Box>
       </Container>
@@ -45,4 +45,4 @@ function CompraJazigo() {
   );
 }
 
-export default CompraJazigo;
+export default AlugaJazigo;
