@@ -49,7 +49,7 @@ const NavBar = ({ page, isLoggedIn, cpf }) => {
                     </Box>
 
                     <Stack direction='row' spacing={2}>
-                        <Button color={color1} variant="contained" href={isLoggedIn ? '/Home' : '/'}>Home</Button>
+                        <Button color={color1} variant="contained" href={isLoggedIn ? `/Home?cpf=${cpf}` : '/'}>Home</Button>
                         <Button color={color2} variant="contained" href='/QuemSomos'>Quem Somos</Button>
                         <Button color={color3} variant="contained" href='/ContratacaoPlanos'>Planos</Button>
                         <Button color={color4} variant="contained" href='/Contato'>Contato</Button>
