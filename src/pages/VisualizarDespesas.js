@@ -9,6 +9,7 @@ import Divider from '@mui/material/Divider';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
+import Titulo from '../components/Titulo';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function VisualizarDespesas() {
@@ -16,11 +17,8 @@ function VisualizarDespesas() {
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <NavBar isLoggedIn={true} />
+      <Titulo texto="Suas despesas" />
       <Container component="main">
-        <Box sx={{ margin: 2 }}>
-          <Typography variant="h2" align='center'>Suas Despesas</Typography>
-          <Divider orientation="horizontal" flexItem />
-        </Box>
 
       </Container>
 

@@ -1,15 +1,10 @@
-import React from 'react';
-import '../Styles/detalhes-jazigo.css';
-import imagemCachorro from '../images/cachorro-vasco.jpg';
-import { Link } from 'react-router-dom';
-import NavBar from '../components/NavBar';
-import { Box, Typography, Button, Card, CardContent, TextField } from '@mui/material';
-import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
+import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import '../Styles/detalhes-jazigo.css';
+import NavBar from '../components/NavBar';
+import imagemCachorro from '../images/cachorro-vasco.jpg';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 const PersonalizarJazigo = () => {

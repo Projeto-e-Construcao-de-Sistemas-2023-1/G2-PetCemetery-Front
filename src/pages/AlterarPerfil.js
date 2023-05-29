@@ -1,6 +1,5 @@
-import { Button, Stack, Typography, Grid } from '@mui/material';
+import { Button, Grid, Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
@@ -9,8 +8,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/alterar-perfil.css';
 import NavBar from '../components/NavBar';
-import { editarPerfilPost } from '../components/api';
 import Titulo from '../components/Titulo';
+import { editarPerfilPost } from '../components/api';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AlterarPerfil() {

@@ -5,9 +5,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
-import { useLocation } from 'react-router-dom';
 import Titulo from '../components/Titulo';
 
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
@@ -31,9 +30,9 @@ function CompraJazigo() {
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <NavBar />
+      <Titulo texto={"Jazigo " + (+jazigoId + 1)} />
       <Container component="main" maxWidth="xs">
         <Box sx={{ marginTop: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-          <Titulo texto={"Jazigo " + (+jazigoId + 1)} />
           <Typography variant="h6">{`Valor do Jazigo: R$ 30000,00`}</Typography>
           <Divider orientation="horizontal" flexItem sx={{ margin: 2 }} />
           <Stack spacing={2} direction='row'>

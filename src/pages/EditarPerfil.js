@@ -1,6 +1,5 @@
 import { Button, Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
@@ -9,6 +8,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/editar-perfil.css';
 import NavBar from '../components/NavBar';
+import Titulo from '../components/Titulo';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function EditarPerfil({ nome, email }) {
@@ -19,22 +19,17 @@ function EditarPerfil({ nome, email }) {
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <NavBar isLoggedIn={true} />
-
+      <Titulo texto="Seu Perfil" />
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-        <Box sx={{ margin: 2 }}>
-          <Typography variant="h2" align='center'>Seu Perfil</Typography>
-          <Divider orientation="horizontal" flexItem />
-        </Box>
-
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '80%' }}>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left', width: '100%' }}>
             <Typography variant="h5">Nome</Typography>
-            <TextField margin="normal" fullWidth id="nome" label="João das Neves" name="nome" disabled InputProps={{ readOnly: true, style: { color: 'white' }, }} InputLabelProps={{ style: { color: 'white' }, }}/>
+            <TextField margin="normal" fullWidth id="nome" label="João das Neves" name="nome" disabled InputProps={{ readOnly: true, style: { color: 'white' }, }} InputLabelProps={{ style: { color: 'white' }, }} />
           </Box>
 
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left', width: '100%' }}>
             <Typography variant="h5">Email</Typography>
-            <TextField margin="normal" fullWidth id="email" label="joaodasneves@example.com" name="email" disabled InputProps={{ readOnly: true, style: { color: 'white' }, }} InputLabelProps={{ style: { color: 'white' }, }}/>
+            <TextField margin="normal" fullWidth id="email" label="joaodasneves@example.com" name="email" disabled InputProps={{ readOnly: true, style: { color: 'white' }, }} InputLabelProps={{ style: { color: 'white' }, }} />
           </Box>
         </Box>
 

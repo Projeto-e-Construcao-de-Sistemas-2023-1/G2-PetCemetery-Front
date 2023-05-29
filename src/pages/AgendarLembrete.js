@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import TextField from '@mui/material/TextField';
+import Titulo from '../components/Titulo';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AgendarLembrete() {
@@ -16,11 +16,9 @@ function AgendarLembrete() {
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <NavBar isLoggedIn={true} />
+      <Titulo texto="Adicione um lembrete de visita" mW="md" />
       <Container component="main">
-        <Box sx={{ margin: 2 }}>
-          <Typography variant="h2" align='center'>Adicione um lembrete de visita</Typography>
-          <Divider orientation="horizontal" flexItem />
-        </Box>
+        
 
       </Container>
 
