@@ -3,17 +3,26 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../Styles/quem-somos.css';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
+import { getUrlParams } from '../utils/utils';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function QuemSomos() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const cpf = getUrlParams('cpf');
+
+  useEffect(() => {
+    if (cpf == null) setIsLoggedIn(false);
+    else setIsLoggedIn(true);
+  }, []);
+
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <NavBar page={2}/>
+      <NavBar page={2} isLoggedIn={isLoggedIn} cpf={cpf} />
       <Titulo texto="Quem Somos" />
 
       <Container component="main">
