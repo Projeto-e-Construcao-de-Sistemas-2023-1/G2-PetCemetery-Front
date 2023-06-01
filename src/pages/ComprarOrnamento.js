@@ -26,7 +26,7 @@ function ComprarOrnamento() {
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <NavBar />
+      <NavBar isLoggedIn={true} cpf={cpf} />
       <Titulo texto="Escolha o pacote de ornamentos" mW="lg" />
       <Container component="main" maxWidth="xs">
 

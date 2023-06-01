@@ -35,7 +35,7 @@ function ConfirmarCompra() {
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <NavBar page={1} isLoggedIn={true} cpf={cpf} />
+      <NavBar isLoggedIn={true} cpf={cpf} />
       <Titulo texto="Confirmar Compra" mW="sm" />
 
       <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>

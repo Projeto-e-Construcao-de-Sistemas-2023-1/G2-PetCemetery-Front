@@ -30,7 +30,7 @@ function CompraAlugaJazigo() {
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <NavBar />
+      <NavBar isLoggedIn={true} cpf={cpf} />
       <Titulo texto={tipoTransacao + " Jazigo " + (+jazigoId + 1)} />
       <Container component="main" maxWidth="xs">
         <Box sx={{ marginTop: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
