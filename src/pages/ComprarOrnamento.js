@@ -1,22 +1,21 @@
-import { Button, Checkbox, FormControlLabel, Stack, Typography } from '@mui/material';
+import { Button, Checkbox, FormControlLabel, Stack } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
+import { getUrlParams } from '../utils/utils';
 
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function ComprarOrnamento() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const jazigoId = searchParams.get('id');
-  const cpf = searchParams.get('cpf');
+  const jazigoId = getUrlParams('id');
+  const cpf = getUrlParams('cpf');
 
   const [selectedOrnament, setSelectedOrnament] = useState('Gold');
 

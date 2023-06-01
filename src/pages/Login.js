@@ -38,8 +38,6 @@ function Login() {
     }
   };
 
-  //TODO sistema de cpfs para clientes
-
   const handleLogin = async (e) => { //formato: STATUS;tipo_cliente;cpf
     let resp = await loginPost(emailInput, passwordInput);
     console.log(resp);
@@ -51,7 +49,7 @@ function Login() {
       if (resp[1] == "cliente") {
         navigate(`/Home?cpf=${resp[2]}`);
       } else if (resp[1] == "admin") {
-        navigate('/HomeAdmin');
+        navigate(`/HomeAdmin?cpf=${resp[2]}`);
       }
     }
     else if (resp[0] == "ERR") {

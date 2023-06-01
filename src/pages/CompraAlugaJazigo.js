@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 import { getUrlParams } from '../utils/utils';
@@ -14,7 +14,6 @@ const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function CompraAlugaJazigo() {
   const navigate = useNavigate();
-  const [jazigo, setJazigo] = useState(""); // Supondo que jazigoData é um objeto com as informações do jazigo
   const [tipoTransacao, setTipoTransacao] = useState("");
 
   const jazigoId = getUrlParams('id');
@@ -25,10 +24,6 @@ function CompraAlugaJazigo() {
     setTipoTransacao(tipo == "compra" ? "Comprar" : "Alugar");
   }, []);
 
-  const handleJazigo = (jazigo) => {
-    jazigo.name = jazigo.split(";");
-    //console.log(emailInput);
-  }
   //TODO: Fazer o fetch do preço do jazigo pelo id, e colocar no lugar do 30000
   const handleComprar = (e) => { navigate(`/ComprarOrnamento?cpf=${cpf}&id=${jazigoId}`); }
 

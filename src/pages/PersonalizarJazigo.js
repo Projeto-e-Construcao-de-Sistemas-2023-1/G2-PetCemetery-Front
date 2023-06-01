@@ -2,16 +2,14 @@ import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/mate
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import '../Styles/detalhes-jazigo.css';
 import NavBar from '../components/NavBar';
 import imagemCachorro from '../images/cachorro-vasco.jpg';
+import { getUrlParams } from '../utils/utils';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 const PersonalizarJazigo = () => {
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const cpf = searchParams.get('cpf');
+    const cpf = getUrlParams('cpf');
     return (
         <ThemeProvider theme={mainTheme}>
             <CssBaseline />

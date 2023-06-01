@@ -3,16 +3,15 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../Styles/detalhes-jazigo.css';
 import NavBar from '../components/NavBar';
 import imagemCachorro from '../images/cachorro-vasco.jpg';
+import { getUrlParams } from '../utils/utils';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 const DetalhesJazigo = () => {
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const cpf = searchParams.get('cpf');
+    const cpf = getUrlParams('cpf');
 
     const animal = { //TODO: puxar do backend os dados do animal
         nome: 'Vasco',

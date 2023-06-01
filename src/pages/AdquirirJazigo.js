@@ -8,13 +8,11 @@ import Mapa from '../components/Mapa';
 import ModalPadrao from '../components/ModalPadrao';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
-import { useLocation } from 'react-router-dom';
+import { getUrlParams } from '../utils/utils';
 const mainTheme = createTheme({ palette: { mode: 'dark' } });
 
 function AdquirirJazigo() {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const cpf = searchParams.get('cpf');
+  const cpf = getUrlParams('cpf');
 
   const navigate = useNavigate();
 

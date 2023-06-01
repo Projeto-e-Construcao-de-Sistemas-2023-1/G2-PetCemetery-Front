@@ -5,18 +5,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../Styles/home.css';
 import NavBar from '../components/NavBar';
 import { getUrlParams } from '../utils/utils';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
-function Home() {
+function HomeAdmin() {
   const cpf = getUrlParams('cpf');
-  //mandar requisicao pro back, mandar o cpf e o back vai retornar os dados relevantes à pagina
-
-  //CPF: {cpf}, pagina: home
-
   const navigate = useNavigate();
+  
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
@@ -25,7 +21,7 @@ function Home() {
         <Grid container rowSpacing={2} columnSpacing={2} sx={{ margin: 2 }}>
           <Grid item xs={6}>
             <Grid item>
-              <Typography variant="h2" align='center'>Meus Jazigos</Typography>
+              <Typography variant="h2" align='center'>Meus Jazigos admin</Typography>
             </Grid>
             <Grid container spacing={2} direction="column" alignItems="left">
               <Grid item>
@@ -65,4 +61,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomeAdmin;
