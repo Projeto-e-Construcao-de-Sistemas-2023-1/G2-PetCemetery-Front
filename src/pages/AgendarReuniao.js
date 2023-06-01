@@ -16,7 +16,7 @@ function AgendarReuniao() {
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <NavBar isLoggedIn={true} cpf={cpf} />
-      <Titulo texto="Agendar Reunião" mW="md" />
+      <Titulo texto="Agendar Reunião" mW="sm" />
       <Container component="main">
 
 

@@ -27,16 +27,18 @@ import ComprarOrnamento from './pages/ComprarOrnamento';
 import DesativarConta from './pages/DesativarConta';
 import CompraAlugaJazigo from './pages/CompraAlugaJazigo';
 import HomeAdmin from './pages/HomeAdmin';
+import ConfirmarCompra from './pages/ConfirmarCompra';
 //TODO já criar o esqueleto de TODAS as paginas possiveis
 //TODO ver se vale a pena criar componente para Titulo com Divider
 
+/*
 function App({ children }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       {children}
     </LocalizationProvider>
   );
-}
+}*/
 
 const paginas = createBrowserRouter([
 
@@ -123,6 +125,10 @@ const paginas = createBrowserRouter([
   {
     path: "/QuemSomos",
     element: <QuemSomos />
+  },
+  {
+    path: "/ConfirmarCompra",
+    element: <ConfirmarCompra />
   },
   {
     path: "/HomeAdmin",

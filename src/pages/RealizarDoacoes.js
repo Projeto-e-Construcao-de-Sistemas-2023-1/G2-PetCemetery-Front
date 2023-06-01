@@ -19,12 +19,14 @@ function RealizarDoacoes() {
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <NavBar isLoggedIn={true} cpf={cpf} />
-      <Titulo texto="ONGs que ajudam os animais" />
+      <Titulo texto="ONGs que ajudam os animais" mW="md" />
       <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
         <Stack spacing={2} direction='column' divider={<Divider orientation="horizontal" flexItem />}>
           <Button variant="outlined" color="success" href="https://www.instagram.com/osindefesos/">ONG indefesos RJ</Button>
           <Button variant="outlined" color="success" href="https://amparanimal.org.br/">Ampara Animal</Button>
           <Button variant="outlined" color="success" href="https://www.suipa.org.br/">SUIPA</Button>
+          <Button variant="outlined" color="success" href="https://www.onggarra.com/">ONG Garra</Button>
+          <Button variant="outlined" color="success" href="https://petssemfronteiras.org.br/">Pets Sem Fronteiras</Button>
         </Stack>
       </Container>
 

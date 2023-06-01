@@ -17,7 +17,7 @@ function VisualizarDespesas() {
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <NavBar isLoggedIn={true} cpf={cpf} />
-      <Titulo texto="Suas despesas" />
+      <Titulo texto="Suas despesas" mW="sm" />
       <Container component="main">
 
       </Container>
