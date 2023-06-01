@@ -15,11 +15,12 @@ class Item {
 const Carrinho = () => {
     const [cartItems, setCartItems] = useState([]);
 
-    const addItemToCart = (item) => {
+    const addItem = (nome, tipo, preco, enderecoJazigo) => {
+        var item = new Item(nome, tipo, preco, enderecoJazigo);
         setCartItems([...cartItems, item]);
     };
 
-    const removeItemFromCart = (index) => {
+    const removeItem = (index) => {
         const updatedItems = [...cartItems];
         updatedItems.splice(index, 1);
         setCartItems(updatedItems);
@@ -41,7 +42,7 @@ const Carrinho = () => {
                         {cartItems.map((item, index) => (
                             <ListItem key={index}>
                                 <ListItemText primary={item.name} secondary={`$${item.price}`} />
-                                <Button variant="outlined" color="error" onClick={() => removeItemFromCart(index)}>Remover</Button>
+                                <Button variant="outlined" color="error" onClick={() => removeItem(index)}>Remover</Button>
                             </ListItem>
                         ))}
                     </List>

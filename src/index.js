@@ -31,14 +31,14 @@ import ConfirmarCompra from './pages/ConfirmarCompra';
 //TODO já criar o esqueleto de TODAS as paginas possiveis
 //TODO ver se vale a pena criar componente para Titulo com Divider
 
-/*
+
 function App({ children }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       {children}
     </LocalizationProvider>
   );
-}*/
+}
 
 const paginas = createBrowserRouter([
 
@@ -144,7 +144,9 @@ const paginas = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={paginas} />
+    <App>
+      <RouterProvider router={paginas} />
+    </App>
   </React.StrictMode>
 );
 
