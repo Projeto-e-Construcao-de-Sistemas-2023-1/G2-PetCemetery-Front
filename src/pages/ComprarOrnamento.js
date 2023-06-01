@@ -17,7 +17,7 @@ function ComprarOrnamento() {
   const jazigoId = getUrlParams('id');
   const cpf = getUrlParams('cpf');
 
-  const [selectedOrnament, setSelectedOrnament] = useState('Gold');
+  const [selectedOrnament, setSelectedOrnament] = useState('gold');
 
   const handleChange = (event) => {
     setSelectedOrnament(event.target.value);
@@ -32,12 +32,12 @@ function ComprarOrnamento() {
 
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
           <Stack direction='column'>
-            <FormControlLabel control={<Checkbox checked={selectedOrnament === 'Basic'} onChange={handleChange} value="Basic" />} label="Basic: Mensagem e Foto - R$1,00" />
-            <FormControlLabel control={<Checkbox checked={selectedOrnament === 'Silver'} onChange={handleChange} value="Silver" />} label="Silver: Mensagem, Foto e Flores - R$50,00" />
-            <FormControlLabel control={<Checkbox checked={selectedOrnament === 'Gold'} onChange={handleChange} value="Gold" />} label="Gold: Mensagem, Foto, Flores e Catavento - R$80,00" />
+            <FormControlLabel control={<Checkbox checked={selectedOrnament === 'basic'} onChange={handleChange} value="basic" />} label="Basic: Mensagem e Foto - R$1,00" />
+            <FormControlLabel control={<Checkbox checked={selectedOrnament === 'silver'} onChange={handleChange} value="silver" />} label="Silver: Mensagem, Foto e Flores - R$50,00" />
+            <FormControlLabel control={<Checkbox checked={selectedOrnament === 'gold'} onChange={handleChange} value="gold" />} label="Gold: Mensagem, Foto, Flores e Catavento - R$80,00" />
             <Divider orientation="horizontal" flexItem sx={{ margin: 2 }} />
             <Stack spacing={2} direction='row'>
-              <Button variant="contained" onClick={() => { navigate(`/ConfirmarCompra?cpf=${cpf}&id=${jazigoId}`); }}>Comprar</Button>
+              <Button variant="contained" onClick={() => { navigate(`/ConfirmarCompra?cpf=${cpf}&id=${jazigoId}&ornamento=${selectedOrnament}`); }}>Comprar</Button>
             </Stack>
           </Stack>
         </Box>
