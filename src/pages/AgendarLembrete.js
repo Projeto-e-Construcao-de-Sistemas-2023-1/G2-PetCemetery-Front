@@ -33,8 +33,8 @@ function AgendarLembrete() {
     axios.get(url).then((response) => {
       setData(response.data);
       //setClima(response.data.main.temp);
+      console.log(response.data);
     });
-    console.log(response.data);
 
     //data.list.weather
   }
