@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import ModalPadrao from '../components/ModalPadrao';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
+import '../weather-icons/css/weather-icons.min.css';
 import axios from 'axios';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
@@ -31,9 +32,11 @@ function AgendarLembrete() {
   const handleClima = () => {
     axios.get(url).then((response) => {
       setData(response.data);
-      console.log(response.data);
-      setClima(response.data.main.temp);
+      //setClima(response.data.main.temp);
     });
+    console.log(response.data);
+
+    response.data.list.weather
   }
 
   const handleHome = () => {
@@ -59,6 +62,7 @@ function AgendarLembrete() {
             <Typography variant="h5" align='center'>Escolha a data da sua visita</Typography>
             <DatePicker onChange={handleClima} />
             <Typography variant="h4" align='center'>{"Clima " + clima}</Typography>
+            <Box> <i className="wi wi-day-sunny" /> </Box>
           </Box>
           <Button variant="contained" color='secondary' onClick={() => { handleAgendar(); }}>Agendar</Button>
         </Stack>
