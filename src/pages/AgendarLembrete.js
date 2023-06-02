@@ -36,7 +36,7 @@ function AgendarLembrete() {
     });
     console.log(response.data);
 
-    response.data.list.weather
+    //data.list.weather
   }
 
   const handleHome = () => {
