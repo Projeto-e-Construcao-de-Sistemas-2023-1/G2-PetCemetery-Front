@@ -22,7 +22,7 @@ function AgendarLembrete() {
   const lat = -22.954925987607037;
   const lon = -43.168870628095085;
 
-  const url = `https://pro.openweathermap.org/data/2.5/forecast/climate?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  const url = `https://pro.openweathermap.org/data/2.5/forecast/climate?lat=${lat}&lon=${lon}&appid=${apiKey}&lang=pt_br&units=metric&mode=json`;
   console.log(url);
 
   const [data, setData] = useState({});
@@ -30,13 +30,13 @@ function AgendarLembrete() {
   const [clima, setClima] = useState('Ensolarado');
 
   const handleClima = () => {
-    axios.get(url).then((response) => {
+    axios.get(url).then((response) => { 
       setData(response.data);
       //setClima(response.data.main.temp);
       console.log(response.data);
     });
 
-    //data.list.weather
+    const weatherCondition = data.list[0].weather[0].main;
   }
 
   const handleHome = () => {
