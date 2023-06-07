@@ -31,7 +31,7 @@ function CompraAlugaJazigo() {
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <NavBar isLoggedIn={true} cpf={cpf} />
-      <Titulo texto={tipoTransacao + " Jazigo " + (+jazigoId + 1)} />
+      <Titulo texto={tipoTransacao + " Jazigo " + jazigoId} />
       <Container component="main" maxWidth="xs">
         <Box sx={{ marginTop: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
           <Typography variant="h6">{`Valor do Jazigo: R$ 30000,00`}</Typography>
