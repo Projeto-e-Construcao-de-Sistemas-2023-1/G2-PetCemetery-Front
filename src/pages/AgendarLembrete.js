@@ -19,11 +19,11 @@ function AgendarLembrete() {
   const searchParams = new URLSearchParams(location.search);
   const cpf = searchParams.get('cpf');
 
-  const apiKey = 'fa23f7952a0a6b8ec53d68cc173b3982';
-  const lat = -22.954925987607037;
-  const lon = -43.168870628095085;
+  const apiKey = '54774bb84681436793d142324230806';
+  const city = 'Rio de Janeiro';
+  const days = 10;
 
-  const url = `https://pro.openweathermap.org/data/2.5/forecast/climate?lat=${lat}&lon=${lon}&appid=${apiKey}&lang=pt_br&units=metric&mode=json`;
+  const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}&aqi=no&alerts=no`;
   console.log(url);
 
   const [selectedDate, setSelectedDate] = useState({});
@@ -32,11 +32,12 @@ function AgendarLembrete() {
 
   const handleClima = () => {
     axios.get(url).then((response) => {
-      //setClima(response.data.main.temp);
+      setClima(response.data.forecast.forecastday[0].day.condition.text);
       console.log(clima);
     });
 
     //const weatherCondition = data.list[0].weather[0].main;
+    //TODO finalizar clima
   }
 
   const handleHome = () => {
@@ -46,7 +47,7 @@ function AgendarLembrete() {
   const handleDateChange = (event) => {
     setSelectedDate(format(event.$d, "yyyy-MM-dd"));
     console.log(selectedDate);
-    //handleClima();
+    handleClima();
   };
 
   const handleLogout = () => {
