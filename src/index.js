@@ -23,6 +23,7 @@ import AgendarExumacao from './pages/AgendarExumacao';
 import PersonalizarJazigo from './pages/PersonalizarJazigo';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import 'dayjs/locale/pt-br';
 import ComprarOrnamento from './pages/ComprarOrnamento';
 import DesativarConta from './pages/DesativarConta';
 import CompraAlugaJazigo from './pages/CompraAlugaJazigo';
@@ -34,7 +35,7 @@ import ConfirmarCompra from './pages/ConfirmarCompra';
 
 function App({ children }) {
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
       {children}
     </LocalizationProvider>
   );

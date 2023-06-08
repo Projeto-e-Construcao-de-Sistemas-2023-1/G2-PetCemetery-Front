@@ -3,6 +3,7 @@ import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { DatePicker } from '@mui/x-date-pickers';
+import { format } from "date-fns";
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../Styles/agendar-reuniao.css';
@@ -17,6 +18,7 @@ function AgendarReuniao() {
   const searchParams = new URLSearchParams(location.search);
   const cpf = searchParams.get('cpf');
 
+  const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
   const [selectedAssunto, setSelectedAssunto] = useState('');
 
@@ -34,6 +36,7 @@ function AgendarReuniao() {
     setModalOpen(true);
   };
 
+  const handleDateChange = (event) => { setSelectedDate(format(event.$d, "yyyy-MM-dd")); console.log(selectedDate); };
   const handleTimeChange = (event) => { setSelectedTime(event.target.value); };
   const handleAssuntoChange = (event) => { setSelectedAssunto(event.target.value); };
 
@@ -46,7 +49,7 @@ function AgendarReuniao() {
         <Stack spacing={2} direction="column" divider={<Divider orientation="horizontal" flexItem />}>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
             <Typography variant="h5" align='center'>Escolha a data da reunião</Typography>
-            <DatePicker />
+            <DatePicker onChange={handleDateChange} />
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
             <Typography variant="h5" align='center'>Lista de horários disponíveis</Typography>

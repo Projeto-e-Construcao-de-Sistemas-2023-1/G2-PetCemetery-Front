@@ -1,15 +1,16 @@
-import { Box, Button, Divider, FormControl, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
+import { Box, Button, Divider, Stack, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { DatePicker } from '@mui/x-date-pickers';
+import axios from 'axios';
+import { format } from "date-fns";
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ModalPadrao from '../components/ModalPadrao';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 import '../weather-icons/css/weather-icons.min.css';
-import axios from 'axios';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AgendarLembrete() {
@@ -25,22 +26,27 @@ function AgendarLembrete() {
   const url = `https://pro.openweathermap.org/data/2.5/forecast/climate?lat=${lat}&lon=${lon}&appid=${apiKey}&lang=pt_br&units=metric&mode=json`;
   console.log(url);
 
-  const [data, setData] = useState({});
+  const [selectedDate, setSelectedDate] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
   const [clima, setClima] = useState('Ensolarado');
 
   const handleClima = () => {
-    axios.get(url).then((response) => { 
-      setData(response.data);
+    axios.get(url).then((response) => {
       //setClima(response.data.main.temp);
-      console.log(response.data);
+      console.log(clima);
     });
 
-    const weatherCondition = data.list[0].weather[0].main;
+    //const weatherCondition = data.list[0].weather[0].main;
   }
 
   const handleHome = () => {
     navigate(`/Home?cpf=${cpf}`);
+  };
+
+  const handleDateChange = (event) => {
+    setSelectedDate(format(event.$d, "yyyy-MM-dd"));
+    console.log(selectedDate);
+    //handleClima();
   };
 
   const handleLogout = () => {
@@ -60,7 +66,7 @@ function AgendarLembrete() {
         <Stack spacing={2} direction="column" divider={<Divider orientation="horizontal" flexItem />}>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
             <Typography variant="h5" align='center'>Escolha a data da sua visita</Typography>
-            <DatePicker onChange={handleClima} />
+            <DatePicker onChange={handleDateChange} />
             <Typography variant="h4" align='center'>{"Clima " + clima}</Typography>
             <Box> <i className="wi wi-day-sunny" /> </Box>
           </Box>
