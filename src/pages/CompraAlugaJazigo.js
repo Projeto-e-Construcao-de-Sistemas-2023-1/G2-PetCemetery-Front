@@ -24,6 +24,12 @@ function CompraAlugaJazigo() {
     setTipoTransacao(tipo == "compra" ? "Comprar" : "Alugar");
   }, []);
 
+  function getCoordinates(id) {
+    var row = String.fromCharCode(65 + Math.floor((id - 1) / 12));
+    var column = (id - 1) % 12 + 1;
+    return row + '-' + column;
+  }
+
   //TODO: Fazer o fetch do preço do jazigo pelo id, e colocar no lugar do 30000
   const handleComprar = (e) => { navigate(`/ComprarOrnamento?cpf=${cpf}&id=${jazigoId}`); }
 
@@ -31,7 +37,7 @@ function CompraAlugaJazigo() {
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <NavBar isLoggedIn={true} cpf={cpf} />
-      <Titulo texto={tipoTransacao + " Jazigo " + jazigoId} />
+      <Titulo texto={tipoTransacao + " Jazigo " + getCoordinates(jazigoId)} />
       <Container component="main" maxWidth="xs">
         <Box sx={{ marginTop: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
           <Typography variant="h6">{`Valor do Jazigo: R$ 30000,00`}</Typography>

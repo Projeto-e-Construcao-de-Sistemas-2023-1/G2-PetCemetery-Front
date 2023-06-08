@@ -19,6 +19,12 @@ function AdquirirJazigo() {
   const [JazigoEscolhido, setJazigoEscolhido] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  function getCoordinates(id) {
+    var row = String.fromCharCode(65 + Math.floor((id - 1) / 12));
+    var column = (id - 1) % 12 + 1;
+    return row + '-' + column;
+  }
+
   const handleEscolha = (id) => {
     setJazigoEscolhido(id);
     setIsModalOpen(true);
@@ -45,7 +51,7 @@ function AdquirirJazigo() {
       <Titulo texto="Escolha o jazigo no mapa" mW="md" />
       <Container component="main">
         <Mapa onJazigoSelect={handleEscolha} isModalOpen={isModalOpen} />
-        <ModalPadrao title={"Jazigo " + (JazigoEscolhido)} open={isModalOpen} onClose={handleModalClose} bt1Text="Comprar" bt1Href={handleComprar} bt2Text="Alugar" bt2Href={handleAlugar} />
+        <ModalPadrao title={"Jazigo " + getCoordinates(JazigoEscolhido)} open={isModalOpen} onClose={handleModalClose} bt1Text="Comprar" bt1Href={handleComprar} bt2Text="Alugar" bt2Href={handleAlugar} />
       </Container>
     </ThemeProvider>
   );
