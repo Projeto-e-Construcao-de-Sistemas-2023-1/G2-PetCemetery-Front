@@ -46,10 +46,12 @@ function Login() {
     else { console.log("Resposta do back = null"); setErrMsg("Erro na conexão com o servidor. Verifique sua rede"); return; }
 
     if (resp[0] == "OK") {
+      sessionStorage.setItem('usuario', resp[1]); // Armazena o tipo de usuário em sessão
+      sessionStorage.setItem('cpf', resp[2]); // Armazena o CPF do usuário em sessão
       if (resp[1] == "cliente") {
-        navigate(`/Home?cpf=${resp[2]}`);
+        navigate(`/Home`);
       } else if (resp[1] == "admin") {
-        navigate(`/HomeAdmin?cpf=${resp[2]}`);
+        navigate(`/HomeAdmin`);
       }
     }
     else if (resp[0] == "ERR") {
