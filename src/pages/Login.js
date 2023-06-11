@@ -16,7 +16,6 @@ const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function Login() {
   const navigate = useNavigate();
-
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
