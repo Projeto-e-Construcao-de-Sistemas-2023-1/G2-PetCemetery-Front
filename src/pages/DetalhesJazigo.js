@@ -11,7 +11,7 @@ import { getUrlParams } from '../utils/utils';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 const DetalhesJazigo = () => {
-    const cpf = getUrlParams('cpf');
+    const cpf = sessionStorage.getItem('cpf');
 
     const animal = { //TODO: puxar do backend os dados do animal
         nome: 'Vasco',
@@ -49,10 +49,10 @@ const DetalhesJazigo = () => {
 
                         <img src={animal.imagemAnimal} alt="Imagem do Animal" width={200} />
                         <Stack direction="row" spacing={2}>
-                            <Button variant="contained" color="primary" onClick={() => { navigate(`/AgendarExumacao?cpf=${cpf}`) }}>
+                            <Button variant="contained" color="primary" onClick={() => { navigate(`/AgendarExumacao`) }}>
                                 Agendar exumação
                             </Button>
-                            <Button variant="contained" color="secondary" onClick={() => { navigate(`/PersonalizarJazigo?cpf=${cpf}`) }}>
+                            <Button variant="contained" color="secondary" onClick={() => { navigate(`/PersonalizarJazigo`) }}>
                                 Personalizar Jazigo
                             </Button>
                         </Stack>

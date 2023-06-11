@@ -6,11 +6,10 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
-import { getUrlParams } from '../utils/utils';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function HomeAdmin() {
-  const cpf = getUrlParams('cpf');
+  const cpf = sessionStorage.getItem('cpf');
   const navigate = useNavigate();
   
   return (
@@ -25,7 +24,7 @@ function HomeAdmin() {
             </Grid>
             <Grid container spacing={2} direction="column" alignItems="left">
               <Grid item>
-                <Button variant="outlined" onClick={() => { navigate(`/DetalhesJazigo?cpf=${cpf}`) }}>Vasco 15/04/2023</Button>
+                <Button variant="outlined" onClick={() => { navigate(`/DetalhesJazigo`) }}>Vasco 15/04/2023</Button>
               </Grid>
               <Grid item>
                 <Button variant="outlined">Jazigo Vazio</Button>
@@ -39,19 +38,19 @@ function HomeAdmin() {
             </Grid>
             <Grid container spacing={2} direction="column" alignItems="right">
               <Grid item>
-                <Button variant="contained" onClick={() => { navigate(`/AdquirirJazigo?cpf=${cpf}`) }}>Adquirir Jazigo</Button>
+                <Button variant="contained" onClick={() => { navigate(`/AdquirirJazigo`) }}>Adquirir Jazigo</Button>
               </Grid>
               <Grid item>
-                <Button variant="contained" onClick={() => { navigate(`/VisualizarDespesas?cpf=${cpf}`) }}>Visualizar Despesas</Button>
+                <Button variant="contained" onClick={() => { navigate(`/VisualizarDespesas`) }}>Visualizar Despesas</Button>
               </Grid>
               <Grid item>
-                <Button variant="contained" onClick={() => { navigate(`/AgendarLembrete?cpf=${cpf}`) }}>Agendar Lembrete de Visitas</Button>
+                <Button variant="contained" onClick={() => { navigate(`/AgendarLembrete`) }}>Agendar Lembrete de Visitas</Button>
               </Grid>
               <Grid item>
-                <Button variant="contained" onClick={() => { navigate(`/AgendarReuniao?cpf=${cpf}`) }}>Agendar Reunião</Button>
+                <Button variant="contained" onClick={() => { navigate(`/AgendarReuniao`) }}>Agendar Reunião</Button>
               </Grid>
               <Grid item>
-                <Button variant="contained" onClick={() => { navigate(`/RealizarDoacoes?cpf=${cpf}`) }}>Realizar Doações</Button>
+                <Button variant="contained" onClick={() => { navigate(`/RealizarDoacoes`) }}>Realizar Doações</Button>
               </Grid>
             </Grid>
           </Grid>

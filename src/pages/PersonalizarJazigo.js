@@ -9,7 +9,7 @@ import { getUrlParams } from '../utils/utils';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 const PersonalizarJazigo = () => {
-    const cpf = getUrlParams('cpf');
+    const cpf = getsessionStorage.getItem('cpf');
     return (
         <ThemeProvider theme={mainTheme}>
             <CssBaseline />

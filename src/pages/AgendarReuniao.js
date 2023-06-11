@@ -13,10 +13,8 @@ import Titulo from '../components/Titulo';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AgendarReuniao() {
-  const location = useLocation();
   const navigate = useNavigate();
-  const searchParams = new URLSearchParams(location.search);
-  const cpf = searchParams.get('cpf');
+  const cpf = sessionStorage.getItem('cpf');
 
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
@@ -25,7 +23,7 @@ function AgendarReuniao() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleHome = () => {
-    navigate(`/Home?cpf=${cpf}`);
+    navigate(`/Home`);
   };
 
   const handleLogout = () => {

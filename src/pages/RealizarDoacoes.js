@@ -4,16 +4,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import useNavigate from 'react-router-dom';
 import '../Styles/realizar-doacoes.css';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 //TODO: verificar e trocar os vários boxes por um stack em outras paginas
 function RealizarDoacoes() {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const cpf = searchParams.get('cpf');
+  const cpf = sessionStorage.getItem('cpf');
   const navigate = useNavigate();
   return (
     <ThemeProvider theme={mainTheme}>

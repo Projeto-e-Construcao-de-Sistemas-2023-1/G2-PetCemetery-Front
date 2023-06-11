@@ -12,7 +12,7 @@ import { getUrlParams } from '../utils/utils';
 const mainTheme = createTheme({ palette: { mode: 'dark' } });
 
 function AdquirirJazigo() {
-  const cpf = getUrlParams('cpf');
+  const cpf = sessionStorage.getItem('cpf');
 
   const navigate = useNavigate();
 
@@ -37,11 +37,11 @@ function AdquirirJazigo() {
   };
 
   const handleComprar = () => {
-    navigate(`/CompraAlugaJazigo?cpf=${cpf}&id=${JazigoEscolhido}&tipo=compra`);
+    navigate(`/CompraAlugaJazigo?id=${JazigoEscolhido}&tipo=compra`);
   };
 
   const handleAlugar = () => {
-    navigate(`/CompraAlugaJazigo?cpf=${cpf}&id=${JazigoEscolhido}&tipo=aluguel`);
+    navigate(`/CompraAlugaJazigo?id=${JazigoEscolhido}&tipo=aluguel`);
   };
 
   return (

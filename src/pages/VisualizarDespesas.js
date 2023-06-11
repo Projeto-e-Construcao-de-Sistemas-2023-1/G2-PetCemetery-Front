@@ -8,15 +8,14 @@ import { useNavigate } from 'react-router-dom';
 import '../Styles/visualizar-despesas.css';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
-import { getUrlParams } from '../utils/utils';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function VisualizarDespesas() {
   const navigate = useNavigate();
-  const cpf = getUrlParams('cpf');
+  const cpf = sessionStorage.getItem('cpf');
 
   const handleButtonClick = () => {
-    navigate(`/ConfirmarCompra?cpf=${cpf}&tipocompra=despesas`);
+    navigate(`/ConfirmarCompra?tipocompra=despesas`);
     //TODO na confirmar compra puxar as despesas por cpf qd receber despesas como tipocompra
   };
 

@@ -14,10 +14,10 @@ import { getUrlParams } from '../utils/utils';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function EditarPerfil() {
-  const cpf = getUrlParams('cpf');
+  const cpf = sessionStorage.getItem('cpf');
   const navigate = useNavigate();
   const handleDesativar = (e) => {
-    navigate(`/DesativarConta?cpf=${cpf}`);
+    navigate(`/DesativarConta`);
   }
 
   const [nome, setNome] = useState("");

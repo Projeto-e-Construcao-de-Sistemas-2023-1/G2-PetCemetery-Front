@@ -38,7 +38,7 @@ const NavBar = ({ page, isLoggedIn, cpf }) => {
             color4 = "inherit";
             break;
     }
-
+    
     return (
         <React.Fragment>
             <AppBar position='static' sx={{ top: 0, left: 0, right: 0, position: 'fixed', width: '100%' }}>

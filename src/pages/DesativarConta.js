@@ -14,7 +14,7 @@ import ModalPadrao from '../components/ModalPadrao';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function DesativarConta() {
-  const cpf = getUrlParams('cpf');
+  const cpf = sessionStorage.getItem('cpf');
   const navigate = useNavigate();
 
   const [nome, setNome] = useState("");

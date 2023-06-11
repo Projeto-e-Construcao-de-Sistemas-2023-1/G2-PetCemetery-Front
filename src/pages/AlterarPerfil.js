@@ -14,9 +14,7 @@ import { useLocation } from 'react-router-dom';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AlterarPerfil() {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const cpf = searchParams.get('cpf');
+  const cpf = sessionStorage.getItem('cpf');
 
   const navigate = useNavigate();
 
@@ -108,7 +106,7 @@ function AlterarPerfil() {
   }
 
   const handleCancelar = (e) => {
-    navigate(`/EditarPerfil?cpf=${cpf}`);
+    navigate(`/EditarPerfil`);
   }
 
   const handleAlterar = async (e) => {
@@ -120,7 +118,7 @@ function AlterarPerfil() {
 
     if (resp[0] == "OK") {
       console.log("cpf do cliente: " + resp[1]);
-      navigate(`/Home?cpf=${cpf}`);
+      navigate(`/Home`);
     }
     else if (resp[0] == "ERR") {
       console.log("ERRO! motivo: " + resp[1]);

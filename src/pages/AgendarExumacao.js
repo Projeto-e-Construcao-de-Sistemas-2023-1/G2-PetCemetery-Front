@@ -15,8 +15,7 @@ import { getUrlParams } from '../utils/utils';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 const AgendarExumacao = () => {
-    const cpf = getUrlParams('cpf');
-
+    const cpf = sessionStorage.getItem('cpf');
     const [selectedDate, setSelectedDate] = useState(null);
     const precoExumacao = 400.00;
 

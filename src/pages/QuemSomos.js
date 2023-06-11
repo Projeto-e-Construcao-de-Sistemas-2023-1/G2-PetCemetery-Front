@@ -12,7 +12,7 @@ const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function QuemSomos() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const cpf = getUrlParams('cpf');
+  const cpf = sessionStorage.getItem('cpf');
 
   useEffect(() => {
     if (cpf == null) setIsLoggedIn(false);

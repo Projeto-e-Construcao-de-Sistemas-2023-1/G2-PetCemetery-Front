@@ -17,7 +17,7 @@ function CompraAlugaJazigo() {
   const [tipoTransacao, setTipoTransacao] = useState("");
 
   const jazigoId = getUrlParams('id');
-  const cpf = getUrlParams('cpf');
+  const cpf = sessionStorage.getItem('cpf');
   const tipo = getUrlParams('tipo');
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function CompraAlugaJazigo() {
   }
 
   //TODO: Fazer o fetch do preço do jazigo pelo id, e colocar no lugar do 30000
-  const handleComprar = (e) => { navigate(`/ComprarOrnamento?cpf=${cpf}&id=${jazigoId}`); }
+  const handleComprar = (e) => { navigate(`/ComprarOrnamento?id=${jazigoId}`); }
 
   return (
     <ThemeProvider theme={mainTheme}>

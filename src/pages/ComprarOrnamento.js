@@ -15,7 +15,7 @@ const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 function ComprarOrnamento() {
   const navigate = useNavigate();
   const jazigoId = getUrlParams('id');
-  const cpf = getUrlParams('cpf');
+  const cpf = sessionStorage.getItem('cpf');
 
   const [selectedOrnament, setSelectedOrnament] = useState('gold');
 
@@ -37,7 +37,7 @@ function ComprarOrnamento() {
             <FormControlLabel control={<Checkbox checked={selectedOrnament === 'gold'} onChange={handleChange} value="gold" />} label="Gold: Mensagem, Foto, Flores e Catavento - R$80,00" />
             <Divider orientation="horizontal" flexItem sx={{ margin: 2 }} />
             <Stack spacing={2} direction='row'>
-              <Button variant="contained" onClick={() => { navigate(`/ConfirmarCompra?cpf=${cpf}&id=${jazigoId}&ornamento=${selectedOrnament}`); }}>Comprar</Button>
+              <Button variant="contained" onClick={() => { navigate(`/ConfirmarCompra?id=${jazigoId}&ornamento=${selectedOrnament}`); }}>Comprar</Button>
             </Stack>
           </Stack>
         </Box>

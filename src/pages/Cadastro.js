@@ -85,8 +85,7 @@ function Cadastro() {
     else { console.log("Resposta do back = null"); setErrMsg("Erro na conexão com o servidor. Verifique sua rede"); return; }
 
     if (resp[0] == "OK") {
-      console.log("cpf do cliente: " + resp[1]);
-      navigate(`/Home?cpf=${resp[1]}`);
+      navigate(`/Home`);
     }
     else if (resp[0] == "ERR") {
       console.log("ERRO! motivo: " + resp[1]);

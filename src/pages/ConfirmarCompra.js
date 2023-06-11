@@ -13,13 +13,13 @@ import { getUrlParams } from '../utils/utils';
 const mainTheme = createTheme({ palette: { mode: 'dark' } });
 
 function ConfirmarCompra() {
-  const cpf = getUrlParams('cpf');
+  const cpf = sessionStorage.getItem('cpf');
   const id = getUrlParams('id');
 
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleHome = () => {
-    navigate(`/Home?cpf=${cpf}`);
+    navigate(`/Home`);
   };
 
   const handleLogout = () => {

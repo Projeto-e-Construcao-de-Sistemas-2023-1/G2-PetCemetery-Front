@@ -14,10 +14,8 @@ import '../weather-icons/css/weather-icons.min.css';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AgendarLembrete() {
-  const location = useLocation();
   const navigate = useNavigate();
-  const searchParams = new URLSearchParams(location.search);
-  const cpf = searchParams.get('cpf');
+  const cpf = sessionStorage.getItem('cpf');
 
   const apiKey = '54774bb84681436793d142324230806';
   const city = 'Rio de Janeiro';
@@ -41,7 +39,7 @@ function AgendarLembrete() {
   }
 
   const handleHome = () => {
-    navigate(`/Home?cpf=${cpf}`);
+    navigate(`/Home`);
   };
 
   const handleDateChange = (event) => {
