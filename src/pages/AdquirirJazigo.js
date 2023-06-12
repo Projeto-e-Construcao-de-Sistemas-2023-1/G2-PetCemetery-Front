@@ -8,7 +8,6 @@ import Mapa from '../components/Mapa';
 import ModalPadrao from '../components/ModalPadrao';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
-import { getUrlParams } from '../utils/utils';
 const mainTheme = createTheme({ palette: { mode: 'dark' } });
 
 function AdquirirJazigo() {

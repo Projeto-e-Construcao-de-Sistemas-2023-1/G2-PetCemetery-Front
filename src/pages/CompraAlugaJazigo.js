@@ -9,19 +9,47 @@ import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 import { getUrlParams } from '../utils/utils';
+import { getCompraJazigo, getAluguelJazigo } from '../components/api';
 
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function CompraAlugaJazigo() {
   const navigate = useNavigate();
   const [tipoTransacao, setTipoTransacao] = useState("");
+  const [preco, setPreco] = useState(0);
+  const [endereco, setEndereco] = useState("");
 
   const jazigoId = getUrlParams('id');
   const cpf = sessionStorage.getItem('cpf');
   const tipo = getUrlParams('tipo');
 
+  const getJazigoInfo = async (e) => { //formato: STATUS;endereco;preco
+    let resp = "";
+    if (tipo == "compra") {
+      resp = await getCompraJazigo(cpf, jazigoId);
+    }
+    else if (tipo == "aluguel") {
+      resp = await getAluguelJazigo(cpf, jazigoId);
+    }
+
+    console.log(resp);
+
+    if (resp != null) resp = resp.split(';');
+    else { console.log("Resposta do back = null"); return; }
+
+    if (resp[0] == "OK") {
+      setEndereco(resp[1]);
+      setPreco(resp[2]);
+    }
+    else {
+      console.log("Erro desconhecido na conexao com o back");
+    }
+  }
+
   useEffect(() => {
     setTipoTransacao(tipo == "compra" ? "Comprar" : "Alugar");
+
+    getJazigoInfo();
   }, []);
 
   function getCoordinates(id) {
@@ -31,16 +59,16 @@ function CompraAlugaJazigo() {
   }
 
   //TODO: Fazer o fetch do preço do jazigo pelo id, e colocar no lugar do 30000
-  const handleComprar = (e) => { navigate(`/ComprarOrnamento?id=${jazigoId}`); }
+  const handleComprar = (e) => { navigate(`/ComprarOrnamento?id=${jazigoId}&tipo=${tipo}`); }
 
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <NavBar isLoggedIn={true} cpf={cpf} />
-      <Titulo texto={tipoTransacao + " Jazigo " + getCoordinates(jazigoId)} />
+      <Titulo texto={tipoTransacao + " Jazigo " + endereco} />
       <Container component="main" maxWidth="xs">
         <Box sx={{ marginTop: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-          <Typography variant="h6">{`Valor do Jazigo: R$ 30000,00`}</Typography>
+          <Typography variant="h6">Valor do Jazigo: R$ {preco}</Typography>
           <Divider orientation="horizontal" flexItem sx={{ margin: 2 }} />
           <Stack spacing={2} direction='row'>
             <Button variant="contained" onClick={() => { handleComprar(); }}>Comprar Pacote de Ornamentos</Button>

@@ -99,10 +99,30 @@ export const getCompraJazigo = async (cpf, id_jazigo) => {
     }
 };
 
+export const getAluguelJazigo = async (cpf, id_jazigo) => {
+    console.log("entrou no getAluguelJazigo");
+    try {
+        const response = await apiCall.get(`/api/${cpf}/alugar_jazigo/${id_jazigo}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const getCompraJazigoPlanos = async (cpf, id_jazigo) => {
     console.log("entrou no getCompraJazigoPlanos");
     try {
-        const response = await apiCall.post(`/api/${cpf}/comprar_jazigo/${id_jazigo}/listar_planos`);
+        const response = await apiCall.get(`/api/${cpf}/comprar_jazigo/${id_jazigo}/listar_planos`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getAluguelJazigoPlanos = async (cpf, id_jazigo) => {
+    console.log("entrou no getAluguelJazigoPlanos");
+    try {
+        const response = await apiCall.get(`/api/${cpf}/alugar_jazigo/${id_jazigo}/listar_planos`);
         return response.data;
     } catch (error) {
         console.log(error);
