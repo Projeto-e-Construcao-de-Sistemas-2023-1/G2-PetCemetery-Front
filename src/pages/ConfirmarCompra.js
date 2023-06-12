@@ -2,35 +2,59 @@ import { Button, Divider, Grid, Paper, Stack, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import React, { useState } from 'react'; // Import useState
+import React, { useEffect, useState } from 'react'; // Import useState
 import { useNavigate } from 'react-router-dom';
 import '../Styles/home.css';
 import Carrinho from '../components/Carrinho';
 import ModalPadrao from '../components/ModalPadrao';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
+import { getInformacoesCarrinho } from '../components/api';
 import { getUrlParams } from '../utils/utils';
 const mainTheme = createTheme({ palette: { mode: 'dark' } });
 
 function ConfirmarCompra() {
   const cpf = sessionStorage.getItem('cpf');
-  const id = getUrlParams('id');
+  const jazigoId = getUrlParams('id');
+  const tipo = getUrlParams('tipo');
+  const ornamento = getUrlParams('ornamento');
 
   const [modalOpen, setModalOpen] = useState(false);
 
-  const handleHome = () => {
-    navigate(`/Home`);
-  };
+  const handleHome = () => { navigate('/Home'); };
 
-  const handleLogout = () => {
-    navigate('/');
-  };
+  const handleLogout = () => { navigate('/'); };
 
   const navigate = useNavigate();
 
-  const handleButtonClick = () => {
-    setModalOpen(true);
+  const handleButtonClick = () => { setModalOpen(true); };
+
+  const getInfoCarrinho = async (e) => {
+    let resp = await getInformacoesCarrinho(cpf);
+    console.log(resp);
+
+    if (resp != null) resp = resp.split(';');
+    else { console.log("Resposta do back = null"); return; }
+
+    if (resp[0] == "OK") {
+      console.log("Informacoes do carrinho recebidas com sucesso");
+
+      //
+    }
+    else {
+      console.log("Erro desconhecido na conexao com o back");
+    }
   };
+
+  const handleAddToCart = () => {
+
+  };
+
+  useEffect(() => {
+    //handleAddToCart();
+
+    getInfoCarrinho();
+  }, []);
 
   return (
     <ThemeProvider theme={mainTheme}>

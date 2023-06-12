@@ -139,10 +139,10 @@ export const compraJazigoPlanosPost = async (cpf, id_jazigo, plano_selecionado) 
     }
 };
 
-export const getInformacoesCarrinho = async (cpf, id_jazigo) => {
+export const getInformacoesCarrinho = async (cpf) => {
     console.log("entrou no getInformacoesCarrinho");
     try {
-        const response = await apiCall.get(`/api/${cpf}/comprar_jazigo/${id_jazigo}/informacoes_carrinho`);
+        const response = await apiCall.get(`/api/${cpf}/informacoes_carrinho`);
         return response.data;
     } catch (error) {
         console.log(error);

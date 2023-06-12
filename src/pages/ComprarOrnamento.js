@@ -70,7 +70,7 @@ function ComprarOrnamento() {
             <FormControlLabel control={<Checkbox checked={selectedOrnament === 'gold'} onChange={handleChange} value="gold" />} label={"Gold: Mensagem, Foto, Flores e Catavento - R$" + precoGold} />
             <Divider orientation="horizontal" flexItem sx={{ margin: 2 }} />
             <Stack spacing={2} direction='row'>
-              <Button variant="contained" onClick={() => { navigate(`/ConfirmarCompra?id=${jazigoId}&ornamento=${selectedOrnament}`); }}>Comprar</Button>
+              <Button variant="contained" onClick={() => { navigate(`/ConfirmarCompra?id=${jazigoId}&tipo=${tipo}&ornamento=${selectedOrnament}`); }}>Comprar</Button>
             </Stack>
           </Stack>
         </Box>
