@@ -12,24 +12,22 @@ class Servico {
     }
 }
 
-const Carrinho = () => {
-    const [cartServicos, setCartServicos] = useState([]);
-    var servicos = [];
-    var valorTotal = 0;
+const Carrinho = ({ cartServicos }) => {
+    const [cartItems, setCartItems] = useState(cartServicos);
 
     const addServico = (tipo, valor, enderecoJazigo) => {
         var item = new Servico(tipo, valor, enderecoJazigo);
-        setCartServicos([...cartServicos, item]);
+        setCartItems([...cartItems, item]);
     };
 
     const removeServico = (index) => {
-        const updatedServicos = [...cartServicos];
-        updatedServicos.splice(index, 1);
-        setCartServicos(updatedServicos);
+        const updatedItems = [...cartItems];
+        updatedItems.splice(index, 1);
+        setCartItems(updatedItems);
     };
 
     const clearCart = () => {
-        setCartServicos([]);
+        setCartItems([]);
     };
 
     return (
@@ -37,19 +35,23 @@ const Carrinho = () => {
             <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Typography variant="h4">Seu Carrinho</Typography>
                 <Divider orientation="horizontal" flexItem sx={{ margin: 1 }} />
-                {cartServicos.length == 0 ? (
+                {cartItems.length === 0 ? (
                     <Typography variant="body1">O carrinho está vazio</Typography>
                 ) : (
                     <List>
-                        {cartServicos.map((item, index) => (
+                        {cartItems.map((item, index) => (
                             <ListItem key={index}>
                                 <ListItemText primary={item.name} secondary={`$${item.price}`} />
-                                <Button variant="outlined" color="error" onClick={() => removeServico(index)}>Remover</Button>
+                                <Button variant="outlined" color="error" onClick={() => removeServico(index)}>
+                                    Remover
+                                </Button>
                             </ListItem>
                         ))}
                     </List>
                 )}
-                <Button variant="outlined" disabled={cartServicos.length === 0} onClick={clearCart}>Limpar Carrinho</Button>
+                <Button variant="outlined" disabled={cartItems.length === 0} onClick={clearCart}>
+                    Limpar Carrinho
+                </Button>
             </Container>
         </React.Fragment>
     );

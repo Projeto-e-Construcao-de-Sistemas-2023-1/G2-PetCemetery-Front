@@ -198,3 +198,21 @@ export const finalizarAluguel = async (cpf, id, planoSelecionado) => {
         console.log(error);
     }
 };
+
+export const agendarExumacao = async (data, horario) => {
+    try {
+      const response = await axios.post('api/{cpf}/meus_jazigos/{id}/agendar_exumacao', {
+        data,
+        horario,
+      });
+  
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        throw new Error('Falha na requisição');
+      }
+    } catch (error) {
+      console.error('Erro na requisição:', error);
+      throw error;
+    }
+  };

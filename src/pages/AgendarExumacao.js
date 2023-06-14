@@ -1,55 +1,92 @@
-import React, { useState } from 'react';
-import '../Styles/detalhes-jazigo.css';
-import imagemCachorro from '../images/cachorro-vasco.jpg';
-import { Link } from 'react-router-dom';
-import NavBar from '../components/NavBar';
-import { Stack, Button, Typography, Grid, Card, Box } from '@mui/material';
+import { Box, Button, Divider, FormControl, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import TextField from '@mui/material/TextField';
+import { DatePicker } from '@mui/x-date-pickers';
+import { format } from "date-fns";
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getUrlParams } from '../utils/utils';
+import ModalOk from '../components/ModalOk';
+import NavBar from '../components/NavBar';
+import Titulo from '../components/Titulo';
+import { agendarExumacao } from '../components/api'; // Importando a função
+
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
-const AgendarExumacao = () => {
-    const cpf = sessionStorage.getItem('cpf');
-    const [selectedDate, setSelectedDate] = useState(null);
-    const precoExumacao = 400.00;
+function AgendarExumacao() {
+  const navigate = useNavigate();
+  const cpf = sessionStorage.getItem('cpf');
 
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
+  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedTime, setSelectedTime] = useState('');
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleHome = () => {
+    navigate(`/Home`);
+  };
+
+  const handleLogout = () => {
+    navigate('/');
+  };
+
+  const handleAgendar = async () => { 
+    const exumacao = {
+        data: selectedDate,
+        horario: selectedTime
     };
 
-    const handleContinuarPagamento = () => {
-        // Lógica para continuar para o pagamento
-        console.log('Continuar para o pagamento');
-    };
+    try {
+        const response = await agendarExumacao(cpf, exumacao.data, exumacao.horario);
+        if (response === "OK;") {
+            setModalOpen(true);
+        } else {
+            console.error('Erro ao agendar exumação:', response);
+        }
+    } catch (error) {
+        console.error('Erro ao agendar exumação:', error);
+    }
+  };
 
-    return (
-        <ThemeProvider theme={mainTheme}>
-            <CssBaseline />
-            <NavBar isLoggedIn={true} cpf={cpf} />
-            <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
-                <Card>
-                    <Box p={2} textAlign="center">
-                        <Typography variant="h5" component="h1" gutterBottom>
-                            Agendar Exumação
-                        </Typography>
+  const handleDateChange = (event) => { setSelectedDate(format(event.$d, "yyyy-MM-dd")); };
+  const handleTimeChange = (event) => { setSelectedTime(event.target.value + ""); };
 
-                        <Typography variant="body1" gutterBottom>
-                            Preço: R$ {precoExumacao.toFixed(2)}
-                        </Typography>
-                        <Button variant="contained" color="primary" onClick={handleContinuarPagamento}>
-                            Continuar para o pagamento
-                        </Button>
-                    </Box>
-                </Card>
-            </Box>
-        </ThemeProvider>
-    );
-};
+  return (
+    <ThemeProvider theme={mainTheme}>
+      <CssBaseline />
+      <NavBar isLoggedIn={true} cpf={cpf} />
+      <Titulo texto="Agendar Exumação" mW="sm" />
+      <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Stack spacing={2} direction="column" divider={<Divider orientation="horizontal" flexItem />}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
+            <Typography variant="h5" align='center'>Escolha a data da exumação</Typography>
+            <DatePicker onChange={handleDateChange} />
+          </Box>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
+            <Typography variant="h5" align='center'>Escolha o horário da exumação</Typography>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Horário</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={selectedTime}
+                label="Horário"
+                onChange={handleTimeChange}
+              >
+                <MenuItem value={'08:00'}>08:00</MenuItem>
+                <MenuItem value={'10:00'}>10:00</MenuItem>
+                <MenuItem value={'12:00'}>12:00</MenuItem>
+                <MenuItem value={'14:00'}>14:00</MenuItem>
+                <MenuItem value={'16:00'}>16:00</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+          <Button fullWidth variant="contained" color="primary" onClick={handleAgendar}>Agendar Exumação</Button>
+        </Stack>
+      </Container>
+      <ModalOk title="Exumação realizada com sucesso" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="OK" bt1Href={handleHome}/>
+    </ThemeProvider>
+  );
+}
 
 export default AgendarExumacao;

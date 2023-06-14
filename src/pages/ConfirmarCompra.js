@@ -20,6 +20,7 @@ function ConfirmarCompra() {
   const ornamento = getUrlParams('ornamento');
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [resp, setResp] = useState([]);
 
   const handleHome = () => { navigate('/Home'); };
 
@@ -30,34 +31,16 @@ function ConfirmarCompra() {
   const handleButtonClick = () => { setModalOpen(true); };
 
   const getInfoCarrinho = async (e) => {
-    let resp = await getInformacoesCarrinho(cpf);
+    setResp(await getInformacoesCarrinho(cpf));
     console.log(resp);
-
-    if (!isJSON(resp)) {
-      console.log("NAO EH JSON");
-      if (resp != null) resp = resp.split(';');
-      else { console.log("Resposta do back = null"); return; }
-
-      if (resp[1] == "carrinho_nulo") {
-        console.log("Erro! Carrinho nulo");
-      }
-      else {
-        console.log("Erro desconhecido na conexao com o back");
-      }
-    }
-
-    else {
-      resp = JSON.parse(resp);
-      console.log(resp);
-    }
   };
 
   const handleAddToCart = async (e) => {
     var resp;
-    if(tipo == "compra"){
+    if (tipo == "compra") {
       resp = await finalizarCompra(cpf, jazigoId, ornamento);
     }
-    else if(tipo == "aluguel"){
+    else if (tipo == "aluguel") {
       resp = await finalizarAluguel(cpf, jazigoId, ornamento);
     }
     console.log(resp);
@@ -81,7 +64,7 @@ function ConfirmarCompra() {
         <Grid container spacing={2}>
           <Grid item xs={5}>
             <Paper elevation={1} style={{ height: '100%', textAlign: 'center', padding: 20 }}>
-              <Carrinho />
+              <Carrinho cartServicos={resp} />
             </Paper>
           </Grid>
           <Grid item xs={2} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
