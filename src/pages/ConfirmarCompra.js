@@ -9,8 +9,8 @@ import Carrinho from '../components/Carrinho';
 import ModalPadrao from '../components/ModalPadrao';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
-import { getInformacoesCarrinho } from '../components/api';
-import { getUrlParams } from '../utils/utils';
+import { getInformacoesCarrinho, finalizarCompra, finalizarAluguel } from '../components/api';
+import { getUrlParams, isJSON } from '../utils/utils';
 const mainTheme = createTheme({ palette: { mode: 'dark' } });
 
 function ConfirmarCompra() {
@@ -33,25 +33,40 @@ function ConfirmarCompra() {
     let resp = await getInformacoesCarrinho(cpf);
     console.log(resp);
 
-    if (resp != null) resp = resp.split(';');
-    else { console.log("Resposta do back = null"); return; }
+    if (!isJSON(resp)) {
+      console.log("NAO EH JSON");
+      if (resp != null) resp = resp.split(';');
+      else { console.log("Resposta do back = null"); return; }
 
-    if (resp[0] == "OK") {
-      console.log("Informacoes do carrinho recebidas com sucesso");
-
-      //
+      if (resp[1] == "carrinho_nulo") {
+        console.log("Erro! Carrinho nulo");
+      }
+      else {
+        console.log("Erro desconhecido na conexao com o back");
+      }
     }
+
     else {
-      console.log("Erro desconhecido na conexao com o back");
+      resp = JSON.parse(resp);
+      console.log(resp);
     }
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async (e) => {
+    var resp;
+    if(tipo == "compra"){
+      resp = await finalizarCompra(cpf, jazigoId, ornamento);
+    }
+    else if(tipo == "aluguel"){
+      resp = await finalizarAluguel(cpf, jazigoId, ornamento);
+    }
+    console.log(resp);
 
+    //getInfoCarrinho();
   };
 
   useEffect(() => {
-    //handleAddToCart();
+    handleAddToCart();
 
     getInfoCarrinho();
   }, []);

@@ -5,11 +5,13 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { DatePicker } from '@mui/x-date-pickers';
 import { format } from "date-fns";
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../Styles/agendar-reuniao.css';
-import ModalPadrao from '../components/ModalPadrao';
+import ModalOk from '../components/ModalOk';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
+import { agendarReuniao } from '../components/api'; // Importando a função
+
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AgendarReuniao() {
@@ -30,12 +32,29 @@ function AgendarReuniao() {
     navigate('/');
   };
 
-  const handleAgendar = () => {
-    setModalOpen(true);
+  const handleAgendar = async () => { // Função atualizada
+    const reuniao = {
+        data: selectedDate,
+        horario: selectedTime,
+        assunto: selectedAssunto
+    };
+
+    try {
+        const response = await agendarReuniao(cpf, reuniao.data, reuniao.horario, reuniao.assunto);
+        if (response === "OK;") {
+            setModalOpen(true);
+        } else {
+            console.error('Erro ao agendar reunião:', response);
+        }
+    } catch (error) {
+        console.error('Erro ao agendar reunião:', error);
+    }
   };
 
   const handleDateChange = (event) => { setSelectedDate(format(event.$d, "yyyy-MM-dd")); console.log(selectedDate); };
-  const handleTimeChange = (event) => { setSelectedTime(event.target.value); };
+  const handleTimeChange = (event) => { 
+    setSelectedTime(event.target.value + ""); 
+};
   const handleAssuntoChange = (event) => { setSelectedAssunto(event.target.value); };
 
   return (
@@ -54,10 +73,10 @@ function AgendarReuniao() {
             <FormControl fullWidth>
               <InputLabel></InputLabel>
               <Select value={selectedTime} onChange={handleTimeChange}>
-                <MenuItem value="7">7:00</MenuItem>
-                <MenuItem value="8">8:00</MenuItem>
-                <MenuItem value="9">9:00</MenuItem>
-                <MenuItem value="10">10:00</MenuItem>
+                <MenuItem value="08:00">08:00</MenuItem>
+                <MenuItem value="09:00">09:00</MenuItem>
+                <MenuItem value="10:00">10:00</MenuItem>
+                <MenuItem value="11:00">11:00</MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -74,11 +93,10 @@ function AgendarReuniao() {
               </Select>
             </FormControl>
           </Box>
-          <Button variant="contained" color='secondary' onClick={() => { handleAgendar(); }}>Agendar</Button>
+          <Button variant="contained" color='secondary' onClick={handleAgendar}>Agendar</Button>
         </Stack>
-        <ModalPadrao title="Agendamento realizado com sucesso" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="Home" bt1Href={handleHome} bt2Text="Logout" bt2Href={handleLogout} />
+        <ModalOk title="Agendamento realizado com sucesso" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="OK" bt1Href={handleHome}/>
       </Container>
-
     </ThemeProvider >
   );
 }

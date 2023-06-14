@@ -31,7 +31,7 @@ function HomeAdmin() {
                   <Button variant="contained" onClick={() => { navigate(`/DetalharJazigo`) }}>Detalhar Jazigo</Button>
                 </Grid>
                 <Grid item>
-                  <Button variant="contained" onClick={() => { navigate(`/VisualizarReunioes`) }}>Visualizar Reuniões</Button>
+                  <Button variant="contained" onClick={() => { navigate(`/VisualizarReuniao`) }}>Visualizar Reuniões</Button>
                 </Grid>
               </Grid>
             </Grid>

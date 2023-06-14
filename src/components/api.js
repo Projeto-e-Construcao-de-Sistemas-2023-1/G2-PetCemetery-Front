@@ -158,3 +158,43 @@ export const realizarPagamentoPost = async (cpf, id_jazigo) => {
         console.log(error);
     }
 };
+
+export const agendarReuniao = async (cpf, data, horario, assunto) => {
+    console.log("entrou no agendarReuniao");
+    try {
+        const reuniao = { data, horario, assunto }; // construa o objeto Reuniao
+        const response = await apiCall.post(`/api/reuniao/cliente/${cpf}/agendar`, reuniao);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const visualizarReuniao = async () => {
+    try {
+        const response = await apiCall.get('/api/reuniao/admin/visualizar');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const finalizarCompra = async (cpf, id, planoSelecionado) => {
+    console.log("entrou no finalizarCompra");
+    try {
+        const response = await apiCall.post(`/api/${cpf}/comprar_jazigo/${id}/listar_planos/plano?planoSelecionado=${planoSelecionado}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const finalizarAluguel = async (cpf, id, planoSelecionado) => {
+    console.log("entrou no finalizarAluguel");
+    try {
+        const response = await apiCall.post(`/api/${cpf}/alugar_jazigo/${id}/listar_planos/plano?planoSelecionado=${planoSelecionado}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};

@@ -5,3 +5,12 @@ export function getUrlParams(id) {
     const param = searchParams.get(id);
     return param;
 }
+
+export function isJSON(str) {
+    try {
+        const parsedValue = JSON.parse(str);
+        return typeof parsedValue !== 'object' || (Array.isArray(parsedValue) && parsedValue.length > 0);
+    } catch (error) {
+        return false;
+    }
+}

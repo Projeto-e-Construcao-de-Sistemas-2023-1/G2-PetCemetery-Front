@@ -29,6 +29,7 @@ import DesativarConta from './pages/DesativarConta';
 import CompraAlugaJazigo from './pages/CompraAlugaJazigo';
 import HomeAdmin from './pages/HomeAdmin';
 import ConfirmarCompra from './pages/ConfirmarCompra';
+import VisualizarReuniao from './pages/VisualizarReuniao';
 //TODO já criar o esqueleto de TODAS as paginas possiveis
 //TODO ver se vale a pena criar componente para Titulo com Divider
 
@@ -118,6 +119,10 @@ const paginas = createBrowserRouter([
   , {
     path: "/ComprarOrnamento",
     element: <ComprarOrnamento />
+  },
+  , {
+    path: "/VisualizarReuniao",
+    element: <VisualizarReuniao />
   },
   , {
     path: "/CompraAlugaJazigo",
