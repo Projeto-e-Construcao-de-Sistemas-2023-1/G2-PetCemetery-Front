@@ -52,12 +52,6 @@ function CompraAlugaJazigo() {
     getJazigoInfo();
   }, []);
 
-  function getCoordinates(id) {
-    var row = String.fromCharCode(65 + Math.floor((id - 1) / 12));
-    var column = (id - 1) % 12 + 1;
-    return row + '-' + column;
-  }
-
   //TODO: Fazer o fetch do preço do jazigo pelo id, e colocar no lugar do 30000
   const handleComprar = (e) => { navigate(`/ComprarOrnamento?id=${jazigoId}&tipo=${tipo}`); }
 
