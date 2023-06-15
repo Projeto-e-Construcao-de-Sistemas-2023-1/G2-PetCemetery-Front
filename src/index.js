@@ -30,6 +30,7 @@ import CompraAlugaJazigo from './pages/CompraAlugaJazigo';
 import HomeAdmin from './pages/HomeAdmin';
 import ConfirmarCompra from './pages/ConfirmarCompra';
 import VisualizarReuniao from './pages/VisualizarReuniao';
+import AlterarValorPlanos from './pages/AlterarValorPlanos';
 //TODO já criar o esqueleto de TODAS as paginas possiveis
 //TODO ver se vale a pena criar componente para Titulo com Divider
 
@@ -51,6 +52,10 @@ const paginas = createBrowserRouter([
   , {
     path: "/PaginaInicial",
     element: <PaginaInicial />
+  }
+  , {
+    path: "/AlterarValorPlanos",
+    element: <AlterarValorPlanos />
   }
   , {
     path: "/AgendarExumacao",
