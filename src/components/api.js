@@ -216,3 +216,13 @@ export const agendarExumacao = async (data, horario) => {
       throw error;
     }
   };
+
+  export const getDetalhesJazigo = async (cpf_proprietario, id_jazigo) => {
+    console.log("entrou no getDetalhesJazigo");
+    try {
+        const response = await apiCall.get(`/api/${cpf_proprietario}/meus_jazigos/${id_jazigo}/detalhar_jazigo`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
