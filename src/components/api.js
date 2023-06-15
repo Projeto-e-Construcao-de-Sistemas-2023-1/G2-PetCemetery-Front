@@ -149,6 +149,16 @@ export const getInformacoesCarrinho = async (cpf) => {
     }
 };
 
+export const removerItemCarrinho = async (cpf, idServico) => {
+    console.log("entrou no removerItemCarrinho");
+    try {
+        const response = await apiCall.post(`/api/${cpf}/informacoes_carrinho/remover_servico?idServico=${idServico}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const realizarPagamentoPost = async (cpf, id_jazigo) => {
     console.log("entrou no postRealizarPagamento");
     try {

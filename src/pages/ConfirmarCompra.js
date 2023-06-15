@@ -51,24 +51,29 @@ function ConfirmarCompra() {
         setResp(data);
         console.log(data);
       } catch (error) {
-        console.log(error);
+        console.log("Erro ao pegar info do carrinho: " + error);
       }
     };
 
-    getInfoCarrinho();
+    const handleLoadData = async () => {
+      await handleAddToCart();
+      getInfoCarrinho();
+    };
+
+    handleLoadData();
   }, []);
 
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <NavBar isLoggedIn={true} cpf={cpf} />
+      <NavBar isLoggedIn={true} />
       <Titulo texto="Confirmar Compra" mW="sm" />
 
       <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <Grid container spacing={2}>
           <Grid item xs={5}>
             <Paper elevation={1} style={{ height: '100%', textAlign: 'center', padding: 20 }}>
-              <Carrinho cartServicos={resp} />
+              <Carrinho cpf={cpf} jazigoId={jazigoId} ornamento={ornamento} tipo={tipo} />
             </Paper>
           </Grid>
           <Grid item xs={2} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

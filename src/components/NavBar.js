@@ -49,10 +49,10 @@ const NavBar = ({ page, isLoggedIn, cpf }) => {
                     </Box>
 
                     <Stack direction='row' spacing={2}>
-                        <Button color={color1} variant="contained" href={isLoggedIn ? `/Home?cpf=${cpf}` : '/'}>Home</Button>
-                        <Button color={color2} variant="contained" href={isLoggedIn ? `/QuemSomos?cpf=${cpf}` : '/QuemSomos'}>Quem Somos</Button>
-                        <Button color={color3} variant="contained" href={isLoggedIn ? `/ContratacaoPlanos?cpf=${cpf}` : '/ContratacaoPlanos'}>Planos</Button>
-                        <Button color={color4} variant="contained" href={isLoggedIn ? `/Contato?cpf=${cpf}` : '/Contato'}>Contato</Button>
+                        <Button color={color1} variant="contained" href={isLoggedIn ? `/Home` : '/'}>Home</Button>
+                        <Button color={color2} variant="contained" href={isLoggedIn ? `/QuemSomos` : '/QuemSomos'}>Quem Somos</Button>
+                        <Button color={color3} variant="contained" href={isLoggedIn ? `/ContratacaoPlanos` : '/ContratacaoPlanos'}>Planos</Button>
+                        <Button color={color4} variant="contained" href={isLoggedIn ? `/Contato` : '/Contato'}>Contato</Button>
                     </Stack>
 
                     <Box sx={{ position: "fixed", top: 0, right: 0, zIndex: 2000, padding: 2 }}>
@@ -64,7 +64,7 @@ const NavBar = ({ page, isLoggedIn, cpf }) => {
                         }
                         {isLoggedIn &&
                             <Stack spacing={2} direction='row'>
-                                <Button variant="contained" color="primary" href={`/EditarPerfil?cpf=${cpf}`}>Meu Perfil</Button>
+                                <Button variant="contained" color="primary" href={`/EditarPerfil`}>Meu Perfil</Button>
                                 <Button variant="contained" color="error" href={'/'}>Logout</Button>
                             </Stack>
                         }
