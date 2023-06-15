@@ -5,7 +5,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react'; // Import useState
 import { useNavigate } from 'react-router-dom';
 import '../Styles/home.css';
-import Carrinho from '../components/Carrinho';
+import Carrinho, { Servico } from '../components/Carrinho';
 import ModalPadrao from '../components/ModalPadrao';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
@@ -30,10 +30,6 @@ function ConfirmarCompra() {
 
   const handleButtonClick = () => { setModalOpen(true); };
 
-  const getInfoCarrinho = async (e) => {
-    setResp(await getInformacoesCarrinho(cpf));
-    console.log(resp);
-  };
 
   const handleAddToCart = async (e) => {
     var resp;
@@ -49,7 +45,15 @@ function ConfirmarCompra() {
   };
 
   useEffect(() => {
-    handleAddToCart();
+    const getInfoCarrinho = async () => {
+      try {
+        const data = await getInformacoesCarrinho(cpf);
+        setResp(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
     getInfoCarrinho();
   }, []);
