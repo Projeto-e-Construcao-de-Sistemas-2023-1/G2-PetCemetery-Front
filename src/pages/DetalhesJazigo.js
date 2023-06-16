@@ -1,73 +1,87 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Card, Stack, Typography } from '@mui/material';
+import { Box, Button, Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
-import imagemCachorro from '../images/cachorro-vasco.jpg';
-import { getDetalhesJazigo } from '../components/api';
+import { getMeusJazigos } from '../components/api';
+import { Link } from 'react-router-dom';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { format } from 'date-fns';
 
 const mainTheme = createTheme({ palette: { mode: 'dark' } });
 
 const DetalhesJazigo = () => {
   const cpf = sessionStorage.getItem('cpf');
-  const { id } = useParams();
-  const [jazigo, setJazigo] = useState(null);
+  const [jazigos, setJazigos] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchDetalhesJazigo = async () => {
+    const fetchJazigos = async () => {
       try {
-        const response = await getDetalhesJazigo(cpf, id);
-        console.log("Response da API:", response); // Verifique a resposta da API aqui
-
-        if (response === "OK;vazio") {
-          setJazigo({ nomePet: "Vazio", endereco: id });
-        } else {
-          setJazigo(response);
-        }
+        const response = await getMeusJazigos(cpf);
+        console.log("Response da API:", response);
+        setJazigos(response);
       } catch (error) {
         console.log(error);
       }
-    }
+    };
 
-    fetchDetalhesJazigo();
-  }, [cpf, id]);
+    fetchJazigos();
+  }, [cpf]);
+
+  console.log("Estado de Jazigos:", jazigos);
+
+  const handleDetalhesJazigo = (idJazigo) => {
+    navigate(`/DetalhesJazigo/${idJazigo}`);
+  };
 
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <NavBar isLoggedIn={true} cpf={cpf} />
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
-        <Card>
-          <Box p={2} textAlign="center">
-            <Typography variant="h5" component="h1" gutterBottom>Detalhes do Jazigo</Typography>
-            <Stack direction="row" spacing={2} margin={2} justifyContent="center">
-              <Typography variant="body1">Nome: {jazigo?.nomePet}</Typography>
-              <Typography variant="body1">Endereço: {jazigo?.endereco}</Typography>
-            </Stack>
-
-            {jazigo && jazigo.nomePet !== "Vazio" && (
-              <Stack direction="row" spacing={2} margin={2} justifyContent="center">
-                <Typography variant="body1">Outro dado: {jazigo?.outroDado}</Typography>
+      <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Box p={2} textAlign="center">
+          <Typography variant="h5" component="h1" gutterBottom>Detalhes do Jazigo</Typography>
+          <Typography variant="body1">CPF: {cpf}</Typography>
+          {jazigos.map((jazigo, index) => (
+            <Accordion key={index}>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`panel${index + 1}-content`} id={`panel${index + 1}-header`}>
+                <Typography variant="h6">Jazigo {index + 1}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography variant="h6">Detalhes do Jazigo {jazigo.idJazigo}</Typography>
+                <Typography variant="body1">Nome do Pet: {jazigo.nomePet}</Typography>
+                {jazigo.dataEnterro ? (
+                  <Typography variant="body1">Data de Enterrado: {format(new Date(jazigo.dataEnterro), 'dd/MM/yyyy')}</Typography>
+                ) : (
+                  <Typography variant="body1">Data de Enterrado: </Typography>
+                )}
+                <Typography variant="body1">Endereço: {jazigo.endereco}</Typography>
+                <Typography variant="body1">ID do Jazigo: {jazigo.idJazigo}</Typography>
+                {jazigo.dataNascimento ? (
+                  <Typography variant="body1">Data de Nascimento: {format(new Date(jazigo.dataNascimento), 'dd/MM/yyyy')}</Typography>
+                ) : (
+                  <Typography variant="body1">Data de Nascimento: </Typography>
+                )}
+                <Typography variant="body1">Espécie: {jazigo.especie}</Typography>
                 {/* Adicione mais informações do jazigo aqui */}
-              </Stack>
-            )}
-
-            <img src={imagemCachorro} alt="Imagem do Animal" width={200} />
-
-            <Stack direction="row" spacing={2}>
-              <Button variant="contained" color="primary" onClick={() => { navigate(`/AgendarExumacao`) }}>
-                Agendar exumação
-              </Button>
-              <Button variant="contained" color="secondary" onClick={() => { navigate(`/PersonalizarJazigo`) }}>
-                Personalizar Jazigo
-              </Button>
-            </Stack>
-          </Box>
-        </Card>
-      </Box>
+                {jazigo.nomePet !== 'Vazio' && (
+                  <div>
+                    <Button variant="contained" color="primary" onClick={() => { navigate(`/AgendarExumacao`) }}>
+                      Agendar exumação
+                    </Button>
+                    <Button variant="contained" color="secondary" onClick={() => { navigate(`/PersonalizarJazigo`) }}>
+                      Personalizar Jazigo
+                    </Button>
+                  </div>
+                )}
+              </AccordionDetails>
+            </Accordion>
+          ))}
+        </Box>
+      </Container>
     </ThemeProvider>
   );
 };
