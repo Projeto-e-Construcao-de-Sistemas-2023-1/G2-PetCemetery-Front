@@ -2,9 +2,10 @@ import { Button, Grid, Typography, TextField, FormControl, MenuItem, Select } fr
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import React from 'react';
+
 import NavBar from '../components/NavBar';
 import { AlterarValorServico } from '../components/api';
+import React, { useState } from 'react';
 
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 

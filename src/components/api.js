@@ -209,28 +209,20 @@ export const finalizarAluguel = async (cpf, id, planoSelecionado) => {
     }
 };
 
-export const agendarExumacao = async (data, horario) => {
+export const agendarExumacao = async (cpf, id, dataExumacao, horaExumacao) => {
     try {
-      const response = await axios.post('api/{cpf}/meus_jazigos/{id}/agendar_exumacao', {
-        data,
-        horario,
-      });
-  
-      if (response.status === 200) {
+        const response = await apiCall.post(`/api/${cpf}/meus_jazigos/${id}/agendar_exumacao?data=${dataExumacao}&hora=${horaExumacao}`);
         return response.data;
-      } else {
-        throw new Error('Falha na requisição');
-      }
     } catch (error) {
-      console.error('Erro na requisição:', error);
-      throw error;
+        console.error('Erro ao agendar exumação:', error);
+        return null;
     }
-  };
+};
 
-  export const getDetalhesJazigo = async (cpf_proprietario, id_jazigo) => {
+  export const getDetalhesJazigo = async (cpf_proprietario, idJazigo) => {
     console.log("entrou no getDetalhesJazigo");
     try {
-        const response = await apiCall.get(`/api/${cpf_proprietario}/meus_jazigos/${id_jazigo}/detalhar_jazigo`);
+        const response = await apiCall.get(`/api/${cpf_proprietario}/meus_jazigos/${idJazigo}/detalhar_jazigo`);
         return response.data;
     } catch (error) {
         console.log(error);

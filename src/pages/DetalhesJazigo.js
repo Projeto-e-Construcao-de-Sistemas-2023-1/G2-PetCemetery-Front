@@ -69,7 +69,7 @@ const DetalhesJazigo = () => {
                 {/* Adicione mais informações do jazigo aqui */}
                 {jazigo.nomePet !== 'Vazio' && (
                   <div>
-                    <Button variant="contained" color="primary" onClick={() => { navigate(`/AgendarExumacao`) }}>
+                    <Button variant="contained" color="primary" onClick={() => { navigate(`/AgendarExumacao?id=${jazigo.idJazigo}`) }}>
                       Agendar exumação
                     </Button>
                     <Button variant="contained" color="secondary" onClick={() => { navigate(`/PersonalizarJazigo`) }}>
