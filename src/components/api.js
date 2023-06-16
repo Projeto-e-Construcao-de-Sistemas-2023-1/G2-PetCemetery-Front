@@ -236,3 +236,12 @@ export const agendarExumacao = async (data, horario) => {
         console.log(error);
     }
 };
+
+export const AlterarValorServico = async (servico, valor) => {
+  await apiCall.post(`/api/admin/servicos/alterar?servico=${servico}&valor=${valor}`).then((response) => {
+      console.log(response);
+      return response.data;
+    }).catch((error) => {
+      console.log(error);
+    });
+};

@@ -3,7 +3,7 @@ import React from 'react';
 import { ReactComponent as Logo } from '../logo.svg';
 import './navbar.css';
 
-const NavBar = ({ page, isLoggedIn, cpf }) => {
+const NavBar = ({ page, isLoggedIn}) => {
     var color1, color2, color3, color4;
 
     switch (page) {

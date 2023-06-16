@@ -30,7 +30,7 @@ import CompraAlugaJazigo from './pages/CompraAlugaJazigo';
 import HomeAdmin from './pages/HomeAdmin';
 import ConfirmarCompra from './pages/ConfirmarCompra';
 import VisualizarReuniao from './pages/VisualizarReuniao';
-import AlterarValorPlanos from './pages/AlterarValorPlanos';
+import ManterServicos from './pages/ManterServicos';
 //TODO já criar o esqueleto de TODAS as paginas possiveis
 //TODO ver se vale a pena criar componente para Titulo com Divider
 
@@ -54,8 +54,8 @@ const paginas = createBrowserRouter([
     element: <PaginaInicial />
   }
   , {
-    path: "/AlterarValorPlanos",
-    element: <AlterarValorPlanos />
+    path: "/ManterServicos",
+    element: <ManterServicos />
   }
   , {
     path: "/AgendarExumacao",
@@ -80,85 +80,84 @@ const paginas = createBrowserRouter([
   , {
     path: "/Login",
     element: <Login />
-  },
+  }
   , {
     path: "/Cadastro",
     element: <Cadastro />
-  },
+  }
   , {
     path: "/EditarPerfil",
     element: <EditarPerfil />
-  },
+  }
   , {
     path: "/AlterarPerfil",
     element: <AlterarPerfil />
-  },
+  }
   , {
     path: "/DesativarConta",
     element: <DesativarConta />
-  },
+  }
   , {
     path: "/AdquirirJazigo",
     element: <AdquirirJazigo />
-  },
+  }
   , {
     path: "/VisualizarDespesas",
     element: <VisualizarDespesas />
-  },
+  }
   , {
     path: "/AgendarLembrete",
     element: <AgendarLembrete />
-  },
+  }
   , {
     path: "/AgendarReuniao",
     element: <AgendarReuniao />
-  },
+  }
   , {
     path: "/RealizarDoacoes",
     element: <RealizarDoacoes />
-  },
+  }
   , {
     path: "/InfoScreen",
     element: <InfoScreen />
-  },
+  }
   , {
     path: "/ComprarOrnamento",
     element: <ComprarOrnamento />
-  },
+  }
   , {
     path: "/VisualizarReuniao",
     element: <VisualizarReuniao />
-  },
+  }
   , {
     path: "/CompraAlugaJazigo",
     element: <CompraAlugaJazigo />
-  },
-  {
+  }
+  , {
     path: "/QuemSomos",
     element: <QuemSomos />
-  },
-  {
+  }
+  , {
     path: "/ConfirmarCompra",
     element: <ConfirmarCompra />
-  },
-  {
+  }
+  , {
     path: "/HomeAdmin",
     element: <HomeAdmin />
-  },
-  {
+  }
+  , {
     path: "/Home",
     element: <Home />
   }
-
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+
     <App>
       <RouterProvider router={paginas} />
     </App>
-  </React.StrictMode>
+
 );
 
 reportWebVitals();

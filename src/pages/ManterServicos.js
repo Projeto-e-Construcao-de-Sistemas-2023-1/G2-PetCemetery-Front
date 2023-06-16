@@ -3,21 +3,27 @@ import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
+import { AlterarValorServico } from '../components/api';
 
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AlterarValorPlanos() {
 
-const [opcaoSelecionada, setOpcaoSelecionada] = React.useState('');
+  const [servico, setServico] = useState('');
+  const [valor, setValor] = useState('');
 
-const handleOptionChange = (event) => {
-  setOpcaoSelecionada(event.target.value);
-};
+  const handleAlteraValor = async () => {
+    console.log('Opcao selecionada:', servico);
+    console.log('Valor:', valor);
 
+    await AlterarValorServico(servico, valor).catch((error) => {
+      console.log("Erro:", error);
+    });
 
-  const navigate = useNavigate();
+    
+  };
+
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
@@ -31,24 +37,35 @@ const handleOptionChange = (event) => {
                 <Grid item>
                 <FormControl variant="outlined">
                   <Select
-                    value={opcaoSelecionada}
-                    onChange={handleOptionChange}
+                    value={servico}
+                    onChange={(event) => setServico(event.target.value)}
                     displayEmpty
                     inputProps={{ 'aria-label': 'Selecione um plano' }}>
                     <MenuItem value="" disabled>
-                      Selecione um plano
+                      Selecione um serviço
                     </MenuItem>
-                    <MenuItem value="Bronze">Bronze</MenuItem>
-                    <MenuItem value="Silver">Silver</MenuItem>
-                    <MenuItem value="Gold">Gold</MenuItem>
+                    <MenuItem value="BASIC">Basic</MenuItem>
+                    <MenuItem value="SILVER">Silver</MenuItem>
+                    <MenuItem value="GOLD">Gold</MenuItem>
+                    <MenuItem value="Exumacao">Exumação</MenuItem>
+                    <MenuItem value="Enterro">Enterro</MenuItem>
+                    <MenuItem value="Manutencao">Manutencao</MenuItem>
+                    <MenuItem value="Aluguel">Aluguel</MenuItem>
+                    <MenuItem value="Compra">Compra</MenuItem>
                   </Select>
                 </FormControl>
                 </Grid>
                 <Grid item>
-                  <TextField label="Digite o novo valor" placeholder="Valor em R$" variant="outlined"/>
+                  <TextField
+                    label="Digite o novo valor"
+                    placeholder="Valor em R$"
+                    variant="outlined"
+                    value={valor}
+                    onChange={(event) => setValor(event.target.value)}
+                  />
                 </Grid>
                 <Grid item>
-                  <Button variant="contained" onClick={() => { navigate(`/AlterarHorarioFuncionamento`) }}>Alterar Valor do plano</Button>
+                  <Button variant="contained" onClick={ handleAlteraValor }>Alterar valor do serviço</Button>
                 </Grid>
               </Grid>
             </Grid>

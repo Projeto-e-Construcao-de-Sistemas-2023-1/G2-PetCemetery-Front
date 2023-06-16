@@ -5,24 +5,23 @@ import { finalizarAluguel, finalizarCompra, getInformacoesCarrinho, removerItemC
 
 const Carrinho = ({ cpf, jazigoId, ornamento, tipo }) => {
     const [cartItems, setCartItems] = useState([]);
-    const [resp, setResp] = useState([]);
 
     //
 
     const handleAddToCart = async () => {
         var respAdd;
         if (!cartItems.some((item) => item.jazigoId === jazigoId)) {
-            if (tipo == "compra") {
+            if (tipo === "compra") {
                 respAdd = await finalizarCompra(cpf, jazigoId, ornamento);
             }
-            else if (tipo == "aluguel") {
+            else if (tipo === "aluguel") {
                 respAdd = await finalizarAluguel(cpf, jazigoId, ornamento);
             }
 
             if (respAdd != null) respAdd = respAdd.split(';');
             else { console.log("Resposta do back = null"); return; }
 
-            if (respAdd[0] == "OK") {
+            if (respAdd[0] === "OK") {
                 console.log("Item adicionado ao carrinho com sucesso");
             }
             else {
@@ -59,7 +58,7 @@ const Carrinho = ({ cpf, jazigoId, ornamento, tipo }) => {
         if (resp != null) resp = resp.split(';');
         else { console.log("Resposta do back = null"); return; }
 
-        if (resp[0] == "OK") {
+        if (resp[0] === "OK") {
             console.log("Servico removido com sucesso: " + index);
             getInfoCarrinho();
         }

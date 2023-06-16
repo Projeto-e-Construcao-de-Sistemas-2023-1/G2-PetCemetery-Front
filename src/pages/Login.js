@@ -21,6 +21,9 @@ function Login() {
 
   const [errMsg, setErrMsg] = useState("");
 
+  const handleCadastro = (e) => { navigate('/Cadastro'); }
+  const handleGoogle = (e) => { navigate('/Home'); }
+
   const handleEmail = (e) => {
     setEmailInput(e.target.value);
     console.log(emailInput);
@@ -44,28 +47,25 @@ function Login() {
     if (resp != null) resp = resp.split(';');
     else { console.log("Resposta do back = null"); setErrMsg("Erro na conexão com o servidor. Verifique sua rede"); return; }
 
-    if (resp[0] == "OK") {
+    if (resp[0] === "OK") {
       sessionStorage.setItem('usuario', resp[1]); // Armazena o tipo de usuário em sessão
       sessionStorage.setItem('cpf', resp[2]); // Armazena o CPF do usuário em sessão
-      if (resp[1] == "cliente") {
+      if (resp[1] === "cliente") {
         navigate(`/Home`);
-      } else if (resp[1] == "admin") {
+      } else if (resp[1] === "admin") {
         navigate(`/HomeAdmin`);
       }
     }
-    else if (resp[0] == "ERR") {
+    else if (resp[0] === "ERR") {
       console.log("ERRO! motivo: " + resp[1]);
-      if (resp[1] == "email_invalido") setErrMsg("Email inválido");
-      else if (resp[1] == "senha_invalida") setErrMsg("Senha inválida");
+      if (resp[1] === "email_invalido") setErrMsg("Email inválido");
+      else if (resp[1] === "senha_invalida") setErrMsg("Senha inválida");
     }
     else {
       console.log("Erro na formatacao de resposta do servidor");
       setErrMsg("Erro na formatação de resposta do servidor");
     }
   }
-
-  const handleCadastro = (e) => { navigate('/Cadastro'); }
-  const handleGoogle = (e) => { navigate('/Home'); }
 
   return (
     <ThemeProvider theme={mainTheme}>
