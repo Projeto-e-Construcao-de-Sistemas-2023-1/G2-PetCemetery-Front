@@ -227,12 +227,13 @@ export const agendarExumacao = async (data, horario) => {
     }
   };
 
-  export const getDetalhesJazigo = async (cpf_proprietario, id_jazigo) => {
-    console.log("entrou no getDetalhesJazigo");
-    try {
-        const response = await apiCall.get(`/api/${cpf_proprietario}/meus_jazigos/${id_jazigo}/detalhar_jazigo`);
-        return response.data;
-    } catch (error) {
-        console.log(error);
-    }
-};
+
+export function getDetalhesJazigo(cpf, id) {
+    return fetch(`/api/${cpf}/meus_jazigos/${id}/detalhar_jazigo`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erro ao buscar os detalhes do jazigo');
+        }
+        return response.json();
+      });
+  }

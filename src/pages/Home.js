@@ -1,34 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Button, Grid, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
-import { getMeusJazigos } from '../components/api';
+import { Link } from 'react-router-dom';
 
 const mainTheme = createTheme({ palette: { mode: 'dark' } });
 
 function Home() {
   const cpf = sessionStorage.getItem('cpf');
-  const [jazigos, setJazigos] = useState([]);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchJazigos = async () => {
-      try {
-        const response = await getMeusJazigos(cpf);
-        console.log("Response da API:", response); // Verifique a resposta da API aqui
-        setJazigos(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchJazigos();
-  }, [cpf]);
-
-  console.log("Estado de Jazigos:", jazigos); // Verifique o estado atualizado aqui
 
   return (
     <ThemeProvider theme={mainTheme}>
@@ -41,16 +24,14 @@ function Home() {
               <Typography variant="h2" align="center">Meus Jazigos</Typography>
             </Grid>
             <Grid container spacing={2} direction="column" alignItems="left">
-              {jazigos.map((jazigo, index) => (
-                <Grid item key={index}>
-                  <Button
-                    variant="outlined"
-                    onClick={() => { navigate(`/DetalhesJazigo/${jazigo.id}`) }}
-                  >
-                    {jazigo.nomePet === "Vazio" ? `Jazigo ${jazigo.endereco}` : `${jazigo.nomePet} ${jazigo.dataEnterro}`}
-                  </Button>
-                </Grid>
-              ))}
+              <Grid item>
+                <Button
+                  variant="outlined"
+                  onClick={() => { navigate(`/DetalhesJazigo`) }} // Assume que você tem uma rota chamada '/MeusJazigos'
+                >
+                  Ver Meus Jazigos
+                </Button>
+              </Grid>
             </Grid>
           </Grid>
 
