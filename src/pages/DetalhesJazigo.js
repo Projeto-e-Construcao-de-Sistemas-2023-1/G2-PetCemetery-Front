@@ -6,7 +6,6 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import { getMeusJazigos } from '../components/api';
-import { Link } from 'react-router-dom';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { format } from 'date-fns';
 
