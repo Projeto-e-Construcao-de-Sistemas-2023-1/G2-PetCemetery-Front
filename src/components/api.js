@@ -237,3 +237,15 @@ export const AlterarValorServico = async (servico, valor) => {
       console.log(error);
     });
 };
+
+export const personalizarJazigo = async (cpf, id, mensagem) => {
+    try {
+      const response = await apiCall.post(`/api/${cpf}/informacoes_jazigo/${id}/editar_jazigo`, mensagem);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  
+  
