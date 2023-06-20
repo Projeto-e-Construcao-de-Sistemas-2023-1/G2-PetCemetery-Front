@@ -89,40 +89,20 @@ export const getMeusJazigos = async (cpf_proprietario) => {
     }
 };
 
-export const getCompraJazigo = async (cpf, id_jazigo) => {
+export const getCompraJazigo = async (cpf, id_jazigo, tipo) => {
     console.log("entrou no getCompraJazigo");
     try {
-        const response = await apiCall.get(`/api/${cpf}/comprar_jazigo/${id_jazigo}`);
+        const response = await apiCall.get(`/api/${cpf}/adquirir_jazigo/${id_jazigo}?tipo=${tipo}`);
         return response.data;
     } catch (error) {
         console.log(error);
     }
 };
 
-export const getAluguelJazigo = async (cpf, id_jazigo) => {
-    console.log("entrou no getAluguelJazigo");
-    try {
-        const response = await apiCall.get(`/api/${cpf}/alugar_jazigo/${id_jazigo}`);
-        return response.data;
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-export const getCompraJazigoPlanos = async (cpf, id_jazigo) => {
+export const getCompraJazigoPlanos = async (cpf, id_jazigo, tipo) => {
     console.log("entrou no getCompraJazigoPlanos");
     try {
-        const response = await apiCall.get(`/api/${cpf}/comprar_jazigo/${id_jazigo}/listar_planos`);
-        return response.data;
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-export const getAluguelJazigoPlanos = async (cpf, id_jazigo) => {
-    console.log("entrou no getAluguelJazigoPlanos");
-    try {
-        const response = await apiCall.get(`/api/${cpf}/alugar_jazigo/${id_jazigo}/listar_planos`);
+        const response = await apiCall.get(`/api/${cpf}/comprar_jazigo/${id_jazigo}/listar_planos?tipo=${tipo}`);
         return response.data;
     } catch (error) {
         console.log(error);
@@ -199,54 +179,38 @@ export const visualizarReuniao = async () => {
     }
 };
 
-export const finalizarCompra = async (cpf, id, planoSelecionado) => {
+export const finalizarCompraCarrinho = async (cpf) => {
     console.log("entrou no finalizarCompra");
     try {
-        const response = await apiCall.post(`/api/${cpf}/comprar_jazigo/${id}/listar_planos/plano?planoSelecionado=${planoSelecionado}`);
+        const response = await apiCall.post(`/api/${cpf}/informacoes_carrinho/finalizar`);
         return response.data;
     } catch (error) {
         console.log(error);
     }
 };
 
-export const finalizarAluguel = async (cpf, id, planoSelecionado) => {
-    console.log("entrou no finalizarAluguel");
+export const agendarExumacao = async (cpf, id, dataExumacao, horaExumacao) => {
     try {
-        const response = await apiCall.post(`/api/${cpf}/alugar_jazigo/${id}/listar_planos/plano?planoSelecionado=${planoSelecionado}`);
+        const response = await apiCall.post(`/api/${cpf}/meus_jazigos/${id}/agendar_exumacao?data=${dataExumacao}&hora=${horaExumacao}`);
         return response.data;
     } catch (error) {
-        console.log(error);
+        console.error('Erro ao agendar exumação:', error);
+        return null;
     }
 };
 
-export const agendarExumacao = async (data, horario) => {
-    try {
-      const response = await axios.post('api/{cpf}/meus_jazigos/{id}/agendar_exumacao', {
-        data,
-        horario,
-      });
-  
-      if (response.status === 200) {
-        return response.data;
-      } else {
-        throw new Error('Falha na requisição');
-      }
-    } catch (error) {
-      console.error('Erro na requisição:', error);
-      throw error;
-    }
-  };
-
-  export const getDetalhesJazigo = async (cpf_proprietario, id_jazigo) => {
+  export const getDetalhesJazigo = async (cpf_proprietario, idJazigo) => {
     console.log("entrou no getDetalhesJazigo");
     try {
-        const response = await apiCall.get(`/api/${cpf_proprietario}/meus_jazigos/${id_jazigo}/detalhar_jazigo`);
+        const response = await apiCall.get(`/api/${cpf_proprietario}/meus_jazigos/${idJazigo}/detalhar_jazigo`);
         return response.data;
     } catch (error) {
         console.log(error);
     }
 };
 
+//Altera valor de um servico
+//Passar um JSON no body com nome do servico e valor novo
 export const AlterarValorServico = async (servico, valor) => {
   await apiCall.post(`/api/admin/servicos/alterar?servico=${servico}&valor=${valor}`).then((response) => {
       console.log(response);
@@ -254,4 +218,14 @@ export const AlterarValorServico = async (servico, valor) => {
     }).catch((error) => {
       console.log(error);
     });
+}
+
+//Adiciona item ao carrinho
+export const addItemCarrinho = async (cpf, id, plano_selecionado) => {
+    await apiCall.post(`/api/${cpf}/comprar_jazigo/${id}/listar_planos/plano?planoSelecionado=${plano_selecionado}`).then((response) => {
+        console.log(response);
+        return response.data;
+      }).catch((error) => {
+        console.log(error);
+      });
 };

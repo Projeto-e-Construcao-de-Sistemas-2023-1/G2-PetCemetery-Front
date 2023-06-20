@@ -35,12 +35,8 @@ function AdquirirJazigo() {
     setJazigoEscolhido(null);
   };
 
-  const handleComprar = () => {
-    navigate(`/CompraAlugaJazigo?id=${JazigoEscolhido}&tipo=compra`);
-  };
-
-  const handleAlugar = () => {
-    navigate(`/CompraAlugaJazigo?id=${JazigoEscolhido}&tipo=aluguel`);
+  const handleComprar = (tipo) => {
+    navigate(`/CompraAlugaJazigo?id=${JazigoEscolhido}&tipo=${tipo}`);
   };
 
   return (
@@ -50,7 +46,7 @@ function AdquirirJazigo() {
       <Titulo texto="Escolha o jazigo no mapa" mW="md" />
       <Container component="main">
         <Mapa onJazigoSelect={handleEscolha} isModalOpen={isModalOpen} />
-        <ModalPadrao title={"Jazigo " + getCoordinates(JazigoEscolhido)} open={isModalOpen} onClose={handleModalClose} bt1Text="Comprar" bt1Href={handleComprar} bt2Text="Alugar" bt2Href={handleAlugar} />
+        <ModalPadrao title={"Jazigo " + getCoordinates(JazigoEscolhido)} open={isModalOpen} onClose={handleModalClose} bt1Text="Comprar" bt1Href={handleComprar('compra')} bt2Text="Alugar" bt2Href={handleComprar('aluguel')} />
       </Container>
     </ThemeProvider>
   );

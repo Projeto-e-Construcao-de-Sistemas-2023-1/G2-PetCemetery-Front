@@ -10,24 +10,22 @@ import ModalOk from '../components/ModalOk';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 import { agendarExumacao } from '../components/api'; // Importando a função
+import { getUrlParams } from '../utils/utils';
 
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
+const id = getUrlParams('id');
 
 function AgendarExumacao() {
   const navigate = useNavigate();
   const cpf = sessionStorage.getItem('cpf');
+  
 
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
-
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleHome = () => {
     navigate(`/Home`);
-  };
-
-  const handleLogout = () => {
-    navigate('/');
   };
 
   const handleAgendar = async () => { 
@@ -37,7 +35,7 @@ function AgendarExumacao() {
     };
 
     try {
-        const response = await agendarExumacao(cpf, exumacao.data, exumacao.horario);
+        const response = await agendarExumacao(cpf, id, exumacao.data, exumacao.horario);
         if (response === "OK;") {
             setModalOpen(true);
         } else {

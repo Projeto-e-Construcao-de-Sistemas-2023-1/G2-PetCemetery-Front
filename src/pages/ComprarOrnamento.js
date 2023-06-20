@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 import { getUrlParams } from '../utils/utils';
-import { getCompraJazigoPlanos, getAluguelJazigoPlanos } from '../components/api';
+import { getCompraJazigoPlanos, addItemCarrinho } from '../components/api';
 
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
@@ -26,12 +26,7 @@ function ComprarOrnamento() {
 
   const getPlanoInfo = async (e) => { //formato: STATUS;endereco;preco
     let resp = "";
-    if (tipo == "compra") {
-      resp = await getCompraJazigoPlanos(cpf, jazigoId);
-    }
-    else if (tipo == "aluguel") {
-      resp = await getAluguelJazigoPlanos(cpf, jazigoId);
-    }
+    resp = await getCompraJazigoPlanos(cpf, jazigoId, tipo);
 
     console.log(resp);
 
@@ -55,6 +50,11 @@ function ComprarOrnamento() {
   const handleChange = (event) => {
     setSelectedOrnament(event.target.value);
   };
+
+  const handleAddToCart = () => {
+    addItemCarrinho(cpf, jazigoId, selectedOrnament);
+    navigate(`/ConfirmarCompra`);
+  };
   //TODO: fazer o componente de compra e usar aqui
   return (
     <ThemeProvider theme={mainTheme}>
@@ -70,7 +70,7 @@ function ComprarOrnamento() {
             <FormControlLabel control={<Checkbox checked={selectedOrnament === 'gold'} onChange={handleChange} value="gold" />} label={"Gold: Mensagem, Foto, Flores e Catavento - R$" + precoGold} />
             <Divider orientation="horizontal" flexItem sx={{ margin: 2 }} />
             <Stack spacing={2} direction='row'>
-              <Button variant="contained" onClick={() => { navigate(`/ConfirmarCompra?id=${jazigoId}&tipo=${tipo}&ornamento=${selectedOrnament}`); }}>Comprar</Button>
+              <Button variant="contained" onClick={ handleAddToCart }>Comprar</Button>
             </Stack>
           </Stack>
         </Box>
