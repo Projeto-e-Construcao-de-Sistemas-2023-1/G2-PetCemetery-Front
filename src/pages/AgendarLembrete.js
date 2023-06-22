@@ -17,6 +17,7 @@ function AgendarLembrete() {
   const navigate = useNavigate();
   const cpf = sessionStorage.getItem('cpf');
 
+  //TODO URGENTE CARALHO FAZ ESSA PORRA
   const apiKey = '54774bb84681436793d142324230806';
   const city = 'Rio de Janeiro';
   const days = 10;

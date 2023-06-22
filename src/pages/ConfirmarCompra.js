@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'; // Import useState
 import { useNavigate } from 'react-router-dom';
 import '../Styles/home.css';
 import Carrinho, { Servico } from '../components/Carrinho';
-import ModalPadrao from '../components/ModalPadrao';
+import ModalOk from '../components/ModalOk';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 import { getInformacoesCarrinho, finalizarCompraCarrinho } from '../components/api';
@@ -24,16 +24,16 @@ function ConfirmarCompra() {
 
   const navigate = useNavigate();
 
-  const handleButtonClick = () => { 
+  const handleButtonClick = () => {
     handleCompra();
-    setModalOpen(true); 
+    setModalOpen(true);
   };
 
 
   const handleCompra = async (e) => {
     var resp;
     resp = await finalizarCompraCarrinho(cpf);
-    
+
     console.log("resp: " + resp);
   };
 
@@ -67,7 +67,7 @@ function ConfirmarCompra() {
             </Paper>
           </Grid>
         </Grid>
-        <ModalPadrao title="Pagamento realizado com sucesso" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="Home" bt1Href={handleHome} bt2Text="Logout" bt2Href={handleLogout} />
+        <ModalOk title="Pagamento realizado com sucesso" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="OK" bt1Href={handleHome}/>
       </Container>
     </ThemeProvider>
   );

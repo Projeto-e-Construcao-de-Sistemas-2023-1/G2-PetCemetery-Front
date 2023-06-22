@@ -1,35 +1,36 @@
-import { useLocation } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
 import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { getDetalhesJazigo, personalizarJazigo } from '../components/api';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import ModalOk from '../components/ModalOk';
 import NavBar from '../components/NavBar';
-import { getUrlParams } from '../utils/utils';
-
-const mainTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
+import { personalizarJazigo } from '../components/api';
+import { useNavigate } from 'react-router-dom';
+const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 const PersonalizarJazigo = () => {
   const cpf = sessionStorage.getItem('cpf');
   const query = new URLSearchParams(useLocation().search);
   const id = Number(query.get('id'));
   const [mensagem, setMensagem] = useState('');
-  const [foto, setFoto] = useState(null);
+  const [foto, setFoto] = useState('');
   const [urlFoto, setUrlFoto] = useState('');
   const [resultado, setResultado] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("URLFOTO: " + urlFoto);
     // Recuperar a URL da imagem do armazenamento local
     const cachedUrlFoto = localStorage.getItem('urlFoto');
+
+    console.log("Cachedurlfoto: " + cachedUrlFoto);
 
     if (cachedUrlFoto) {
       setUrlFoto(cachedUrlFoto);
     }
-  }, []);
+  }, [urlFoto]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -41,7 +42,7 @@ const PersonalizarJazigo = () => {
       localStorage.setItem('urlFoto', urlFoto);
 
       if (response === 'OK;Mensagem_editada') {
-        setResultado('Mensagem editada com sucesso.');
+        setIsModalOpen(true);
       } else {
         setResultado('Erro ao editar a mensagem do jazigo.');
       }
@@ -50,31 +51,25 @@ const PersonalizarJazigo = () => {
     }
   };
 
-  const handleFotoChange = (event) => {
-    const file = event.target.files[0];
-    const url = URL.createObjectURL(file);
-
-    // Armazenar a URL da imagem selecionada no estado e no armazenamento local
-    setFoto(file);
-    setUrlFoto(url);
-    localStorage.setItem('urlFoto', url);
-  };
-
   const handleChooseImage = () => {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
     input.onchange = (event) => {
       const file = event.target.files[0];
+      console.log("Imagem escolhida: " + file.name);
       const url = URL.createObjectURL(file);
+      console.log("URL OBJECT CRIADO: " + url);
 
       // Armazenar a URL da imagem selecionada no estado e no armazenamento local
-      setFoto(file);
+      setFoto(url);
       setUrlFoto(url);
       localStorage.setItem('urlFoto', url);
     };
     input.click();
   };
+
+  const handleHome = () => { navigate('/DetalhesJazigo'); };
 
   return (
     <ThemeProvider theme={mainTheme}>
@@ -92,7 +87,7 @@ const PersonalizarJazigo = () => {
             <Box display="flex" marginTop={2}>
               <Box flexBasis="50%">
                 {foto ? (
-                  <img src={URL.createObjectURL(foto)} alt="Imagem do Jazigo" width="40%" />
+                  <img src={foto} alt="Imagem do Jazigo" width="40%" />
                 ) : (
                   <img src={urlFoto || '../images/nome-da-imagem-padrao.jpg'} alt="Imagem do Jazigo" width="40%" />
                 )}
@@ -105,12 +100,13 @@ const PersonalizarJazigo = () => {
               </Box>
             </Box>
             <Box display="flex" justifyContent="center" marginTop={2}>
-              <Button variant="contained" color="primary" onClick={handleSubmit}> Confirmar </Button>
+              <Button variant="contained" color="primary" onClick={handleSubmit}>Confirmar</Button>
             </Box>
             {resultado && <Typography variant="subtitle1">{resultado}</Typography>}
           </CardContent>
         </Card>
       </Box>
+      <ModalOk title={"Mensagem editada com sucesso"} open={isModalOpen} bt1Text="Voltar" bt1Href={handleHome} />
     </ThemeProvider>
   );
 };

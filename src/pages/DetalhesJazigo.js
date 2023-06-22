@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
+import { Box, Button, Accordion, AccordionSummary, AccordionDetails, Typography, Stack } from '@mui/material';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -9,7 +9,6 @@ import { getMeusJazigos } from '../components/api';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { format } from 'date-fns';
 import Titulo from '../components/Titulo';
-
 const mainTheme = createTheme({ palette: { mode: 'dark' } });
 
 const DetalhesJazigo = () => {
@@ -55,12 +54,12 @@ const DetalhesJazigo = () => {
         <Box p={2} textAlign="center">
           <Box sx={{ margin: 2 }} >
             <Titulo texto="Detalhes do Jazigo" mW="md" />
-            <Typography variant="h5">CPF: {cpf}</Typography>
+            <Typography variant="h5">Seu CPF: {cpf}</Typography>
           </Box>
           {jazigos.map((jazigo, index) => (
             <Accordion key={index}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`panel${index + 1}-content`} id={`panel${index + 1}-header`}>
-                <Typography variant="h6">Jazigo {index + 1}</Typography>
+                <Typography variant="h6">Jazigo {jazigo.endereco}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <Typography variant="h6">Detalhes do Jazigo {jazigo.idJazigo}</Typography>
@@ -82,17 +81,16 @@ const DetalhesJazigo = () => {
                 {jazigo.mensagem && (
                   <Typography variant="h6">Mensagem {(jazigo.mensagem)}</Typography>
                 )}
-                {/* Adicione mais informações do jazigo aqui */}
                 {jazigo.nomePet ? (
-                  <Box sx={{ margin: 2 }}>
+                  <Stack spacing={2} direction='row' sx={{ margin: 2 }}>
                     <Button variant="contained" color="primary" onClick={() => handleAgendarEnterro(jazigo.idJazigo)}> Agendar enterro </Button>
                     <Button variant="contained" color="secondary" onClick={() => handlePersonalizarJazigo(jazigo.idJazigo)}> Personalizar Jazigo </Button>
-                  </Box>
+                  </Stack>
                 ) : (
-                  <Box sx={{ margin: 2 }}>
+                  <Stack spacing={2} direction='row' sx={{ margin: 2 }}>
                     <Button variant="contained" color="primary" onClick={() => handleAgendarExumacao(jazigo.idJazigo)}> Agendar exumação </Button>
                     <Button variant="contained" color="secondary" onClick={() => handlePersonalizarJazigo(jazigo.idJazigo)}> Personalizar Jazigo </Button>
-                  </Box>
+                  </Stack>
                 )}
               </AccordionDetails>
             </Accordion>
