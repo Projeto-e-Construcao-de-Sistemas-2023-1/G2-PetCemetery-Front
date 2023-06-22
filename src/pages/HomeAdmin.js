@@ -25,7 +25,7 @@ function HomeAdmin() {
                   <Button variant="contained" onClick={() => { navigate(`/AlterarHorarioFuncionamento`) }}>Alterar Horário de Funcionamento</Button>
                 </Grid>
                 <Grid item>
-                  <Button variant="contained" onClick={() => { navigate(`/Relatorios`) }}>Relatórios</Button>
+                  <Button variant="contained" onClick={() => { navigate(`/RelatorioSelecao`) }}>Relatórios</Button>
                 </Grid>
                 <Grid item>
                   <Button variant="contained" onClick={() => { navigate(`/DetalharJazigo`) }}>Detalhar Jazigo</Button>
