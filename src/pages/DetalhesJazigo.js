@@ -65,13 +65,24 @@ const DetalhesJazigo = () => {
                   <Typography variant="body1">Data de Nascimento: </Typography>
                 )}
                 <Typography variant="body1">Espécie: {jazigo.especie}</Typography>
+                {jazigo.mensagem && (
+                <Typography variant="body1">Mensagem {(jazigo.mensagem)}</Typography>
+              )}
                 {/* Adicione mais informações do jazigo aqui */}
                 {jazigo.nomePet !== 'Vazio' && (
                   <div>
-                    <Button variant="contained" color="primary" onClick={() => { navigate(`/AgendarExumacao?id=${jazigo.idJazigo}`) }}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={ navigate(`/AgendarExumacao?id=${jazigo.idJazigo}`) }
+                    >
                       Agendar exumação
                     </Button>
-                    <Button variant="contained" color="secondary" onClick={() => { navigate(`/PersonalizarJazigo`) }}>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={ navigate(`/AgendarEnterro?id=${jazigo.idJazigo}`) }
+                    >
                       Personalizar Jazigo
                     </Button>
                   </div>

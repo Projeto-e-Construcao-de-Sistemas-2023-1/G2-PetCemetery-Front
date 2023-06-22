@@ -24,16 +24,6 @@ function ConfirmarCompra() {
 
   const navigate = useNavigate();
 
-  const getInfoCarrinho = async () => {
-    try {
-      const data = await getInformacoesCarrinho(cpf);
-      setResp(data);
-      console.log(data);
-    } catch (error) {
-      console.log("Erro ao pegar info do carrinho: " + error);
-    }
-  };
-
   const handleButtonClick = () => { 
     handleCompra();
     setModalOpen(true); 
@@ -44,14 +34,8 @@ function ConfirmarCompra() {
     var resp;
     resp = await finalizarCompraCarrinho(cpf);
     
-    console.log(resp);
-
-    getInfoCarrinho();
+    console.log("resp: " + resp);
   };
-
-  /*useEffect(() => {
-    getInfoCarrinho();
-  }, []);*/
 
   return (
     <ThemeProvider theme={mainTheme}>

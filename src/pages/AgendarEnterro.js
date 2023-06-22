@@ -10,7 +10,6 @@ import '../Styles/agendar-reuniao.css';
 import ModalOk from '../components/ModalOk';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
-import { agendarReuniao } from '../components/api'; // Importando a função
 
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 

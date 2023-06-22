@@ -1,7 +1,7 @@
 import { Button, Divider, List, ListItem, ListItemText, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import React, { useEffect, useState } from 'react';
-import { finalizarCompraCarrinho, getInformacoesCarrinho, removerItemCarrinho } from './api';
+import { getInformacoesCarrinho, removerItemCarrinho } from './api';
 
 const Carrinho = ({ cpf }) => {
     const [cartItems, setCartItems] = useState([]);
@@ -20,9 +20,7 @@ const Carrinho = ({ cpf }) => {
     useEffect(() => {
         console.log("useEffect");
         getInfoCarrinho();
-    }, []);
-
-    //
+    }, [cpf]);
 
     const removeServico = async (index) => {
         var resp = await removerItemCarrinho(cpf, cartItems[index].idServico);

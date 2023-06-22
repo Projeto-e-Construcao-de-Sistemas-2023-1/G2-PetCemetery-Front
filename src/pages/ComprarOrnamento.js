@@ -26,7 +26,7 @@ function ComprarOrnamento() {
 
   const getPlanoInfo = async (e) => { //formato: STATUS;endereco;preco
     let resp = "";
-    resp = await getCompraJazigoPlanos(cpf, jazigoId, tipo);
+    resp = await getCompraJazigoPlanos(cpf, jazigoId);
 
     console.log(resp);
 
@@ -51,8 +51,8 @@ function ComprarOrnamento() {
     setSelectedOrnament(event.target.value);
   };
 
-  const handleAddToCart = () => {
-    addItemCarrinho(cpf, jazigoId, selectedOrnament);
+  const handleAddToCart = async () => {
+    await addItemCarrinho(cpf, jazigoId, selectedOrnament, tipo);
     navigate(`/ConfirmarCompra`);
   };
   //TODO: fazer o componente de compra e usar aqui
