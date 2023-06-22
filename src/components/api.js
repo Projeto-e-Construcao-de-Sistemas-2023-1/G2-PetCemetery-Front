@@ -246,6 +246,16 @@ export const personalizarJazigo = async (cpf, id, mensagem) => {
       console.log(error);
     }
   };
+
+  export const relatorioInadimplente = async () => {
+    try {
+        const response = await apiCall.get('/api/admin/relatorio');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
   
   
   
