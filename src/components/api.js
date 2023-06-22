@@ -162,8 +162,9 @@ export const agendarReuniao = async (cpf, data, horario, assunto) => {
 
 export const agendarEnterro = async (cpf, id, data, horario, nomePet, especie, dataNascimento) => {
   console.log("entrou no agendarEnterro");
+  console.log(cpf, id, data, horario, nomePet, especie, dataNascimento);
   try {
-      const response = await apiCall.post(`/api/${cpf}/meus_jazigos/${id}/agendar_enterro`, data, horario, nomePet, especie, dataNascimento);
+      const response = await apiCall.post(`/api/${cpf}/meus_jazigos/${id}/agendar_enterro?data=${data}&hora=${horario}&nomePet=${nomePet}&especie=${especie}&dataNascimento=${dataNascimento}`);
       return response.data;
   } catch (error) {
       console.log(error);

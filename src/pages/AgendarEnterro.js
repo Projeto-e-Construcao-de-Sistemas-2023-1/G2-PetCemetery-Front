@@ -1,4 +1,4 @@
-import { Box, Button, Divider, FormControl, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
+import { Box, Button, Divider, FormControl, InputLabel, MenuItem, Select, Stack, TextField, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -10,15 +10,21 @@ import '../Styles/agendar-reuniao.css';
 import ModalOk from '../components/ModalOk';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
+import { getUrlParams } from '../utils/utils';
+import { agendarEnterro } from '../components/api';
 
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AgendarEnterro() {
   const navigate = useNavigate();
   const cpf = sessionStorage.getItem('cpf');
+  const idJazigo = getUrlParams('id');
 
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
+  const [nomePet, setNomePet] = useState('');
+  const [especie, setEspecie] = useState('');
+  const [dataNascimento, setDataNascimento] = useState('');
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -26,15 +32,22 @@ function AgendarEnterro() {
     navigate(`/Home`);
   };
 
+  const handleDateEnterroChange = (event) => { setSelectedDate(format(event.$d, "yyyy-MM-dd")); };
+  const handleTimeChange = (event) => { setSelectedTime(event.target.value + ""); };
+  const handleNomePetChange = (event) => { setNomePet(event.target.value); };
+  const handleEspecieChange = (event) => { setEspecie(event.target.value); };
+  const handleDateNascimentoChange = (event) => { setDataNascimento(format(event.$d, "yyyy-MM-dd")); };
+
   const handleAgendar = async () => { // Função atualizada
-    const reuniao = {
+    const enterro = {
         data: selectedDate,
         horario: selectedTime,
     };
 
     try {
-        const response = await agendarEnterro(cpf, idJazigo, reuniao.data, reuniao.horario, reuniao.assunto, nomePet, especie, dataNascimento);
-        if (response === "OK;") {
+        const response = await agendarEnterro(cpf, idJazigo, enterro.data, enterro.horario, nomePet, especie, dataNascimento);
+        let resp = response.split(';');
+        if (resp[0] === "OK") {
             setModalOpen(true);
         } else {
             console.error('Erro ao agendar enterro:', response);
@@ -44,21 +57,23 @@ function AgendarEnterro() {
     }
   };
 
-  const handleDateChange = (event) => { setSelectedDate(format(event.$d, "yyyy-MM-dd")); console.log(selectedDate); };
-  const handleTimeChange = (event) => { 
-    setSelectedTime(event.target.value + ""); 
-};
-
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <NavBar isLoggedIn={true} cpf={cpf} />
-      <Titulo texto="Agendar Reunião" mW="sm" />
+      <Titulo texto="Agendar Enterro" mW="sm" />
       <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Stack spacing={2} direction="column" divider={<Divider orientation="horizontal" flexItem />}>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
+            <Typography variant="h5" align='center'>Dados do Pet</Typography>
+            <TextField label="Nome do Pet" value={nomePet} onChange={handleNomePetChange} fullWidth required />
+            <TextField label="Espécie" value={especie} onChange={handleEspecieChange} fullWidth required />
+            <Typography variant="h5" align='center'>Data de Nascimento do Pet</Typography>
+            <DatePicker onChange={handleDateNascimentoChange} />
+          </Box>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>  
             <Typography variant="h5" align='center'>Escolha a data de Enterro</Typography>
-            <DatePicker onChange={handleDateChange} />
+            <DatePicker onChange={handleDateEnterroChange} />
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
             <Typography variant="h5" align='center'>Lista de horários disponíveis</Typography>
@@ -72,7 +87,7 @@ function AgendarEnterro() {
               </Select>
             </FormControl>
           </Box>
-          <Button variant="contained" color='secondary' onClick={handleAgendar}>Agendar</Button>
+          <Button variant="contained" color='secondary' onClick={ handleAgendar }>Agendar</Button>
         </Stack>
         <ModalOk title="Agendamento realizado com sucesso" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="OK" bt1Href={handleHome}/>
       </Container>

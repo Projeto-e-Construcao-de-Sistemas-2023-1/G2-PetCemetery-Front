@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { personalizarJazigo } from '../components/api';
+import { getDetalhesJazigo, personalizarJazigo } from '../components/api';
 import NavBar from '../components/NavBar';
+import { getUrlParams } from '../utils/utils';
 
 const mainTheme = createTheme({
   palette: {
@@ -82,12 +83,7 @@ const PersonalizarJazigo = () => {
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
         <Card>
           <CardContent>
-            <Typography variant="h5" component="h1" align="center">
-              Detalhes do Jazigo
-            </Typography>
-            <Typography variant="h6" component="h2" align="center">
-              Plano: Gold
-            </Typography>
+            <Typography variant="h5" component="h1" align="center"> Detalhes do Jazigo </Typography>
             <Box display="flex" alignItems="center" marginTop={2}>
               <Box flexGrow={1}>
                 <Typography variant="subtitle1">Imagem</Typography>
@@ -100,29 +96,16 @@ const PersonalizarJazigo = () => {
                 ) : (
                   <img src={urlFoto || '../images/nome-da-imagem-padrao.jpg'} alt="Imagem do Jazigo" width="40%" />
                 )}
-                <Button variant="contained" color="primary" onClick={handleChooseImage}>
-                  Escolher Imagem
-                </Button>
+                <Button variant="contained" color="primary" onClick={handleChooseImage}> Escolher Imagem </Button>
               </Box>
               <Box flexBasis="50%" pl={2}>
                 <Typography variant="subtitle1">Mensagem na lápide</Typography>
-                <TextField
-                  multiline
-                  rows={4}
-                  fullWidth
-                  placeholder="Digite a mensagem da lápide"
-                  value={mensagem}
-                  onChange={(e) => setMensagem(e.target.value)}
-                />
-                <Typography variant="caption" color="textSecondary">
-                  Limite de 80 caracteres
-                </Typography>
+                <TextField multiline rows={4} fullWidth placeholder="Digite a mensagem da lápide" value={mensagem} onChange={(e) => setMensagem(e.target.value)} />
+                <Typography variant="caption" color="textSecondary"> Limite de 80 caracteres </Typography>
               </Box>
             </Box>
             <Box display="flex" justifyContent="center" marginTop={2}>
-              <Button variant="contained" color="primary" onClick={handleSubmit}>
-                Confirmar
-              </Button>
+              <Button variant="contained" color="primary" onClick={handleSubmit}> Confirmar </Button>
             </Box>
             {resultado && <Typography variant="subtitle1">{resultado}</Typography>}
           </CardContent>
