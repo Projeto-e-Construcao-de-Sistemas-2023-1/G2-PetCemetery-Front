@@ -2,9 +2,12 @@ import { AppBar, Box, Button, Stack, Toolbar } from '@mui/material';
 import React from 'react';
 import { ReactComponent as Logo } from '../logo.svg';
 import './navbar.css';
+import IconCarrinho from './IconCarrinho';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = ({ page, isLoggedIn}) => {
     var color1, color2, color3, color4;
+    const navigate = useNavigate();
 
     switch (page) {
         case 1:
@@ -63,9 +66,17 @@ const NavBar = ({ page, isLoggedIn}) => {
                             </Stack>
                         }
                         {isLoggedIn &&
-                            <Stack spacing={2} direction='row'>
-                                <Button variant="contained" color="primary" href={`/EditarPerfil`}>Meu Perfil</Button>
-                                <Button variant="contained" color="error" href={'/'}>Logout</Button>
+
+                            <Stack spacing={1} direction="row" alignItems="center">
+                                <Button variant="contained" color="primary" href={`/EditarPerfil`}>
+                                Meu Perfil
+                                </Button>
+                                <Button variant="contained" color="error" href={'/'}>
+                                Logout
+                                </Button>
+                                <Button variant="contained" color="secondary" href={'/ConfirmarCompra'}>
+                                    <IconCarrinho href={'/ConfirmarCompra'} />
+                                </Button>
                             </Stack>
                         }
                     </Box>
