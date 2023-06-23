@@ -6,18 +6,14 @@ import React, { useEffect, useState } from 'react'; // Import useState
 import { useNavigate } from 'react-router-dom';
 import '../Styles/home.css';
 import Carrinho, { Servico } from '../components/Carrinho';
-import ModalPadrao from '../components/ModalPadrao';
+import ModalOk from '../components/ModalOk';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
-import { getInformacoesCarrinho, finalizarCompra, finalizarAluguel } from '../components/api';
-import { getUrlParams, isJSON } from '../utils/utils';
+import { getInformacoesCarrinho, finalizarCompraCarrinho } from '../components/api';
 const mainTheme = createTheme({ palette: { mode: 'dark' } });
 
 function ConfirmarCompra() {
   const cpf = sessionStorage.getItem('cpf');
-  const jazigoId = getUrlParams('id');
-  const tipo = getUrlParams('tipo');
-  const ornamento = getUrlParams('ornamento');
 
   const [modalOpen, setModalOpen] = useState(false);
   const [resp, setResp] = useState([]);
@@ -28,40 +24,18 @@ function ConfirmarCompra() {
 
   const navigate = useNavigate();
 
-  const handleButtonClick = () => { setModalOpen(true); };
-
-
-  const handleAddToCart = async (e) => {
-    var resp;
-    if (tipo == "compra") {
-      resp = await finalizarCompra(cpf, jazigoId, ornamento);
-    }
-    else if (tipo == "aluguel") {
-      resp = await finalizarAluguel(cpf, jazigoId, ornamento);
-    }
-    console.log(resp);
-
-    //getInfoCarrinho();
+  const handleButtonClick = () => {
+    handleCompra();
+    setModalOpen(true);
   };
 
-  useEffect(() => {
-    const getInfoCarrinho = async () => {
-      try {
-        const data = await getInformacoesCarrinho(cpf);
-        setResp(data);
-        console.log(data);
-      } catch (error) {
-        console.log("Erro ao pegar info do carrinho: " + error);
-      }
-    };
 
-    const handleLoadData = async () => {
-      await handleAddToCart();
-      getInfoCarrinho();
-    };
+  const handleCompra = async (e) => {
+    var resp;
+    resp = await finalizarCompraCarrinho(cpf);
 
-    handleLoadData();
-  }, []);
+    console.log("resp: " + resp);
+  };
 
   return (
     <ThemeProvider theme={mainTheme}>
@@ -73,7 +47,7 @@ function ConfirmarCompra() {
         <Grid container spacing={2}>
           <Grid item xs={5}>
             <Paper elevation={1} style={{ height: '100%', textAlign: 'center', padding: 20 }}>
-              <Carrinho cpf={cpf} jazigoId={jazigoId} ornamento={ornamento} tipo={tipo} />
+              <Carrinho cpf={cpf} />
             </Paper>
           </Grid>
           <Grid item xs={2} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -93,7 +67,7 @@ function ConfirmarCompra() {
             </Paper>
           </Grid>
         </Grid>
-        <ModalPadrao title="Pagamento realizado com sucesso" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="Home" bt1Href={handleHome} bt2Text="Logout" bt2Href={handleLogout} />
+        <ModalOk title="Pagamento realizado com sucesso" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="OK" bt1Href={handleHome}/>
       </Container>
     </ThemeProvider>
   );

@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 import { getUrlParams } from '../utils/utils';
-import { getCompraJazigo, getAluguelJazigo } from '../components/api';
+import { getCompraJazigo } from '../components/api';
 
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
@@ -25,12 +25,7 @@ function CompraAlugaJazigo() {
 
   const getJazigoInfo = async (e) => { //formato: STATUS;endereco;preco
     let resp = "";
-    if (tipo == "compra") {
-      resp = await getCompraJazigo(cpf, jazigoId);
-    }
-    else if (tipo == "aluguel") {
-      resp = await getAluguelJazigo(cpf, jazigoId);
-    }
+    resp = await getCompraJazigo(cpf, jazigoId, tipo);
 
     console.log(resp);
 

@@ -6,11 +6,12 @@ import { DatePicker } from '@mui/x-date-pickers';
 import axios from 'axios';
 import { format } from "date-fns";
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import ModalPadrao from '../components/ModalPadrao';
+import { useNavigate } from 'react-router-dom';
+import ModalOk from '../components/ModalOk';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
-import '../weather-icons/css/weather-icons.min.css';
+import { calcDiff } from '../utils/utils';
+//import '../weather-icons/css/weather-icons.min.css';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AgendarLembrete() {
@@ -19,23 +20,38 @@ function AgendarLembrete() {
 
   const apiKey = '54774bb84681436793d142324230806';
   const city = 'Rio de Janeiro';
-  const days = 10;
+  const days = 3;
 
-  const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}&aqi=no&alerts=no`;
+  const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}&aqi=no&alerts=no&lang=pt`;
   console.log(url);
 
   const [selectedDate, setSelectedDate] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
-  const [clima, setClima] = useState('Ensolarado');
+  const [clima, setClima] = useState("");
+  const [valorData, setValorData] = useState();
+  const [icone, setIcone] = useState("");
+  const [errMsg, setErrMsg] = useState("");
 
-  const handleClima = () => {
-    axios.get(url).then((response) => {
-      setClima(response.data.forecast.forecastday[0].day.condition.text);
-      console.log(clima);
+  const handleClima = async () => {
+    var clima;
+
+    await axios.get(url).then((response) => {
+      clima = response.data.forecast;
+      
     });
 
-    //const weatherCondition = data.list[0].weather[0].main;
-    //TODO finalizar clima
+    const diff = calcDiff(selectedDate);
+
+    if (diff < 0) {
+      setErrMsg("Selecione uma data futura");
+    }
+    else if (diff > 3) {
+      setErrMsg("Previsão do tempo indisponível para a data selecionada");
+    }
+    else {
+      setClima(clima.forecastday[diff].day.condition.text);
+      setIcone(clima.forecastday[diff].day.condition.icon);
+    }
   }
 
   const handleHome = () => {
@@ -43,17 +59,29 @@ function AgendarLembrete() {
   };
 
   const handleDateChange = (event) => {
-    setSelectedDate(format(event.$d, "yyyy-MM-dd"));
-    console.log(selectedDate);
-    handleClima();
-  };
+    var dataSelecionada = format(event.$d, "yyyy-MM-dd");
 
-  const handleLogout = () => {
-    navigate('/');
+    const diff = calcDiff(dataSelecionada);
+
+    if (diff >= 0) {
+      setSelectedDate(dataSelecionada);
+      setValorData(event.$d);
+
+      console.log(selectedDate);
+      handleClima();
+    }
+    else {
+      setErrMsg("Selecione uma data futura");
+    }
   };
 
   const handleAgendar = () => {
-    setModalOpen(true);
+    if (selectedDate != {}) {
+      setModalOpen(true);
+    }
+    else {
+      setErrMsg("Selecione uma data válida")
+    }
   };
 
   return (
@@ -65,15 +93,15 @@ function AgendarLembrete() {
         <Stack spacing={2} direction="column" divider={<Divider orientation="horizontal" flexItem />}>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
             <Typography variant="h5" align='center'>Escolha a data da sua visita</Typography>
-            <DatePicker onChange={handleDateChange} />
-            <Typography variant="h4" align='center'>{"Clima " + clima}</Typography>
-            <Box> <i className="wi wi-day-sunny" /> </Box>
+            <DatePicker value={valorData} onChange={handleDateChange} />
+            <Box> <img src={icone} /> </Box>
+            <Typography variant="h4" align='center'>{clima}</Typography>
           </Box>
           <Button variant="contained" color='secondary' onClick={() => { handleAgendar(); }}>Agendar</Button>
         </Stack>
-        <ModalPadrao title="Agendamento realizado com sucesso" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="Home" bt1Href={handleHome} bt2Text="Logout" bt2Href={handleLogout} />
+        <ModalOk title="Agendamento realizado com sucesso" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="OK" bt1Href={handleHome} />
+        <Typography variant="h6" color="error" align='center'>{errMsg}</Typography>
       </Container>
-
     </ThemeProvider >
   );
 }
