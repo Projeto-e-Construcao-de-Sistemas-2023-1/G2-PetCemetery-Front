@@ -68,15 +68,9 @@ const NavBar = ({ page, isLoggedIn}) => {
                         {isLoggedIn &&
 
                             <Stack spacing={1} direction="row" alignItems="center">
-                                <Button variant="contained" color="primary" href={`/EditarPerfil`}>
-                                Meu Perfil
-                                </Button>
-                                <Button variant="contained" color="error" href={'/'}>
-                                Logout
-                                </Button>
-                                <Button variant="contained" color="secondary" href={'/ConfirmarCompra'}>
-                                    <IconCarrinho href={'/ConfirmarCompra'} />
-                                </Button>
+                                <Button variant="contained" color="primary" href={`/EditarPerfil`}> Meu Perfil </Button>
+                                <Button variant="contained" color="error" href={'/'}> Logout </Button>
+                                <Button variant="contained" color="secondary" href={'/ConfirmarCompra'}> <IconCarrinho href={'/ConfirmarCompra'} /> </Button>
                             </Stack>
                         }
                     </Box>

@@ -34,6 +34,9 @@ import ManterServicos from './pages/ManterServicos';
 import RelatorioInadimplente from './pages/RelatorioInadimplente';
 import RelatorioSelecao from './pages/RelatorioSelecao';
 import AgendarEnterro from './pages/AgendarEnterro';
+import VisualizarExumacoes from './pages/VisualizarExumacoes';
+import VisualizarEnterros from './pages/VisualizarEnterros';
+import VisualizarJazigos from './pages/VisualizarJazigos';
 
 //TODO já criar o esqueleto de TODAS as paginas possiveis
 //TODO ver se vale a pena criar componente para Titulo com Divider
@@ -68,6 +71,18 @@ const paginas = createBrowserRouter([
   , {
     path: "/AgendarEnterro",
     element: <AgendarEnterro />
+  }
+  , {
+    path: "/VisualizarEnterros",
+    element: <VisualizarEnterros />
+  }
+  , {
+    path: "/VisualizarExumacoes",
+    element: <VisualizarExumacoes />
+  }
+  , {
+    path: "/VisualizarJazigos",
+    element: <VisualizarJazigos />
   }
   , {
     path: "/PersonalizarJazigo",

@@ -240,7 +240,7 @@ export const personalizarJazigo = async (cpf, id, mensagem) => {
     }
   };
 
-  export const relatorioInadimplente = async () => {
+export const relatorioInadimplente = async () => {
     try {
         const response = await apiCall.get('/api/admin/relatorio');
         return response.data;
@@ -249,6 +249,29 @@ export const personalizarJazigo = async (cpf, id, mensagem) => {
     }
 };
 
-  
-  
-  
+export const getEnterros = async () => {
+    try {
+        const response = await apiCall.get('/api/admin/visualizar_enterros');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getExumacoes = async () => {
+    try {
+        const response = await apiCall.get('/api/admin/visualizar_exumacoes');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getJazigos = async () => {
+    try {
+        const response = await apiCall.get('/api/get_jazigos');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};  
