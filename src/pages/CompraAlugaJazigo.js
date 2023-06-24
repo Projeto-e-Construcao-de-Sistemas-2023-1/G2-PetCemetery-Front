@@ -47,7 +47,6 @@ function CompraAlugaJazigo() {
     getJazigoInfo();
   }, []);
 
-  //TODO: Fazer o fetch do preço do jazigo pelo id, e colocar no lugar do 30000
   const handleComprar = (e) => { navigate(`/ComprarOrnamento?id=${jazigoId}&tipo=${tipo}`); }
 
   return (

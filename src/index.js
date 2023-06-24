@@ -10,7 +10,7 @@ import AlterarPerfil from './pages/AlterarPerfil';
 import Home from './pages/Home';
 import PaginaInicial from './pages/PaginaInicial';
 import ContratacaoPlanos from './pages/ContratacaoPlanos';
-import InfoScreen from './pages/InfoScreen';
+import AlterarHorarioFuncionamento from './pages/AlterarHorarioFuncionamento';
 import Contato from './pages/Contato';
 import { BrowserRouter as Router, Switch, Route, Link, useHistory, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import AdquirirJazigo from './pages/AdquirirJazigo';
@@ -39,8 +39,6 @@ import VisualizarEnterros from './pages/VisualizarEnterros';
 import VisualizarJazigos from './pages/VisualizarJazigos';
 
 //TODO já criar o esqueleto de TODAS as paginas possiveis
-//TODO ver se vale a pena criar componente para Titulo com Divider
-
 
 function App({ children }) {
   return (
@@ -129,6 +127,10 @@ const paginas = createBrowserRouter([
     element: <VisualizarDespesas />
   }
   , {
+    path: "/AlterarHorarioFuncionamento",
+    element: <AlterarHorarioFuncionamento />
+  }
+  , {
     path: "/AgendarLembrete",
     element: <AgendarLembrete />
   }
@@ -139,10 +141,6 @@ const paginas = createBrowserRouter([
   , {
     path: "/RealizarDoacoes",
     element: <RealizarDoacoes />
-  }
-  , {
-    path: "/InfoScreen",
-    element: <InfoScreen />
   }
   , {
     path: "/ComprarOrnamento",
@@ -185,9 +183,9 @@ const paginas = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
-    <App>
-      <RouterProvider router={paginas} />
-    </App>
+  <App>
+    <RouterProvider router={paginas} />
+  </App>
 
 );
 
