@@ -19,5 +19,5 @@ export function calcDiff(data) {
     const date1 = new Date(data).getTime();
     const date2 = new Date().getTime();
 
-    return Math.ceil((date1 - date2) / (1000 * 3600 * 24));
+    return Math.ceil((date1 - date2) / (1000 * 3600 * 24)) + 1;
 }

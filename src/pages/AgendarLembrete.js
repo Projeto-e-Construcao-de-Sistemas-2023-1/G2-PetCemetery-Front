@@ -4,13 +4,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { DatePicker } from '@mui/x-date-pickers';
 import axios from 'axios';
-import { format } from "date-fns";
+import { format, set } from "date-fns";
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ModalOk from '../components/ModalOk';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 import { calcDiff } from '../utils/utils';
+import dayjs from 'dayjs';
 //import '../weather-icons/css/weather-icons.min.css';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
@@ -23,36 +24,53 @@ function AgendarLembrete() {
   const days = 3;
 
   const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}&aqi=no&alerts=no&lang=pt`;
-  console.log(url);
+  //console.log(url);
 
-  const [selectedDate, setSelectedDate] = useState({});
+  //const [selectedDate, setSelectedDate] = useState(dayjs());
   const [modalOpen, setModalOpen] = useState(false);
   const [clima, setClima] = useState("");
-  const [valorData, setValorData] = useState();
+  const [temperatura, setTemperatura] = useState("");
+  const [valorData, setValorData] = useState(dayjs());
   const [icone, setIcone] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [validDate, setValidDate] = useState(false);
+  const [climaSize, setClimaSize] = useState("h4");
 
-  const handleClima = async () => {
-    var clima;
+  const handleClima = async (diff) => {
+    try {
+      const response = await axios.get(url);
+      const clima = response.data.forecast;
 
-    await axios.get(url).then((response) => {
-      clima = response.data.forecast;
-      
-    });
+      if (diff < 0) {
+        setErrMsg("Selecione uma data futura");
+        setClima("");
+        setIcone("");
+        setTemperatura("");
+        setValidDate(false);
+      } else if (diff > 2) {
+        setClimaSize("body1");
+        setClima("Previsão do tempo indisponível para a data selecionada");
+        setIcone("");
+        setTemperatura("");
+        setValidDate(true);
+      } else {
+        setClimaSize("h4");
+        setClima(clima.forecastday[diff].day.condition.text);
+        setTemperatura(Math.floor(clima.forecastday[diff].day.avgtemp_c) + "°C");
+        setIcone(clima.forecastday[diff].day.condition.icon);
 
-    const diff = calcDiff(selectedDate);
-
-    if (diff < 0) {
-      setErrMsg("Selecione uma data futura");
+        setErrMsg("");
+        setValidDate(true);
+      }
+    } catch (error) {
+      console.error(error);
+      setClima("");
+      setIcone("");
+      setTemperatura("");
+      setErrMsg("Erro inesperado ao obter a previsão do tempo. Tente novamente mais tarde.");
     }
-    else if (diff > 3) {
-      setErrMsg("Previsão do tempo indisponível para a data selecionada");
-    }
-    else {
-      setClima(clima.forecastday[diff].day.condition.text);
-      setIcone(clima.forecastday[diff].day.condition.icon);
-    }
-  }
+  };
+
 
   const handleHome = () => {
     navigate(`/Home`);
@@ -60,27 +78,31 @@ function AgendarLembrete() {
 
   const handleDateChange = (event) => {
     var dataSelecionada = format(event.$d, "yyyy-MM-dd");
-
     const diff = calcDiff(dataSelecionada);
+    console.log("DIFF: " + diff);
 
     if (diff >= 0) {
-      setSelectedDate(dataSelecionada);
-      setValorData(event.$d);
+      setValorData(event);
 
-      console.log(selectedDate);
-      handleClima();
+      handleClima(diff);
     }
     else {
       setErrMsg("Selecione uma data futura");
+      setClima("");
+      setIcone("");
+      setTemperatura("");
+      setValidDate(false);
     }
   };
 
   const handleAgendar = () => {
-    if (selectedDate != {}) {
+    if (validDate) {
+      //mandar pro back
+
       setModalOpen(true);
     }
     else {
-      setErrMsg("Selecione uma data válida")
+      setErrMsg("Selecione uma data válida");
     }
   };
 
@@ -95,7 +117,8 @@ function AgendarLembrete() {
             <Typography variant="h5" align='center'>Escolha a data da sua visita</Typography>
             <DatePicker value={valorData} onChange={handleDateChange} />
             <Box> <img src={icone} /> </Box>
-            <Typography variant="h4" align='center'>{clima}</Typography>
+            <Typography variant={climaSize} align='center'>{clima}</Typography>
+            <Typography variant="h6" align='center'>{temperatura}</Typography>
           </Box>
           <Button variant="contained" color='secondary' onClick={() => { handleAgendar(); }}>Agendar</Button>
         </Stack>
