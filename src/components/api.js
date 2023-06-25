@@ -295,3 +295,13 @@ export const alterarHorarios = async (data) => {
         console.log(error);
     }
 };
+
+export const adicionarLembrete = async (cpf, data) => {
+    console.log("entrou no adicionarLembrete");
+    try {
+        const response = await apiCall.post(`/api/cliente/${cpf}/adicionar-lembrete?data=${data}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};

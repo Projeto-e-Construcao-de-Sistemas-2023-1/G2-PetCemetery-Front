@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, Divider, Grid, Paper, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
+import ListaJazigos from '../components/ListaJazigos';
 
 const mainTheme = createTheme({ palette: { mode: 'dark' } });
 
@@ -21,10 +22,11 @@ function Home() {
           <Grid item xs={6}>
             <Grid item>
               <Typography variant="h2" align="center">Meus Jazigos</Typography>
+              <Divider sx={{ marginBottom: 2, marginTop: 1 }} />
             </Grid>
             <Grid container spacing={2} direction="column" alignItems="left">
               <Grid item>
-                <Button variant="outlined" onClick={() => { navigate(`/DetalhesJazigo`) }}>Ver Meus Jazigos</Button>
+                <ListaJazigos />
               </Grid>
             </Grid>
           </Grid>

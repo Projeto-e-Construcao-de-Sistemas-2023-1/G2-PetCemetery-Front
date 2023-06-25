@@ -4,15 +4,15 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { DatePicker } from '@mui/x-date-pickers';
 import axios from 'axios';
-import { format, set } from "date-fns";
+import { format } from "date-fns";
+import dayjs from 'dayjs';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ModalOk from '../components/ModalOk';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 import { calcDiff } from '../utils/utils';
-import dayjs from 'dayjs';
-//import '../weather-icons/css/weather-icons.min.css';
+import { adicionarLembrete } from '../components/api';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AgendarLembrete() {
@@ -71,13 +71,14 @@ function AgendarLembrete() {
     }
   };
 
-
   const handleHome = () => {
     navigate(`/Home`);
   };
 
   const handleDateChange = (event) => {
     var dataSelecionada = format(event.$d, "yyyy-MM-dd");
+    //console.log("DATA SELECIONADA: " + dataSelecionada);
+    //console.log("DATA ATUAL: " + format(new Date(), "yyyy-MM-dd"));
     const diff = calcDiff(dataSelecionada);
     console.log("DIFF: " + diff);
 
@@ -95,11 +96,20 @@ function AgendarLembrete() {
     }
   };
 
-  const handleAgendar = () => {
+  const handleAgendar = async () => {
     if (validDate) {
       //mandar pro back
+      console.log("Data escolhida: " + format(valorData.$d, "yyyy-MM-dd"));
+      let resp = await adicionarLembrete(cpf, format(valorData.$d, "yyyy-MM-dd"));
+      console.log(resp);
 
-      setModalOpen(true);
+      if (resp == "ERR;data_invalida") {
+        setErrMsg("Data inválida");
+      }
+      else if (resp == "OK;lembrete_adicionado") {
+        setErrMsg("");
+        setModalOpen(true);
+      }
     }
     else {
       setErrMsg("Selecione uma data válida");

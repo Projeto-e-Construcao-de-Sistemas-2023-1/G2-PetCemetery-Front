@@ -10,8 +10,8 @@ import '../Styles/agendar-reuniao.css';
 import ModalOk from '../components/ModalOk';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
-import { getUrlParams } from '../utils/utils';
 import { agendarEnterro } from '../components/api';
+import { getUrlParams } from '../utils/utils';
 
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
@@ -40,20 +40,21 @@ function AgendarEnterro() {
 
   const handleAgendar = async () => { // Função atualizada
     const enterro = {
-        data: selectedDate,
-        horario: selectedTime,
+      data: selectedDate,
+      horario: selectedTime,
     };
 
     try {
-        const response = await agendarEnterro(cpf, idJazigo, enterro.data, enterro.horario, nomePet, especie, dataNascimento);
-        let resp = response.split(';');
-        if (resp[0] === "OK") {
-            setModalOpen(true);
-        } else {
-            console.error('Erro ao agendar enterro:', response);
-        }
+      const response = await agendarEnterro(cpf, idJazigo, enterro.data, enterro.horario, nomePet, especie, dataNascimento);
+      let resp = response.split(';');
+      if (resp[0] === "OK") {
+        console.log(resp);
+        setModalOpen(true);
+      } else {
+        console.error('Erro ao agendar enterro:', response);
+      }
     } catch (error) {
-        console.error('Erro ao agendar enterro:', error);
+      console.error('Erro ao agendar enterro:', error);
     }
   };
 
@@ -65,16 +66,11 @@ function AgendarEnterro() {
       <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Stack spacing={2} direction="column" divider={<Divider orientation="horizontal" flexItem />}>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-            <Typography variant="h5" align='center'>Dados do Pet</Typography>
-            <TextField label="Nome do Pet" value={nomePet} onChange={handleNomePetChange} fullWidth required />
+            <TextField label="Nome do Pet" sx={{ marginBottom: 2 }} value={nomePet} onChange={handleNomePetChange} fullWidth required />
             <TextField label="Espécie" value={especie} onChange={handleEspecieChange} fullWidth required />
-            <Typography variant="h5" align='center'>Data de Nascimento do Pet</Typography>
-            <DatePicker onChange={handleDateNascimentoChange} />
           </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>  
-            <Typography variant="h5" align='center'>Escolha a data de Enterro</Typography>
-            <DatePicker onChange={handleDateEnterroChange} />
-          </Box>
+          <DatePicker label="Data de Nascimento do Pet" sx={{ marginBottom: 2 }} onChange={handleDateNascimentoChange} />
+          <DatePicker label="Data de Enterro" onChange={handleDateEnterroChange} />
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
             <Typography variant="h5" align='center'>Lista de horários disponíveis</Typography>
             <FormControl fullWidth>
@@ -87,9 +83,9 @@ function AgendarEnterro() {
               </Select>
             </FormControl>
           </Box>
-          <Button variant="contained" color='secondary' onClick={ handleAgendar }>Agendar</Button>
+          <Button variant="contained" color='secondary' onClick={handleAgendar}>Agendar</Button>
         </Stack>
-        <ModalOk title="Agendamento realizado com sucesso" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="OK" bt1Href={handleHome}/>
+        <ModalOk title="Agendamento realizado com sucesso" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="OK" bt1Href={handleHome} />
       </Container>
     </ThemeProvider >
   );

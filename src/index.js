@@ -18,7 +18,6 @@ import VisualizarDespesas from './pages/VisualizarDespesas';
 import AgendarLembrete from './pages/AgendarLembrete';
 import AgendarReuniao from './pages/AgendarReuniao';
 import RealizarDoacoes from './pages/RealizarDoacoes';
-import DetalhesJazigo from './pages/DetalhesJazigo';
 import AgendarExumacao from './pages/AgendarExumacao';
 import PersonalizarJazigo from './pages/PersonalizarJazigo';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -89,10 +88,6 @@ const paginas = createBrowserRouter([
   , {
     path: "/Contato",
     element: <Contato />
-  }
-  , {
-    path: "/DetalhesJazigo",
-    element: <DetalhesJazigo />
   }
   , {
     path: "/ContratacaoPlanos",
