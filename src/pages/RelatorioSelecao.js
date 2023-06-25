@@ -29,7 +29,7 @@ function RelatorioSelecao() {
     return (
         <ThemeProvider theme={mainTheme}>
             <CssBaseline />
-            <NavBar isLoggedIn={true} />
+            <NavBar isAdmin={true} />
             <Titulo texto="Selecione um Relatório" mW="md" />
             <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Typography variant="h6" component="h2" gutterBottom> Escolha o relatório que deseja visualizar: </Typography>

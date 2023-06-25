@@ -24,7 +24,7 @@ function AlterarValorPlanos() {
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <NavBar page={1} isLoggedIn={true} />
+      <NavBar isAdmin={true} />
       <Titulo texto="Alterar valor dos serviços" mW="md" />
       <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Stack spacing={2} direction='column' divider={<Divider orientation="horizontal" flexItem />}>

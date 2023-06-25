@@ -12,7 +12,7 @@ function VerMapaJazigos() {
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <NavBar isLoggedIn={true} />
+      <NavBar isAdmin={true} />
       <Titulo texto="Mapa de jazigos" mW="md" />
       <Container component="main">
         <Mapa readOnly />
