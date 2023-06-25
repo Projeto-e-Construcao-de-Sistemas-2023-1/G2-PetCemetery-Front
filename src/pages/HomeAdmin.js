@@ -21,11 +21,11 @@ function HomeAdmin() {
         <Stack direction="column" spacing={3}>
           <Button variant="contained" onClick={() => { navigate(`/AlterarHorarioFuncionamento`) }} sx={{ width: '100%' }}>Alterar Horário de Funcionamento</Button>
           <Button variant="contained" onClick={() => { navigate(`/RelatorioSelecao`) }} sx={{ width: '100%' }}>Relatórios</Button>
-          <Button variant="contained" onClick={() => { navigate(`/DetalharJazigo`) }} sx={{ width: '100%' }}>Detalhar Jazigo</Button>
+          <Button variant="contained" onClick={() => { navigate(`/DetalharJazigo`) }} sx={{ width: '100%' }}>Detalhar Jazigos</Button>
           <Button variant="contained" onClick={() => { navigate(`/VisualizarReuniao`) }} sx={{ width: '100%' }}>Visualizar Reuniões</Button>
           <Button variant="contained" onClick={() => { navigate(`/ClientesInadimplentes`) }} sx={{ width: '100%' }}>Clientes Inadimplentes</Button>
           <Button variant="contained" onClick={() => { navigate(`/ManterServicos`) }} sx={{ width: '100%' }}>Manter Serviços</Button>
-          <Button variant="contained" onClick={() => { navigate(`/AdquirirJazigo`) }} sx={{ width: '100%' }}>Visualizar Mapa de Jazigos</Button>
+          <Button variant="contained" onClick={() => { navigate(`/VerMapaJazigos`) }} sx={{ width: '100%' }}>Visualizar Mapa de Jazigos</Button>
         </Stack>
       </Container>
     </ThemeProvider >
