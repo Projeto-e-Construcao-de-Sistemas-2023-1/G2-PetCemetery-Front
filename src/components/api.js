@@ -286,10 +286,10 @@ export const getHorarios = async () => {
     }
 };
 
-export const alterarHorarios = async () => {
+export const alterarHorarios = async (data) => {
     console.log("entrou no alterarHorarios");
     try {
-        const response = await apiCall.post(`/api/admin/alterar_horario_funcionamento`);
+        const response = await apiCall.post(`/api/admin/alterar_horario_funcionamento`, data);
         return response.data;
     } catch (error) {
         console.log(error);

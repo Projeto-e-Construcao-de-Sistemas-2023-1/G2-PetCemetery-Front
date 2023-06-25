@@ -5,12 +5,12 @@ import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
-const DiaFuncionamento = ({ dia, horarioFuncionamento }) => {
+const DiaFuncionamento = ({ dia, horarioFuncionamento, onChange }) => {
     if (dia != "segunda" && dia != "terca" && dia != "quarta" && dia != "quinta" && dia != "sexta" && dia != "sabado" && dia != "domingo" && dia != "feriado") alert("Dia inválido!");
     function toUpper(string) { return string.charAt(0).toUpperCase() + string.slice(1); }
     const [cor, setCor] = useState('');
-    const [abertura, setAbertura] = useState('');
-    const [fechamento, setFechamento] = useState('');
+    const [abertura, setAbertura] = useState(dayjs());
+    const [fechamento, setFechamento] = useState(dayjs());
     const [fechado, setFechado] = useState(false);
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const DiaFuncionamento = ({ dia, horarioFuncionamento }) => {
             setAbertura(dayjs().set('hour', parseInt(horarioFuncionamento.abertura.split(':')[0])).set('minute', parseInt(horarioFuncionamento.abertura.split(':')[1])));;
             setFechamento(dayjs().set('hour', parseInt(horarioFuncionamento.fechamento.split(':')[0])).set('minute', parseInt(horarioFuncionamento.fechamento.split(':')[1])));
             setFechado(horarioFuncionamento.fechado);
-            
+
             console.log("Horários:");
             console.log(horarioFuncionamento.abertura);
             console.log(horarioFuncionamento.fechamento);
@@ -32,16 +32,26 @@ const DiaFuncionamento = ({ dia, horarioFuncionamento }) => {
         else { console.log("weird shit"); }
     }, [horarioFuncionamento]);
 
+    const handleChange = (newAbertura, newFechamento, newFechado) => {
+        const updatedHorarioFuncionamento = {
+            abertura: newAbertura.format('HH:mm'),
+            fechamento: newFechamento.format('HH:mm'),
+            fechado: newFechado
+        };
+
+        onChange(dia, updatedHorarioFuncionamento);
+    };
+
     const handleAberturaChange = (value) => {
-        setAbertura(value);
+        handleChange(value, fechamento, fechado);
     };
 
     const handleFechamentoChange = (value) => {
-        setFechamento(value);
+        handleChange(abertura, value, fechado);
     };
 
     const handleFechadoChange = (event) => {
-        setFechado(event.target.checked);
+        handleChange(abertura, fechamento, event.target.checked);
     };
 
     return (

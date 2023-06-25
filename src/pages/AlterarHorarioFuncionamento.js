@@ -1,21 +1,21 @@
-import { Box, Button, Divider, Stack } from '@mui/material';
+import { Box, Button, Divider, Stack, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { format } from "date-fns";
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/agendar-reuniao.css';
+import DiaFuncionamento from '../components/DiaFuncionamento';
 import ModalOk from '../components/ModalOk';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 import { alterarHorarios, getHorarios } from '../components/api';
-import DiaFuncionamento from '../components/DiaFuncionamento';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AlterarHorarioFuncionamento() {
   const navigate = useNavigate();
   const cpf = sessionStorage.getItem('cpf');
+  const [errMsg, setErrMsg] = useState("");
 
   const [horarioFuncionamento, setHorarioFuncionamento] = useState({
     segunda: {
@@ -67,7 +67,26 @@ function AlterarHorarioFuncionamento() {
   };
 
   const handleSalvar = async () => {
-    setModalOpen(true);
+    console.log("JSON sendo enviado:");
+    console.log(horarioFuncionamento);
+    const response = await alterarHorarios(horarioFuncionamento);
+    console.log(response);
+
+    if (response == "OK;horario_alterado;") {
+      setModalOpen(true);
+    }
+    else {
+      setErrMsg("Erro ao alterar horário de funcionamento. Verifique a rede");
+    }
+  };
+
+  const handleDiaFuncionamentoChange = (dia, updatedHorarioFuncionamento) => {
+    setHorarioFuncionamento(prevState => ({
+      ...prevState,
+      [dia]: updatedHorarioFuncionamento
+    }));
+    console.log("FUNCIONAMENTO ALTERADO: ");
+    console.log(horarioFuncionamento);
   };
 
   useEffect(() => {
@@ -101,19 +120,20 @@ function AlterarHorarioFuncionamento() {
       <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Stack spacing={2} direction="column" divider={<Divider orientation="horizontal" flexItem />}>
           <Box spacing={2} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
-            <DiaFuncionamento dia="segunda" horarioFuncionamento={horarioFuncionamento.segunda} />
-            <DiaFuncionamento dia="terca" horarioFuncionamento={horarioFuncionamento.terca} />
-            <DiaFuncionamento dia="quarta" horarioFuncionamento={horarioFuncionamento.quarta} />
-            <DiaFuncionamento dia="quinta" horarioFuncionamento={horarioFuncionamento.quinta} />
-            <DiaFuncionamento dia="sexta" horarioFuncionamento={horarioFuncionamento.sexta} />
-            <DiaFuncionamento dia="sabado" horarioFuncionamento={horarioFuncionamento.sabado} />
-            <DiaFuncionamento dia="domingo" horarioFuncionamento={horarioFuncionamento.domingo} />
-            <DiaFuncionamento dia="feriado" horarioFuncionamento={horarioFuncionamento.feriado} />
+            <DiaFuncionamento dia="segunda" horarioFuncionamento={horarioFuncionamento.segunda} onChange={handleDiaFuncionamentoChange} />
+            <DiaFuncionamento dia="terca" horarioFuncionamento={horarioFuncionamento.terca} onChange={handleDiaFuncionamentoChange} />
+            <DiaFuncionamento dia="quarta" horarioFuncionamento={horarioFuncionamento.quarta} onChange={handleDiaFuncionamentoChange} />
+            <DiaFuncionamento dia="quinta" horarioFuncionamento={horarioFuncionamento.quinta} onChange={handleDiaFuncionamentoChange} />
+            <DiaFuncionamento dia="sexta" horarioFuncionamento={horarioFuncionamento.sexta} onChange={handleDiaFuncionamentoChange} />
+            <DiaFuncionamento dia="sabado" horarioFuncionamento={horarioFuncionamento.sabado} onChange={handleDiaFuncionamentoChange} />
+            <DiaFuncionamento dia="domingo" horarioFuncionamento={horarioFuncionamento.domingo} onChange={handleDiaFuncionamentoChange} />
+            <DiaFuncionamento dia="feriado" horarioFuncionamento={horarioFuncionamento.feriado} onChange={handleDiaFuncionamentoChange} />
           </Box>
 
           <Button variant="contained" color='secondary' onClick={handleSalvar}>Salvar e notificar clientes</Button>
         </Stack>
-        <ModalOk title="Agendamento realizado com sucesso" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="OK" bt1Href={handleHome} />
+        <ModalOk title="Horário alterado com sucesso" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="OK" bt1Href={handleHome} />
+        <Typography variant="h6" color="error" align='center'>{errMsg}</Typography>
       </Container>
     </ThemeProvider >
   );
