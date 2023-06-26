@@ -26,7 +26,7 @@ function Home() {
             </Grid>
             <Grid container spacing={2} direction="column" alignItems="left">
               <Grid item>
-                <ListaJazigos />
+                <ListaJazigos admin={false} cliente={true} />
               </Grid>
             </Grid>
           </Grid>

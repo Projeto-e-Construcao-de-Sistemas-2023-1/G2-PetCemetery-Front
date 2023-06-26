@@ -6,18 +6,18 @@ import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
-function DetalharJazigos() {
+function Historico() {
 
     return (
         <ThemeProvider theme={mainTheme}>
             <CssBaseline />
             <NavBar isAdmin={true} />
-            <Titulo texto="Detalhar Jazigos" mW="md" />
+            <Titulo texto="Histórico" />
             <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <ListaJazigos admin={true} cliente={false} />
+                
             </Container>
         </ThemeProvider>
     );
 }
 
-export default DetalharJazigos;
+export default Historico;

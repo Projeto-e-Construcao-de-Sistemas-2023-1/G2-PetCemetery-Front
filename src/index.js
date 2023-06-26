@@ -39,6 +39,7 @@ import VisualizarJazigos from './pages/VisualizarJazigos';
 import VerMapaJazigos from './pages/VerMapaJazigos';
 import DetalharJazigos from './pages/DetalharJazigos';
 import ClientesInadimplentes from './pages/ClientesInadimplentes';
+import Historico from './pages/Historico';
 
 //TODO já criar o esqueleto de TODAS as paginas possiveis
 
@@ -95,6 +96,10 @@ const paginas = createBrowserRouter([
   , {
     path: "/ClientesInadimplentes",
     element: <ClientesInadimplentes />
+  }
+  , {
+    path: "/Historico",
+    element: <Historico />
   }
   , {
     path: "/PersonalizarJazigo",
