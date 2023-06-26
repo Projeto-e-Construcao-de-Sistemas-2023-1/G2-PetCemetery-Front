@@ -1,12 +1,12 @@
-import { Button, Divider, FormControl, MenuItem, Select, Stack, TextField, Typography } from '@mui/material';
+import { Divider, Grid, Stack, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../components/NavBar';
-import { alterarValorServico, exibirServicos } from '../components/api';
-import Titulo from '../components/Titulo';
 import ServicoDisplay from '../components/ServicoDisplay';
+import Titulo from '../components/Titulo';
+import { exibirServicos } from '../components/api';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AlterarValorPlanos() {
@@ -28,6 +28,7 @@ function AlterarValorPlanos() {
     const fetchData = async () => {
       try {
         const response = await exibirServicos();
+        console.log(response);
 
         const servicoResponse = {
           precoCompra: response.precoCompra,
@@ -55,21 +56,29 @@ function AlterarValorPlanos() {
       <NavBar isAdmin={true} />
       <Titulo texto="Alterar valor dos serviços" mW="md" />
       <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Stack spacing={2} direction='column' divider={<Divider orientation="horizontal" flexItem />}>
-
-          <ServicoDisplay nomeServico="Compra" precoServico={servicos.precoCompra} />
-          <ServicoDisplay nomeServico="Aluguel" precoServico={servicos.precoAluguel} />
-          <ServicoDisplay nomeServico="BASIC" precoServico={servicos.precoBasic} />
-          <ServicoDisplay nomeServico="SILVER" precoServico={servicos.precoSilver} />
-          <ServicoDisplay nomeServico="GOLD" precoServico={servicos.precoGold} />
-          <ServicoDisplay nomeServico="Enterro" precoServico={servicos.precoEnterro} />
-          <ServicoDisplay nomeServico="Manutencao" precoServico={servicos.precoManutencao} />
-          <ServicoDisplay nomeServico="Exumacao" precoServico={servicos.precoExumacao} />
-
-          <Button variant="contained" onClick={handleAlteraValor}>Alterar valor do serviço</Button>
-          <Typography variant="h6" color="error" align='center'>{errMsg}</Typography>
-
-        </Stack>
+        <Grid container spacing={2}>
+          <Grid item xs={4}>
+            <Stack direction="column" spacing={2} divider={<Divider orientation="horizontal" flexItem />}>
+              <ServicoDisplay nomeServico="Compra" precoServico={servicos.precoCompra} />
+              <ServicoDisplay nomeServico="Aluguel" precoServico={servicos.precoAluguel} />
+              <ServicoDisplay nomeServico="Enterro" precoServico={servicos.precoEnterro} />
+            </Stack>
+          </Grid>
+          <Grid item xs={4}>
+            <Stack direction="column" spacing={2} divider={<Divider orientation="horizontal" flexItem />}>
+              <ServicoDisplay nomeServico="BASIC" precoServico={servicos.precoBasic} />
+              <ServicoDisplay nomeServico="SILVER" precoServico={servicos.precoSilver} />
+              <ServicoDisplay nomeServico="GOLD" precoServico={servicos.precoGold} />
+            </Stack>
+          </Grid>
+          <Grid item xs={4}>
+            <Stack direction="column" spacing={2} divider={<Divider orientation="horizontal" flexItem />}>
+              <ServicoDisplay nomeServico="Manutencao" precoServico={servicos.precoManutencao} />
+              <ServicoDisplay nomeServico="Exumacao" precoServico={servicos.precoExumacao} />
+            </Stack>
+          </Grid>
+        </Grid>
+        <Typography variant="h6" color="error" align='center'>{errMsg}</Typography>
       </Container>
     </ThemeProvider >
   );

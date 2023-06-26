@@ -211,23 +211,25 @@ export const getDetalhesJazigo = async (cpf_proprietario, idJazigo) => {
 };
 
 export const exibirServicos = async () => {
-    await apiCall.get(`/api/admin/servicos`).then((response) => {
-        console.log(response);
+    try {
+        const response = await apiCall.get(`/api/admin/servicos`);
         return response.data;
-    }).catch((error) => {
-        console.log(error);
-    });
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
 }
 
 //Altera valor de um servico
 //Passar um JSON no body com nome do servico e valor novo
 export const alterarValorServico = async (servico, valor) => {
-    await apiCall.post(`/api/admin/servicos/alterar?servico=${servico}&valor=${valor}`).then((response) => {
-        console.log(response);
+    try {
+        const response = await apiCall.post(`/api/admin/servicos/alterar?servico=${servico}&valor=${valor}`);
         return response.data;
-    }).catch((error) => {
-        console.log(error);
-    });
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
 }
 
 //Adiciona item ao carrinho
