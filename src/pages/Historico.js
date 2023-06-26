@@ -1,12 +1,28 @@
 import { Container, CssBaseline } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import React from 'react';
+import React, { useEffect } from 'react';
 import ListaJazigos from '../components/ListaJazigos';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
+import { getUrlParams } from '../utils/utils';
+import { visualizarHistorico } from '../components/api';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function Historico() {
+    const id = getUrlParams('id');
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                var data = await visualizarHistorico(id);
+                console.log(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <ThemeProvider theme={mainTheme}>
@@ -14,7 +30,7 @@ function Historico() {
             <NavBar isAdmin={true} />
             <Titulo texto="Histórico" />
             <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                
+
             </Container>
         </ThemeProvider>
     );

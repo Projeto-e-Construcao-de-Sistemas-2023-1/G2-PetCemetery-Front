@@ -305,3 +305,13 @@ export const adicionarLembrete = async (cpf, data) => {
         console.log(error);
     }
 };
+
+export const visualizarHistorico = async (id) => {
+    console.log("entrou no visualizarHistorico");
+    try {
+        const response = await apiCall.get(`/api/admin/${id}/visualizar-historico`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
