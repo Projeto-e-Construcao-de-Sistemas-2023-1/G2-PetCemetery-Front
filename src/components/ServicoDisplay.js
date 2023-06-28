@@ -41,7 +41,7 @@ const ServicoDisplay = ({ nomeServico, precoServico }) => {
         try {
             let response = await alterarValorServico(nome, preco);
             console.log(response);
-            if (response == "OK;servico_alterado;") { setErrMsg("Serviço alterado"); }
+            if (response == "OK;servico_alterado;") { setErrMsg("Valor alterado"); }
             else { setErrMsg("Erro ao alterar o serviço"); }
         }
         catch (error) {

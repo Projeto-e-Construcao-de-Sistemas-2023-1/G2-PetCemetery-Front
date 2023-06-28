@@ -44,8 +44,18 @@ function AgendarEnterro() {
       horario: selectedTime,
     };
 
+    console.log("Dados do agendamento sendo feito:");
+    console.log("CPF: " + cpf);
+    console.log("ID do jazigo: " + idJazigo);
+    console.log("Data: " + enterro.data);
+    console.log("Horário: " + enterro.horario);
+    console.log("Nome do pet: " + nomePet);
+    console.log("Espécie: " + especie);
+    console.log("Data de nascimento: " + dataNascimento);
+
     try {
       const response = await agendarEnterro(cpf, idJazigo, enterro.data, enterro.horario, nomePet, especie, dataNascimento);
+      console.log(response);
       let resp = response.split(';');
       if (resp[0] === "OK") {
         console.log(resp);

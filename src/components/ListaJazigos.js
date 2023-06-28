@@ -18,10 +18,12 @@ const ListaJazigos = ({ cliente, admin }) => {
       else if (admin) response = await getJazigos();
       else alert("Erro! Especifique se o usuário é cliente ou admin na chamada do componente ListaJazigos");
 
-      console.log("Resposta da API: " + response);
+      console.log("Resposta da API: ");
+      console.log(response);
       setJazigos(response);
     } catch (error) {
       console.log(error);
+      alert("Erro na conexão com o back");
     }
   };
 

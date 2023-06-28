@@ -71,7 +71,7 @@ const PersonalizarJazigo = () => {
     input.click();
   };
 
-  const handleHome = () => { navigate('/DetalhesJazigo'); };
+  const handleHome = () => { navigate('/Home'); };
 
   return (
     <ThemeProvider theme={mainTheme}>
