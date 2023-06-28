@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Box, Divider, Paper, Typography } from '@mui/material';
 
 function ItemHistorico({ dados }) {
     const [dadosJazigo, setDadosJazigo] = useState(
@@ -35,7 +36,6 @@ function ItemHistorico({ dados }) {
                     <Typography variant="h6">Data de enterro: {dadosJazigo.dataEnterro} </Typography>
                     <Typography variant="h6">Data de exumação: {dadosJazigo.dataExumacao} </Typography>
                 </Box>
-                <Typography variant="h6" color="secondary" align='center'>{errMsg}</Typography>
             </Paper>
         </React.Fragment>
     );

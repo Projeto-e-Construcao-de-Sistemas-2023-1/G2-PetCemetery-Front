@@ -6,7 +6,6 @@ import TextField from '@mui/material/TextField';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../Styles/editar-perfil.css';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 import { getExibirPerfil } from '../components/api';

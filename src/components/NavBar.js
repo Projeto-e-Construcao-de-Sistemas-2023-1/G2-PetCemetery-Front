@@ -1,10 +1,11 @@
-import { AppBar, Box, Button, Stack, Toolbar } from '@mui/material';
-import React from 'react';
+import { AppBar, Box, Button, Stack, Toolbar, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Logo } from '../logo.svg';
 import IconCarrinho from './IconCarrinho';
 import { getInformacoesCarrinho } from './api';
 import './navbar.css';
+
 
 const NavBar = ({ page, isLoggedIn, isAdmin }) => {
     var color1, color2, color3, color4;
@@ -47,12 +48,12 @@ const NavBar = ({ page, isLoggedIn, isAdmin }) => {
 
     const getInfoCarrinho = async () => {
         const cpf = sessionStorage.getItem('cpf');
-        
+
         try {
             console.log("getInfoCarrinho");
             const data = await getInformacoesCarrinho(cpf);
             if (data.length == 0) setNumItensCarrinho("");
-            else setCartItems(data.length);
+            else setNumItensCarrinho(data.length);
             console.log(data.length);
         } catch (error) {
             console.log("Erro ao pegar info do carrinho: " + error);

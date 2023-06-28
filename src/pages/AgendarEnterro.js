@@ -6,7 +6,6 @@ import { DatePicker } from '@mui/x-date-pickers';
 import { format } from "date-fns";
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../Styles/agendar-reuniao.css';
 import ModalOk from '../components/ModalOk';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';

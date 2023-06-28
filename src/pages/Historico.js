@@ -10,7 +10,7 @@ const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function Historico() {
     const id = getUrlParams('id');
-    const [dadosJazigos, setDadosJazigos] = useState({});
+    const [dadosJazigos, setDadosJazigos] = useState([{}]);
 
     useEffect(() => {
         const fetchData = async () => {
