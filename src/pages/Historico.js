@@ -1,6 +1,6 @@
 import { Container, CssBaseline } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ListaJazigos from '../components/ListaJazigos';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
@@ -10,6 +10,17 @@ const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function Historico() {
     const id = getUrlParams('id');
+    const [dadosJazigo, setDadosJazigo] = useState(
+        {
+            id_jazigo: "",
+            nomePet: "",
+            dataNascimentoPet: "",
+            especiePet: "",
+            nomeProprietario: "",
+            dataEnterro: "",
+            dataExumacao: ""
+        }
+    );
 
     useEffect(() => {
         const fetchData = async () => {
