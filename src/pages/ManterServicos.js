@@ -4,7 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { useState } from 'react';
 import NavBar from '../components/NavBar';
-import { AlterarValorServico } from '../components/api';
+import { alterarValorServico } from '../components/api';
 import Titulo from '../components/Titulo';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
@@ -16,7 +16,11 @@ function AlterarValorPlanos() {
     console.log('Opcao selecionada:', servico);
     console.log('Valor:', valor);
 
-    await AlterarValorServico(servico, valor).catch((error) => {
+    await alterarValorServico(servico, valor).then((response) => {
+      console.log("Resposta:", response);
+      alert("Valor alterado com sucesso!");
+    })
+    .catch((error) => {
       console.log("Erro:", error);
     });
   };
