@@ -1,55 +1,84 @@
-import { Button, Divider, FormControl, MenuItem, Select, Stack, TextField, Typography } from '@mui/material';
+import { Divider, Grid, Stack, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../components/NavBar';
-import { alterarValorServico } from '../components/api';
+import ServicoDisplay from '../components/ServicoDisplay';
 import Titulo from '../components/Titulo';
+import { exibirServicos } from '../components/api';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AlterarValorPlanos() {
-  const [servico, setServico] = useState('');
-  const [valor, setValor] = useState('');
+  const [errMsg, setErrMsg] = useState("");
+  const [servicos, setServicos] = useState(
+    {
+      precoCompra: '',
+      precoAluguel: '',
+      precoBasic: '',
+      precoSilver: '',
+      precoGold: '',
+      precoEnterro: '',
+      precoManutencao: '',
+      precoExumacao: ''
+    }
+  );
 
-  const handleAlteraValor = async () => {
-    console.log('Opcao selecionada:', servico);
-    console.log('Valor:', valor);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await exibirServicos();
+        console.log(response);
 
-    await alterarValorServico(servico, valor).then((response) => {
-      console.log("Resposta:", response);
-      alert("Valor alterado com sucesso!");
-    })
-    .catch((error) => {
-      console.log("Erro:", error);
-    });
-  };
+        const servicoResponse = {
+          precoCompra: response.precoCompra,
+          precoAluguel: response.precoAluguel,
+          precoBasic: response.precoBasic,
+          precoSilver: response.precoSilver,
+          precoGold: response.precoGold,
+          precoEnterro: response.precoEnterro,
+          precoManutencao: response.precoManutencao,
+          precoExumacao: response.precoExumacao
+        }
+
+        setServicos(servicoResponse);
+      } catch (error) {
+        setErrMsg("Erro ao requisitar o valor serviços");
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <NavBar page={1} isLoggedIn={true} />
+      <NavBar isAdmin={true} />
       <Titulo texto="Alterar valor dos serviços" mW="md" />
       <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Stack spacing={2} direction='column' divider={<Divider orientation="horizontal" flexItem />}>
-          <FormControl variant="outlined">
-            <Select value={servico} onChange={(event) => setServico(event.target.value)} displayEmpty inputProps={{ 'aria-label': 'Selecione um plano' }}>
-              <MenuItem value="" disabled>Selecione um serviço</MenuItem>
-              <MenuItem value="BASIC">Basic</MenuItem>
-              <MenuItem value="SILVER">Silver</MenuItem>
-              <MenuItem value="GOLD">Gold</MenuItem>
-              <MenuItem value="Exumacao">Exumação</MenuItem>
-              <MenuItem value="Enterro">Enterro</MenuItem>
-              <MenuItem value="Manutencao">Manutencao</MenuItem>
-              <MenuItem value="Aluguel">Aluguel</MenuItem>
-              <MenuItem value="Compra">Compra</MenuItem>
-            </Select>
-          </FormControl>
-
-          <TextField label="Digite o novo valor" placeholder="Valor em R$" variant="outlined" value={valor} onChange={(event) => setValor(event.target.value)} />
-          <Button variant="contained" onClick={handleAlteraValor}>Alterar valor do serviço</Button>
-
-        </Stack>
+        <Grid container spacing={2}>
+          <Grid item xs={4}>
+            <Stack direction="column" spacing={2} divider={<Divider orientation="horizontal" flexItem />}>
+              <ServicoDisplay nomeServico="Compra" precoServico={servicos.precoCompra} />
+              <ServicoDisplay nomeServico="Aluguel" precoServico={servicos.precoAluguel} />
+              <ServicoDisplay nomeServico="Enterro" precoServico={servicos.precoEnterro} />
+            </Stack>
+          </Grid>
+          <Grid item xs={4}>
+            <Stack direction="column" spacing={2} divider={<Divider orientation="horizontal" flexItem />}>
+              <ServicoDisplay nomeServico="BASIC" precoServico={servicos.precoBasic} />
+              <ServicoDisplay nomeServico="SILVER" precoServico={servicos.precoSilver} />
+              <ServicoDisplay nomeServico="GOLD" precoServico={servicos.precoGold} />
+            </Stack>
+          </Grid>
+          <Grid item xs={4}>
+            <Stack direction="column" spacing={2} divider={<Divider orientation="horizontal" flexItem />}>
+              <ServicoDisplay nomeServico="Manutencao" precoServico={servicos.precoManutencao} />
+              <ServicoDisplay nomeServico="Exumacao" precoServico={servicos.precoExumacao} />
+            </Stack>
+          </Grid>
+        </Grid>
+        <Typography variant="h6" color="error" align='center'>{errMsg}</Typography>
       </Container>
     </ThemeProvider >
   );

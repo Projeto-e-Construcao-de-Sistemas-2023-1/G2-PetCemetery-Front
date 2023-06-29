@@ -210,16 +210,26 @@ export const getDetalhesJazigo = async (cpf_proprietario, idJazigo) => {
     }
 };
 
+export const exibirServicos = async () => {
+    try {
+        const response = await apiCall.get(`/api/admin/servicos`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
 //Altera valor de um servico
 //Passar um JSON no body com nome do servico e valor novo
 export const alterarValorServico = async (servico, valor) => {
-    await apiCall.post(`/api/admin/servicos/alterar?servico=${servico}&valor=${valor}`)
-    .then((response) => {
-        console.log(response);
+    try {
+        const response = await apiCall.post(`/api/admin/servicos/alterar?servico=${servico}&valor=${valor}`);
         return response.data;
-    }).catch((error) => {
-        console.log(error);
-    });
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
 }
 
 //Adiciona item ao carrinho
@@ -301,6 +311,16 @@ export const adicionarLembrete = async (cpf, data) => {
     console.log("entrou no adicionarLembrete");
     try {
         const response = await apiCall.post(`/api/cliente/${cpf}/adicionar-lembrete?data=${data}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const visualizarHistorico = async (id) => {
+    console.log("entrou no visualizarHistorico");
+    try {
+        const response = await apiCall.get(`/api/admin/${id}/visualizar-historico`);
         return response.data;
     } catch (error) {
         console.log(error);

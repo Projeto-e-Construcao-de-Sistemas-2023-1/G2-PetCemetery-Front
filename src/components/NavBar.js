@@ -5,7 +5,7 @@ import './navbar.css';
 import IconCarrinho from './IconCarrinho';
 import { useNavigate } from 'react-router-dom';
 
-const NavBar = ({ page, isLoggedIn}) => {
+const NavBar = ({ page, isLoggedIn, isAdmin }) => {
     var color1, color2, color3, color4;
     const navigate = useNavigate();
 
@@ -41,7 +41,7 @@ const NavBar = ({ page, isLoggedIn}) => {
             color4 = "inherit";
             break;
     }
-    
+
     return (
         <React.Fragment>
             <AppBar position='static' sx={{ top: 0, left: 0, right: 0, position: 'fixed', width: '100%' }}>
@@ -52,25 +52,30 @@ const NavBar = ({ page, isLoggedIn}) => {
                     </Box>
 
                     <Stack direction='row' spacing={2}>
-                        <Button color={color1} variant="contained" href={isLoggedIn ? `/Home` : '/'}>Home</Button>
+                        <Button color={color1} variant="contained" href={isAdmin ? `/HomeAdmin` : (isLoggedIn ? `/Home` : '/')}>Home</Button>
                         <Button color={color2} variant="contained" href={isLoggedIn ? `/QuemSomos` : '/QuemSomos'}>Quem Somos</Button>
                         <Button color={color3} variant="contained" href={isLoggedIn ? `/ContratacaoPlanos` : '/ContratacaoPlanos'}>Planos</Button>
                         <Button color={color4} variant="contained" href={isLoggedIn ? `/Contato` : '/Contato'}>Contato</Button>
                     </Stack>
 
                     <Box sx={{ position: "fixed", top: 0, right: 0, zIndex: 2000, padding: 2 }}>
-                        {!isLoggedIn &&
+                        {(!isLoggedIn && !isAdmin) &&
                             <Stack spacing={2} direction='row'>
                                 <Button variant="contained" href="/Login">Login</Button>
                                 <Button variant="contained" color="secondary" href="/Cadastro">Cadastro</Button>
                             </Stack>
                         }
-                        {isLoggedIn &&
+                        {(isLoggedIn) &&
 
                             <Stack spacing={1} direction="row" alignItems="center">
                                 <Button variant="contained" color="primary" href={`/EditarPerfil`}> Meu Perfil </Button>
                                 <Button variant="contained" color="error" href={'/'}> Logout </Button>
                                 <Button variant="contained" color="secondary" href={'/ConfirmarCompra'}> <IconCarrinho href={'/ConfirmarCompra'} /> </Button>
+                            </Stack>
+                        }
+                        {(isAdmin) &&
+                            <Stack spacing={1} direction="row" alignItems="center">
+                                <Button variant="contained" color="error" href={'/'}> Logout </Button>
                             </Stack>
                         }
                     </Box>

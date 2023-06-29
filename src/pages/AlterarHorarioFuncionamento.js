@@ -14,7 +14,6 @@ const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 function AlterarHorarioFuncionamento() {
   const navigate = useNavigate();
-  const cpf = sessionStorage.getItem('cpf');
   const [errMsg, setErrMsg] = useState("");
 
   const [horarioFuncionamento, setHorarioFuncionamento] = useState({
@@ -115,7 +114,7 @@ function AlterarHorarioFuncionamento() {
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <NavBar isLoggedIn={true} cpf={cpf} />
+      <NavBar isAdmin={true} />
       <Titulo texto="Alterar horário de funcionamento" mW="lg" />
       <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Stack spacing={2} direction="column" divider={<Divider orientation="horizontal" flexItem />}>

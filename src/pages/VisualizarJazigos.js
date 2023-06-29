@@ -22,7 +22,7 @@ function VisualizarJazigos() {
     return (
         <ThemeProvider theme={mainTheme}>
             <CssBaseline />
-            <NavBar isLoggedIn={true} />
+            <NavBar isAdmin={true} />
             <Titulo texto="Jazigos" mW="md" />
             <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Stack spacing={2} direction="column" divider={<Divider orientation="horizontal" flexItem />}>
