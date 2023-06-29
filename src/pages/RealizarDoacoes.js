@@ -4,7 +4,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react';
-import '../Styles/realizar-doacoes.css';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });

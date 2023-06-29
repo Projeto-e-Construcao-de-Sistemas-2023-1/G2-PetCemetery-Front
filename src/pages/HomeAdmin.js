@@ -4,7 +4,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../Styles/home.css';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 

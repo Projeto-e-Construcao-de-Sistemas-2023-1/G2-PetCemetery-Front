@@ -3,7 +3,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../Styles/adquirir-jazigo.css';
 import Mapa from '../components/Mapa';
 import ModalPadrao from '../components/ModalPadrao';
 import NavBar from '../components/NavBar';

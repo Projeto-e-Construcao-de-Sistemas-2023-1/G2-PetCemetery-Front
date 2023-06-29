@@ -2,7 +2,6 @@ import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react';
-import '../Styles/adquirir-jazigo.css';
 import Mapa from '../components/Mapa';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';

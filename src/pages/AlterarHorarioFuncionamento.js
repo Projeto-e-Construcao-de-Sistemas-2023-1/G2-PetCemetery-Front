@@ -4,7 +4,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../Styles/agendar-reuniao.css';
 import DiaFuncionamento from '../components/DiaFuncionamento';
 import ModalOk from '../components/ModalOk';
 import NavBar from '../components/NavBar';
