@@ -15,11 +15,11 @@ function Historico() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                var data = await visualizarHistorico(id);
+                const data = await visualizarHistorico(id);
                 console.log(data);
 
                 if (data) setDadosJazigos(data);
-                else console.log("Erro! Jazigo vazio");
+                else console.log("Erro! Histórico do Jazigo vazio");
 
             } catch (error) {
                 console.error("Error fetching data: " + error);
@@ -35,10 +35,9 @@ function Historico() {
             <NavBar isAdmin={true} />
             <Titulo texto="Histórico" />
             <Container component="main" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                {/*NA TEORIA loopa por todos os itens da resposta*/}
-                {dadosJazigos.map((dadosJazigos, index) => (
+                {dadosJazigos.map((dadoJazigo) => (
 
-                    <ItemHistorico dados={dadosJazigos[index]} />
+                    <ItemHistorico dados={dadoJazigo} />
 
                 ))}
 

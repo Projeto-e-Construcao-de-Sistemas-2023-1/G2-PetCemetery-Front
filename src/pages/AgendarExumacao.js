@@ -13,11 +13,11 @@ import { agendarExumacao } from '../components/api'; // Importando a função
 import { getUrlParams } from '../utils/utils';
 
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
-const id = getUrlParams('id');
 
 function AgendarExumacao() {
   const navigate = useNavigate();
   const cpf = sessionStorage.getItem('cpf');
+  const idJazigo = getUrlParams('id');
   
 
   const [selectedDate, setSelectedDate] = useState('');
@@ -29,19 +29,22 @@ function AgendarExumacao() {
   };
 
   const handleAgendar = async () => { 
+    console.log("DATA: " + selectedDate + " HORARIO: " + selectedTime);
     const exumacao = {
-        data: selectedDate,
-        horario: selectedTime
+      data: selectedDate,
+      horario: selectedTime
     };
 
     try {
-        const response = await agendarExumacao(cpf, id, exumacao.data, exumacao.horario);
-        console.log(response);
-        if (response === "OK;") {
-            setModalOpen(true);
-        } else {
-            console.error('Erro ao agendar exumação:', response);
-        }
+      console.log("ID DO JAZIGO: " + idJazigo + "CPF DO CLIENTE: " + cpf);
+      const response = await agendarExumacao(cpf, idJazigo, exumacao.data, exumacao.horario);
+      console.log(response);
+      let resp = response.split(';');
+      if (resp[0] === "OK") {
+          setModalOpen(true);
+      } else {
+          console.error('Erro ao agendar exumação:', response);
+      }
     } catch (error) {
         console.error('Erro ao agendar exumação:', error);
     }
