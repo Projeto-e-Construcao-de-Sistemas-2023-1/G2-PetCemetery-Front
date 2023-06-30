@@ -12,14 +12,17 @@ const mainTheme = createTheme({ palette: { mode: 'dark' } });
 function VisualizarDespesas() {
   const navigate = useNavigate();
   const cpf = sessionStorage.getItem('cpf');
-  const [despesas, setDespesas] = useState([]);
+  const [despesasPagas, setDespesasPagas] = useState([]);
+  const [despesasNaoPagas, setDespesasNaoPagas] = useState([]);
   const [selectedDespesas, setSelectedDespesas] = useState([]);
 
   useEffect(() => {
     const fetchDespesas = async () => {
-      const data = await visualizarDespesas(cpf);
-      console.log(data);
-      setDespesas(data || []);
+      const despesas = await visualizarDespesas(cpf);
+      console.log(despesas);
+
+      setDespesasPagas(despesas.filter((despesa) => despesa.ultimoPagamento !== null));
+      setDespesasNaoPagas(despesas.filter((despesa) => despesa.ultimoPagamento === null));
     };
 
     fetchDespesas();
@@ -38,47 +41,85 @@ function VisualizarDespesas() {
     setSelectedDespesas(newSelectedDespesas);
   };
 
+  const handleDataUltimoPagamento = (despesa) => {
+    if (despesa.ultimoPagamento === null) {
+      return '--/--/----';
+    } else {
+      const data = new Date(despesa.ultimoPagamento);
+      const dia = String(data.getDate()).padStart(2, '0');
+      const mes = String(data.getMonth() + 1).padStart(2, '0');
+      const ano = data.getFullYear();
+
+      return `${dia}/${mes}/${ano}`;
+    }
+  }
+
+  const handleDataVencimento = (despesa) => {
+    if (despesa.dataVencimento === null) {
+      return '--/--/----';
+    } else {
+      const data = new Date(despesa.ultimoPagamento);
+      const dia = String(data.getDate()).padStart(2, '0');
+      const mes = String(data.getMonth() + 1).padStart(2, '0');
+      const ano = data.getFullYear();
+      
+      return `${dia}/${mes}/${ano}`;
+    }
+  }
+
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <NavBar isLoggedIn={true} cpf={cpf} />
       <Titulo texto="Suas despesas" mW="sm" />
       <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
             <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <List sx={{ width: '100%', maxWidth: '800px', bgcolor: 'background.paper', margin: 2 }}>
-                {despesas.map((despesa, index) => {
-                  const labelId = `checkbox-list-label-${index}`;
-                  const formattedLastPaymentDate = new Date(despesa.ultimoPagamento).toLocaleDateString();
-                  const formattedDueDate = new Date(despesa.dataVencimento).toLocaleDateString();
+              <Typography variant="h6" sx={{ marginBottom: 2 }}>
+                Despesas Pagas
+              </Typography>
+              <List sx={{ width: '100%', maxWidth: '800px', bgcolor: 'background.paper' }}>
+                {despesasPagas.map((despesaPaga, indexPaga) => {
+                  const formattedLastPaymentDate = new Date(despesaPaga.ultimoPagamento).toLocaleDateString();
+                  const formattedDueDate = new Date(despesaPaga.dataVencimento).toLocaleDateString();
                   return (
-                    <ListItem key={index} role={undefined} dense button onClick={() => handleToggle(index)}>
-                      <Checkbox
-                        edge="start"
-                        checked={selectedDespesas.indexOf(index) !== -1}
-                        tabIndex={-1}
-                        disableRipple
-                        inputProps={{ 'aria-labelledby': labelId }}
-                      />
-                      <Grid container alignItems="center">
-                        <Grid item xs={10}>
-                          <ListItemText
-                            primary={`Despesa ${index + 1}`}
-                            secondary={`Valor: ${despesa.valor} | Servico: ${despesa.tipoServico} | Ultimo Pagamento: ${formattedLastPaymentDate} | Data Vencimento: ${formattedDueDate}`}
-                            secondaryTypographyProps={{ noWrap: true }}
-                          />
-                        </Grid>
-                        <Grid item xs={2} container justifyContent="flex-end">
-                          <IconButton aria-label="Despesa"><AttachMoneyIcon /></IconButton>
-                        </Grid>
-                      </Grid>
+                    <ListItem key={indexPaga} role={undefined}>
+                      <ListItemText
+                        primary={`Despesa ${indexPaga + 1}`}
+                        secondary={`Valor: ${despesaPaga.valor} | Servico: ${despesaPaga.tipoServico} | Ultimo Pagamento: ${ handleDataUltimoPagamento(despesaPaga) } | Data Vencimento: ${ handleDataVencimento(despesaPaga) }`}
+                        secondaryTypographyProps={{ noWrap: false }}
+                      />  
                     </ListItem>
                   );
                 })}
               </List>
-              <Button variant="contained" color="primary" onClick={() => {/* Handle pay action */ }}>Pagar selecionados</Button>
             </Container>
-
+          </Grid>
+          <Grid item xs={6}>
+            <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <Typography variant="h6" sx={{ marginBottom: 2 }}>
+                Despesas Não Pagas
+              </Typography>
+              <List sx={{ width: '100%', maxWidth: '800px', bgcolor: 'background.paper' }}>
+                {despesasNaoPagas.map((despesaNaoPaga, indexNaoPaga) => {
+                  const labelId = `checkbox-list-label-${indexNaoPaga}`;
+                  return (
+                    <ListItem key={indexNaoPaga} role={undefined} dense button onClick={() => handleToggle(indexNaoPaga)}>
+                      <Checkbox edge="start" checked={selectedDespesas.indexOf(indexNaoPaga) !== -1} tabIndex={-1} disableRipple inputProps={{ 'aria-labelledby': labelId }} />
+                      <ListItemText
+                        primary={`Despesa ${indexNaoPaga + 1}`}
+                        secondary={`Valor: ${despesaNaoPaga.valor} | Servico: ${despesaNaoPaga.tipoServico} | Ultimo Pagamento: ${ handleDataUltimoPagamento(despesaNaoPaga) } | Data Vencimento: ${ handleDataVencimento(despesaNaoPaga) }`}
+                        secondaryTypographyProps={{ noWrap: false }}
+                      />
+                    </ListItem>
+                  );
+                })}
+              </List>
+            </Container>
+          </Grid>
+        </Grid>
+        <Button variant="contained" color="primary" onClick={() => {/* Handle pay action */ }}>Pagar selecionados</Button>
       </Container>
     </ThemeProvider>
   );
