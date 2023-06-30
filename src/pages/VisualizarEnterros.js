@@ -33,7 +33,7 @@ function VisualizarEnterros() {
                                     <TableCell>Valor</TableCell>
                                     <TableCell>Jazigo</TableCell>
                                     <TableCell>CPF</TableCell>
-                                    <TableCell>IdPet</TableCell>
+                                    <TableCell>Data</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -42,7 +42,7 @@ function VisualizarEnterros() {
                                         <TableCell>{enterro.valor}</TableCell>
                                         <TableCell>{enterro.enderecoJazigo}</TableCell>
                                         <TableCell>{enterro.cpfCliente}</TableCell>
-                                        <TableCell>{enterro.idPet}</TableCell>
+                                        <TableCell>{enterro.dataServico}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>

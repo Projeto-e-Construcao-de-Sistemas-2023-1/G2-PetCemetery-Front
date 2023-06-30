@@ -43,47 +43,41 @@ function VisualizarDespesas() {
       <NavBar isLoggedIn={true} cpf={cpf} />
       <Titulo texto="Suas despesas" mW="sm" />
       <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Paper elevation={1} style={{ textAlign: 'center', padding: 20 }}>
-              <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant="h4">Todas as despesas</Typography>
-                <Divider orientation="horizontal" flexItem sx={{ margin: 1 }} />
-                <List sx={{ width: '100%', maxWidth: '800px', bgcolor: 'background.paper', margin: 2 }}>
-                  {despesas.map((despesa, index) => {
-                    const labelId = `checkbox-list-label-${index}`;
-                    const formattedLastPaymentDate = new Date(despesa.ultimoPagamento).toLocaleDateString();
-                    const formattedDueDate = new Date(despesa.dataVencimento).toLocaleDateString();
-                    return (
-                      <ListItem key={index} role={undefined} dense button onClick={() => handleToggle(index)}>
-                        <Checkbox
-                          edge="start"
-                          checked={selectedDespesas.indexOf(index) !== -1}
-                          tabIndex={-1}
-                          disableRipple
-                          inputProps={{ 'aria-labelledby': labelId }}
-                        />
-                        <Grid container alignItems="center">
-                          <Grid item xs={10}>
-                            <ListItemText
-                              primary={`Despesa ${index + 1}`}
-                              secondary={`Valor: ${despesa.valor} | Servico: ${despesa.tipoServico} | Ultimo Pagamento: ${formattedLastPaymentDate} | Data Vencimento: ${formattedDueDate}`}
-                              secondaryTypographyProps={{ noWrap: true }}
-                            />
-                          </Grid>
-                          <Grid item xs={2} container justifyContent="flex-end">
-                            <IconButton aria-label="Despesa"><AttachMoneyIcon /></IconButton>
-                          </Grid>
+
+            <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <List sx={{ width: '100%', maxWidth: '800px', bgcolor: 'background.paper', margin: 2 }}>
+                {despesas.map((despesa, index) => {
+                  const labelId = `checkbox-list-label-${index}`;
+                  const formattedLastPaymentDate = new Date(despesa.ultimoPagamento).toLocaleDateString();
+                  const formattedDueDate = new Date(despesa.dataVencimento).toLocaleDateString();
+                  return (
+                    <ListItem key={index} role={undefined} dense button onClick={() => handleToggle(index)}>
+                      <Checkbox
+                        edge="start"
+                        checked={selectedDespesas.indexOf(index) !== -1}
+                        tabIndex={-1}
+                        disableRipple
+                        inputProps={{ 'aria-labelledby': labelId }}
+                      />
+                      <Grid container alignItems="center">
+                        <Grid item xs={10}>
+                          <ListItemText
+                            primary={`Despesa ${index + 1}`}
+                            secondary={`Valor: ${despesa.valor} | Servico: ${despesa.tipoServico} | Ultimo Pagamento: ${formattedLastPaymentDate} | Data Vencimento: ${formattedDueDate}`}
+                            secondaryTypographyProps={{ noWrap: true }}
+                          />
                         </Grid>
-                      </ListItem>
-                    );
-                  })}
-                </List>
-                <Button variant="contained" color="primary" onClick={() => {/* Handle pay action */}}>Pagar selecionados</Button>
-              </Container>
-            </Paper>
-          </Grid>
-        </Grid>
+                        <Grid item xs={2} container justifyContent="flex-end">
+                          <IconButton aria-label="Despesa"><AttachMoneyIcon /></IconButton>
+                        </Grid>
+                      </Grid>
+                    </ListItem>
+                  );
+                })}
+              </List>
+              <Button variant="contained" color="primary" onClick={() => {/* Handle pay action */ }}>Pagar selecionados</Button>
+            </Container>
+
       </Container>
     </ThemeProvider>
   );

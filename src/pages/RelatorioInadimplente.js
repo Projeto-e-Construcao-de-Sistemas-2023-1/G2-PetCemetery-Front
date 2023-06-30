@@ -12,6 +12,7 @@ function RelatorioInadimplente() {
 
     const fetchClientesInadimplentes = async () => {
         const dadosClientes = await relatorioInadimplente();
+        console.log(dadosClientes);
         setClientes(dadosClientes);
     };
 
@@ -33,9 +34,7 @@ function RelatorioInadimplente() {
                                     <TableCell>Email</TableCell>
                                     <TableCell>Telefone</TableCell>
                                     <TableCell>Nome</TableCell>
-                                    <TableCell>Quantidade de Jazigos</TableCell>
                                     <TableCell>Desativado</TableCell>
-                                    <TableCell>Inadimplente</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -44,9 +43,7 @@ function RelatorioInadimplente() {
                                         <TableCell>{cliente.email}</TableCell>
                                         <TableCell>{cliente.telefone}</TableCell>
                                         <TableCell>{cliente.nome}</TableCell>
-                                        <TableCell>{cliente.quantJazigos}</TableCell>
                                         <TableCell>{cliente.desativado ? "Sim" : "Não"}</TableCell>
-                                        <TableCell>{cliente.inadimplente ? "Sim" : "Não"}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>

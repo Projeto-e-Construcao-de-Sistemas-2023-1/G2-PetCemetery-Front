@@ -37,7 +37,7 @@ function Home() {
                 <Button variant="contained" onClick={() => { navigate(`/AdquirirJazigo`) }}>Adquirir Jazigo</Button>
               </Grid>
               <Grid item>
-                <Button variant="contained" onClick={() => { navigate(`/VisualizarDespesas`) }}>Visualizar Despesas</Button>
+                <Button variant="contained" onClick={() => { navigate(`/VisualizarDespesas`) }}>Pagar Despesas</Button>
               </Grid>
               <Grid item>
                 <Button variant="contained" onClick={() => { navigate(`/AgendarLembrete`) }}>Agendar Lembrete de Visitas</Button>
