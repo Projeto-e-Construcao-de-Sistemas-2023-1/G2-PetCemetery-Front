@@ -10,7 +10,7 @@ import AlterarPerfil from './pages/AlterarPerfil';
 import Home from './pages/Home';
 import PaginaInicial from './pages/PaginaInicial';
 import ContratacaoPlanos from './pages/ContratacaoPlanos';
-import InfoScreen from './pages/InfoScreen';
+import AlterarHorarioFuncionamento from './pages/AlterarHorarioFuncionamento';
 import Contato from './pages/Contato';
 import { BrowserRouter as Router, Switch, Route, Link, useHistory, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import AdquirirJazigo from './pages/AdquirirJazigo';
@@ -18,7 +18,6 @@ import VisualizarDespesas from './pages/VisualizarDespesas';
 import AgendarLembrete from './pages/AgendarLembrete';
 import AgendarReuniao from './pages/AgendarReuniao';
 import RealizarDoacoes from './pages/RealizarDoacoes';
-import DetalhesJazigo from './pages/DetalhesJazigo';
 import AgendarExumacao from './pages/AgendarExumacao';
 import PersonalizarJazigo from './pages/PersonalizarJazigo';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -34,10 +33,15 @@ import ManterServicos from './pages/ManterServicos';
 import RelatorioInadimplente from './pages/RelatorioInadimplente';
 import RelatorioSelecao from './pages/RelatorioSelecao';
 import AgendarEnterro from './pages/AgendarEnterro';
+import VisualizarExumacoes from './pages/VisualizarExumacoes';
+import VisualizarEnterros from './pages/VisualizarEnterros';
+import VisualizarJazigos from './pages/VisualizarJazigos';
+import VerMapaJazigos from './pages/VerMapaJazigos';
+import DetalharJazigos from './pages/DetalharJazigos';
+import ClientesInadimplentes from './pages/ClientesInadimplentes';
+import Historico from './pages/Historico';
 
 //TODO já criar o esqueleto de TODAS as paginas possiveis
-//TODO ver se vale a pena criar componente para Titulo com Divider
-
 
 function App({ children }) {
   return (
@@ -70,16 +74,40 @@ const paginas = createBrowserRouter([
     element: <AgendarEnterro />
   }
   , {
+    path: "/VisualizarEnterros",
+    element: <VisualizarEnterros />
+  }
+  , {
+    path: "/VisualizarExumacoes",
+    element: <VisualizarExumacoes />
+  }
+  , {
+    path: "/VisualizarJazigos",
+    element: <VisualizarJazigos />
+  }
+  , {
+    path: "/VerMapaJazigos",
+    element: <VerMapaJazigos />
+  }
+  , {
+    path: "/DetalharJazigos",
+    element: <DetalharJazigos />
+  }
+  , {
+    path: "/ClientesInadimplentes",
+    element: <ClientesInadimplentes />
+  }
+  , {
+    path: "/Historico",
+    element: <Historico />
+  }
+  , {
     path: "/PersonalizarJazigo",
     element: <PersonalizarJazigo />
   }
   , {
     path: "/Contato",
     element: <Contato />
-  }
-  , {
-    path: "/DetalhesJazigo",
-    element: <DetalhesJazigo />
   }
   , {
     path: "/ContratacaoPlanos",
@@ -114,6 +142,10 @@ const paginas = createBrowserRouter([
     element: <VisualizarDespesas />
   }
   , {
+    path: "/AlterarHorarioFuncionamento",
+    element: <AlterarHorarioFuncionamento />
+  }
+  , {
     path: "/AgendarLembrete",
     element: <AgendarLembrete />
   }
@@ -124,10 +156,6 @@ const paginas = createBrowserRouter([
   , {
     path: "/RealizarDoacoes",
     element: <RealizarDoacoes />
-  }
-  , {
-    path: "/InfoScreen",
-    element: <InfoScreen />
   }
   , {
     path: "/ComprarOrnamento",
@@ -170,9 +198,9 @@ const paginas = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
-    <App>
-      <RouterProvider router={paginas} />
-    </App>
+  <App>
+    <RouterProvider router={paginas} />
+  </App>
 
 );
 

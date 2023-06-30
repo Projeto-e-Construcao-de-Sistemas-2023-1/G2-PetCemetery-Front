@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { visualizarReuniao } from '../components/api'; // Importando a função
+import { getEnterros } from '../components/api'; // Importando a função
 import { Box, Typography, Container, CssBaseline, Divider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import NavBar from '../components/NavBar';
@@ -7,43 +7,42 @@ import Titulo from '../components/Titulo';
 
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
-function VisualizarReuniao() {
-    const cpf = sessionStorage.getItem('cpf');
-    const [reunioes, setReunioes] = useState([]);
+function VisualizarEnterros() {
+    const [enterros, setEnterros] = useState([]);
 
-    const fetchReunioes = async () => {
-        const reunioes = await visualizarReuniao();
-        setReunioes(reunioes);
+    const pegaEnterros = async () => {
+        const servicosDTO = await getEnterros();
+        setEnterros(servicosDTO);
     };
 
     useEffect(() => {
-        fetchReunioes();
+        pegaEnterros();
     }, []);
 
     return (
         <ThemeProvider theme={mainTheme}>
             <CssBaseline />
             <NavBar isAdmin={true} />
-            <Titulo texto="Visualizar Reuniões" mW="md" />
+            <Titulo texto="Enterros" mW="md" />
             <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Stack spacing={2} direction="column" divider={<Divider orientation="horizontal" flexItem />}>
                     <TableContainer>
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>CPF do Cliente</TableCell>
-                                    <TableCell>Data</TableCell>
-                                    <TableCell>Horário</TableCell>
-                                    <TableCell>Assunto</TableCell>
+                                    <TableCell>Valor</TableCell>
+                                    <TableCell>Jazigo</TableCell>
+                                    <TableCell>CPF</TableCell>
+                                    <TableCell>IdPet</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {reunioes.map((reuniao, index) => (
-                                    <TableRow key={index}>
-                                        <TableCell>{reuniao.cpfCliente}</TableCell>
-                                        <TableCell>{reuniao.data}</TableCell>
-                                        <TableCell>{reuniao.horario}</TableCell>
-                                        <TableCell>{reuniao.assunto}</TableCell>
+                                {enterros.map(enterro => (
+                                    <TableRow key={enterro.valor}>
+                                        <TableCell>{enterro.valor}</TableCell>
+                                        <TableCell>{enterro.enderecoJazigo}</TableCell>
+                                        <TableCell>{enterro.cpfCliente}</TableCell>
+                                        <TableCell>{enterro.idPet}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -51,8 +50,8 @@ function VisualizarReuniao() {
                     </TableContainer>
                 </Stack>
             </Container>
-        </ThemeProvider >
+        </ThemeProvider>
     );
 }
 
-export default VisualizarReuniao;
+export default VisualizarEnterros;

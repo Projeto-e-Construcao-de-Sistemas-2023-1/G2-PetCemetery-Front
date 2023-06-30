@@ -23,7 +23,7 @@ const Carrinho = ({ cpf }) => {
     }, [cpf]);
 
     const removeServico = async (index) => {
-        var resp = await removerItemCarrinho(cpf, cartItems[index].idServico);
+        var resp = await removerItemCarrinho(cpf, cartItems[index].idJazigo);
 
         if (resp != null) resp = resp.split(';');
         else { console.log("Resposta do back = null"); return; }

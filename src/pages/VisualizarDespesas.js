@@ -3,7 +3,6 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { Button, Checkbox, Container, CssBaseline, Divider, Grid, IconButton, List, ListItem, ListItemText, Paper, Typography } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import '../Styles/visualizar-despesas.css';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 import { visualizarDespesas } from '../components/api'; // Make sure the path is correct

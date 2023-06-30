@@ -129,10 +129,10 @@ export const getInformacoesCarrinho = async (cpf) => {
     }
 };
 
-export const removerItemCarrinho = async (cpf, idServico) => {
+export const removerItemCarrinho = async (cpf, idJazigo) => {
     console.log("entrou no removerItemCarrinho");
     try {
-        const response = await apiCall.post(`/api/${cpf}/informacoes_carrinho/remover_servico?idServico=${idServico}`);
+        const response = await apiCall.post(`/api/${cpf}/informacoes_carrinho/remover_servico?idJazigo=${idJazigo}`);
         return response.data;
     } catch (error) {
         console.log(error);
@@ -161,14 +161,14 @@ export const agendarReuniao = async (cpf, data, horario, assunto) => {
 };
 
 export const agendarEnterro = async (cpf, id, data, horario, nomePet, especie, dataNascimento) => {
-  console.log("entrou no agendarEnterro");
-  console.log(cpf, id, data, horario, nomePet, especie, dataNascimento);
-  try {
-      const response = await apiCall.post(`/api/${cpf}/meus_jazigos/${id}/agendar_enterro?data=${data}&hora=${horario}&nomePet=${nomePet}&especie=${especie}&dataNascimento=${dataNascimento}`);
-      return response.data;
-  } catch (error) {
-      console.log(error);
-  }
+    console.log("entrou no agendarEnterro");
+    console.log(cpf, id, data, horario, nomePet, especie, dataNascimento);
+    try {
+        const response = await apiCall.post(`/api/${cpf}/meus_jazigos/${id}/agendar_enterro?data=${data}&hora=${horario}&nomePet=${nomePet}&especie=${especie}&dataNascimento=${dataNascimento}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 export const visualizarReuniao = async () => {
@@ -200,7 +200,7 @@ export const agendarExumacao = async (cpf, id, dataExumacao, horaExumacao) => {
     }
 };
 
-  export const getDetalhesJazigo = async (cpf_proprietario, idJazigo) => {
+export const getDetalhesJazigo = async (cpf_proprietario, idJazigo) => {
     console.log("entrou no getDetalhesJazigo");
     try {
         const response = await apiCall.get(`/api/${cpf_proprietario}/meus_jazigos/${idJazigo}/detalhar_jazigo`);
@@ -210,15 +210,26 @@ export const agendarExumacao = async (cpf, id, dataExumacao, horaExumacao) => {
     }
 };
 
+export const exibirServicos = async () => {
+    try {
+        const response = await apiCall.get(`/api/admin/servicos`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
 //Altera valor de um servico
 //Passar um JSON no body com nome do servico e valor novo
-export const AlterarValorServico = async (servico, valor) => {
-  await apiCall.post(`/api/admin/servicos/alterar?servico=${servico}&valor=${valor}`).then((response) => {
-      console.log(response);
-      return response.data;
-    }).catch((error) => {
-      console.log(error);
-    });
+export const alterarValorServico = async (servico, valor) => {
+    try {
+        const response = await apiCall.post(`/api/admin/servicos/alterar?servico=${servico}&valor=${valor}`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
 }
 
 //Adiciona item ao carrinho
@@ -226,21 +237,21 @@ export const addItemCarrinho = async (cpf, id, plano_selecionado, tipo) => {
     await apiCall.post(`/api/${cpf}/adquirir_jazigo/${id}/listar_planos/plano?planoSelecionado=${plano_selecionado}&tipo=${tipo}`).then((response) => {
         console.log(response);
         return response.data;
-      }).catch((error) => {
+    }).catch((error) => {
         console.log(error);
-      });
+    });
 };
 
 export const personalizarJazigo = async (cpf, id, mensagem) => {
     try {
-      const response = await apiCall.post(`/api/${cpf}/informacoes_jazigo/${id}/editar_jazigo`, mensagem);
-      return response.data;
+        const response = await apiCall.post(`/api/${cpf}/informacoes_jazigo/${id}/editar_jazigo`, mensagem);
+        return response.data;
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }
-  };
+};
 
-  export const relatorioInadimplente = async () => {
+export const relatorioInadimplente = async () => {
     try {
         const response = await apiCall.get('/api/admin/relatorio');
         return response.data;
@@ -258,6 +269,69 @@ export const personalizarJazigo = async (cpf, id, mensagem) => {
         }
 };
 
-  
-  
-  
+export const getEnterros = async () => {
+    try {
+        const response = await apiCall.get('/api/admin/visualizar_enterros');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getExumacoes = async () => {
+    try {
+        const response = await apiCall.get('/api/admin/visualizar_exumacoes');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getJazigos = async () => {
+    try {
+        const response = await apiCall.get('/api/get_jazigos');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getHorarios = async () => {
+    console.log("entrou no getHorarios");
+    try {
+        const response = await apiCall.get(`/api/admin/horarios`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const alterarHorarios = async (data) => {
+    console.log("entrou no alterarHorarios");
+    try {
+        const response = await apiCall.post(`/api/admin/alterar_horario_funcionamento`, data);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const adicionarLembrete = async (cpf, data) => {
+    console.log("entrou no adicionarLembrete");
+    try {
+        const response = await apiCall.post(`/api/cliente/${cpf}/adicionar-lembrete?data=${data}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const visualizarHistorico = async (id) => {
+    console.log("entrou no visualizarHistorico");
+    try {
+        const response = await apiCall.get(`/api/admin/${id}/visualizar-historico`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};

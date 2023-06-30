@@ -1,11 +1,11 @@
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, Grid, Stack, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../Styles/home.css';
 import NavBar from '../components/NavBar';
+import Titulo from '../components/Titulo';
 
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
@@ -14,45 +14,18 @@ function HomeAdmin() {
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <NavBar page={1} isLoggedIn={true} />
+      <NavBar page={1} isAdmin={true} />
+      <Titulo texto="Painel do Administrador" mW="md" />
       <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 4, }}>
-        <Typography variant="h2" align='center'>Painel do Administrador</Typography>
-        <Grid container rowSpacing={4} columnSpacing={{ xs: 4, md: 8 }} sx={{ margin: 2, textAlign: 'center' }}>
-          <Grid item xs={6}>
-            <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-              <Grid container spacing={4} direction="column" alignItems="center">
-                <Grid item>
-                  <Button variant="contained" onClick={() => { navigate(`/AlterarHorarioFuncionamento`) }}>Alterar Horário de Funcionamento</Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="contained" onClick={() => { navigate(`/RelatorioSelecao`) }}>Relatórios</Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="contained" onClick={() => { navigate(`/DetalharJazigo`) }}>Detalhar Jazigo</Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="contained" onClick={() => { navigate(`/VisualizarReuniao`) }}>Visualizar Reuniões</Button>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-
-          <Grid item xs={6}>
-            <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-              <Grid container spacing={4} direction="column" alignItems="center">
-                <Grid item>
-                  <Button variant="contained" onClick={() => { navigate(`/ClientesInadimplentes`) }}>Clientes Inadimplentes</Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="contained" onClick={() => { navigate(`/ManterServicos`) }}>Manter Serviços</Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="contained" onClick={() => { navigate(`/AdquirirJazigo`) }}>Visualizar Mapa de Jazigos</Button>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
+        <Stack direction="column" spacing={3}>
+          <Button variant="contained" onClick={() => { navigate(`/AlterarHorarioFuncionamento`) }} sx={{ width: '100%' }}>Alterar Horário de Funcionamento</Button>
+          <Button variant="contained" onClick={() => { navigate(`/RelatorioSelecao`) }} sx={{ width: '100%' }}>Relatórios</Button>
+          <Button variant="contained" onClick={() => { navigate(`/DetalharJazigos`) }} sx={{ width: '100%' }}>Detalhar Jazigos</Button>
+          <Button variant="contained" onClick={() => { navigate(`/VisualizarReuniao`) }} sx={{ width: '100%' }}>Visualizar Reuniões</Button>
+          <Button variant="contained" onClick={() => { navigate(`/ClientesInadimplentes`) }} sx={{ width: '100%' }}>Clientes Inadimplentes</Button>
+          <Button variant="contained" onClick={() => { navigate(`/ManterServicos`) }} sx={{ width: '100%' }}>Manter Serviços</Button>
+          <Button variant="contained" onClick={() => { navigate(`/VerMapaJazigos`) }} sx={{ width: '100%' }}>Visualizar Mapa de Jazigos</Button>
+        </Stack>
       </Container>
     </ThemeProvider >
   );

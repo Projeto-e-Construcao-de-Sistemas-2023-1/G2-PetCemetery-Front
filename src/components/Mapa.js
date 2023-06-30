@@ -5,14 +5,16 @@ import jazul from '../jazul.png';
 import jverde from '../jverde.png';
 import jvermelho from '../jvermelho.png';
 
-const Mapa = ({ onJazigoSelect, isModalOpen }) => {
+const Mapa = ({ onJazigoSelect, isModalOpen, readOnly }) => {
     const [selectedButton, setSelectedButton] = useState(0);
     const [mapArray, setMapArray] = useState([]);
+    const [disableButtons, setDisableButtons] = useState(false);
 
     const letras = ['A', 'B', 'C', 'D', 'E', 'F'];
     const numeros = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
 
     useEffect(() => {
+        if(readOnly) setDisableButtons(true);
         const fetchData = async () => {
             try {
                 var data = await getGravesOccupationStatus();
@@ -43,7 +45,7 @@ const Mapa = ({ onJazigoSelect, isModalOpen }) => {
 
         return (
             <Grid item key={graveID} xs={3} sm={2} md={1} lg={1} xl={1}>
-                <IconButton id={graveID} onClick={() => clickedGrave(index)}>
+                <IconButton id={graveID} disabled={disableButtons} onClick={() => clickedGrave(index)}>
                     <img src={selectedButton === graveID && isModalOpen ? jazul : value ? jverde : jvermelho} alt="icone" />
                 </IconButton>
             </Grid>
