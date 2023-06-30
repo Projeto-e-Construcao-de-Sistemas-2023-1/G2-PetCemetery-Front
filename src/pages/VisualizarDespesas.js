@@ -18,6 +18,7 @@ function VisualizarDespesas() {
   useEffect(() => {
     const fetchDespesas = async () => {
       const data = await visualizarDespesas(cpf);
+      console.log(data);
       setDespesas(data || []);
     };
 

@@ -22,7 +22,7 @@ function HomeAdmin() {
           <Button variant="contained" onClick={() => { navigate(`/RelatorioSelecao`) }} sx={{ width: '100%' }}>Relatórios</Button>
           <Button variant="contained" onClick={() => { navigate(`/DetalharJazigos`) }} sx={{ width: '100%' }}>Detalhar Jazigos</Button>
           <Button variant="contained" onClick={() => { navigate(`/VisualizarReuniao`) }} sx={{ width: '100%' }}>Visualizar Reuniões</Button>
-          <Button variant="contained" onClick={() => { navigate(`/ClientesInadimplentes`) }} sx={{ width: '100%' }}>Clientes Inadimplentes</Button>
+          <Button variant="contained" onClick={() => { navigate(`/RelatorioInadimplente`) }} sx={{ width: '100%' }}>Clientes Inadimplentes</Button>
           <Button variant="contained" onClick={() => { navigate(`/ManterServicos`) }} sx={{ width: '100%' }}>Manter Serviços</Button>
           <Button variant="contained" onClick={() => { navigate(`/VerMapaJazigos`) }} sx={{ width: '100%' }}>Visualizar Mapa de Jazigos</Button>
         </Stack>

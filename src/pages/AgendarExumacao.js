@@ -36,6 +36,7 @@ function AgendarExumacao() {
 
     try {
         const response = await agendarExumacao(cpf, id, exumacao.data, exumacao.horario);
+        console.log(response);
         if (response === "OK;") {
             setModalOpen(true);
         } else {
