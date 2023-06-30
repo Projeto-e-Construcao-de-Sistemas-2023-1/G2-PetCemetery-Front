@@ -192,6 +192,7 @@ export const finalizarCompraCarrinho = async (cpf) => {
 
 export const agendarExumacao = async (cpf, id, dataExumacao, horaExumacao) => {
     try {
+        console.log("id do jazigo: " + id);
         const response = await apiCall.post(`/api/${cpf}/meus_jazigos/${id}/agendar_exumacao?data=${dataExumacao}&hora=${horaExumacao}`);
         return response.data;
     } catch (error) {
@@ -330,6 +331,7 @@ export const visualizarHistorico = async (id) => {
     console.log("entrou no visualizarHistorico");
     try {
         const response = await apiCall.get(`/api/admin/${id}/visualizar-historico`);
+        console.log(response.data);
         return response.data;
     } catch (error) {
         console.log(error);
