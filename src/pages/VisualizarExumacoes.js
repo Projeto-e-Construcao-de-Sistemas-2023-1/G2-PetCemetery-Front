@@ -33,7 +33,7 @@ function VisualizarExumacoes() {
                                     <TableCell>Valor</TableCell>
                                     <TableCell>Jazigo</TableCell>
                                     <TableCell>CPF</TableCell>
-                                    <TableCell>idPet</TableCell>
+                                    <TableCell>Data</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -42,7 +42,7 @@ function VisualizarExumacoes() {
                                         <TableCell>{exumacao.valor}</TableCell>
                                         <TableCell>{exumacao.enderecoJazigo}</TableCell>
                                         <TableCell>{exumacao.cpfCliente}</TableCell>
-                                        <TableCell>{exumacao.idPet}</TableCell>
+                                        <TableCell>{exumacao.dataServico}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
