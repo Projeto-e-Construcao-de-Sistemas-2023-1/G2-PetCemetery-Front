@@ -128,7 +128,7 @@ function AlterarHorarioFuncionamento() {
             <DiaFuncionamento dia="feriado" horarioFuncionamento={horarioFuncionamento.feriado} onChange={handleDiaFuncionamentoChange} />
           </Box>
 
-          <Button variant="contained" color='secondary' onClick={handleSalvar}>Salvar e notificar clientes</Button>
+          <Button variant="contained" color='secondary' onClick={handleSalvar}>Salvar novos horários</Button>
         </Stack>
         <ModalOk title="Horário alterado com sucesso" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="OK" bt1Href={handleHome} />
         <Typography variant="h6" color="error" align='center'>{errMsg}</Typography>

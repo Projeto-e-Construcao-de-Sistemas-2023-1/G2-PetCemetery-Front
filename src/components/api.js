@@ -259,6 +259,15 @@ export const relatorioInadimplente = async () => {
         console.log(error);
     }
 };
+    export const visualizarDespesas = async (cpf) => {
+        try {
+          const response = await apiCall.get(`/api/cliente/${cpf}/visualizar_despesas`);
+          return response.data;
+        } catch (error) {
+          console.error('Erro ao buscar despesas:', error);
+          return null;
+        }
+};
 
 export const getEnterros = async () => {
     try {
