@@ -248,6 +248,15 @@ export const personalizarJazigo = async (cpf, id, mensagem) => {
         console.log(error);
     }
 };
+    export const visualizarDespesas = async (cpf) => {
+        try {
+          const response = await apiCall.get(`/api/cliente/${cpf}/visualizar_despesas`);
+          return response.data;
+        } catch (error) {
+          console.error('Erro ao buscar despesas:', error);
+          return null;
+        }
+};
 
   
   
