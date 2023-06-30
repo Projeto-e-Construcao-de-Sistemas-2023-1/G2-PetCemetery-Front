@@ -76,14 +76,14 @@ const ListaJazigos = ({ cliente, admin }) => {
                 <Typography variant="h6">Mensagem {(jazigo.mensagem)}</Typography>
               )}
 
-              {cliente && jazigo.nomePet && (
+              {cliente && jazigo.nomePet == "" && (
                 <Stack spacing={2} direction='row' sx={{ margin: 2 }}>
                   <Button variant="contained" color="primary" onClick={() => handleAgendarEnterro(jazigo.idJazigo)}> Agendar enterro </Button>
                   <Button variant="contained" color="secondary" onClick={() => handlePersonalizarJazigo(jazigo.idJazigo)}> Personalizar Jazigo </Button>
                 </Stack>
               )}
 
-              {cliente && !jazigo.nomePet && (
+              {cliente && jazigo.nomePet != "" && (
                 <Stack spacing={2} direction='row' sx={{ margin: 2 }}>
                   <Button variant="contained" color="primary" onClick={() => handleAgendarExumacao(jazigo.idJazigo)}> Agendar exumação </Button>
                   <Button variant="contained" color="secondary" onClick={() => handlePersonalizarJazigo(jazigo.idJazigo)}> Personalizar Jazigo </Button>
