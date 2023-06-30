@@ -62,7 +62,7 @@ function VisualizarDespesas() {
       const dia = String(data.getDate()).padStart(2, '0');
       const mes = String(data.getMonth() + 1).padStart(2, '0');
       const ano = data.getFullYear();
-      
+
       return `${dia}/${mes}/${ano}`;
     }
   }
@@ -81,8 +81,6 @@ function VisualizarDespesas() {
               </Typography>
               <List sx={{ width: '100%', maxWidth: '800px', bgcolor: 'background.paper' }}>
                 {despesasPagas.map((despesaPaga, indexPaga) => {
-                  const formattedLastPaymentDate = new Date(despesaPaga.ultimoPagamento).toLocaleDateString();
-                  const formattedDueDate = new Date(despesaPaga.dataVencimento).toLocaleDateString();
                   return (
                     <ListItem key={indexPaga} role={undefined}>
                       <ListItemText
