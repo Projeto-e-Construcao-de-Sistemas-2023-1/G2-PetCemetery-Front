@@ -12,17 +12,43 @@ const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 function AlterarValorPlanos() {
   const [errMsg, setErrMsg] = useState("");
   const [servicos, setServicos] = useState(
+    [{
+      tipoServico: "COMPRA",
+      valor: 0
+    },
     {
-      precoCompra: '',
-      precoAluguel: '',
-      precoBasic: '',
-      precoSilver: '',
-      precoGold: '',
-      precoEnterro: '',
-      precoManutencao: '',
-      precoExumacao: ''
+      tipoServico: "ALUGUEL",
+      valor: 0
+    },
+    {
+      tipoServico: "PERSONALIZACAO",
+      valor: 0
+    },
+    {
+      tipoServico: "MANUTENCAO",
+      valor: 0
+    },
+    {
+      tipoServico: "ENTERRO",
+      valor: 0
+    },
+    {
+      tipoServico: "EXUMACAO",
+      valor: 0
+    },
+    {
+      tipoServico: "BASIC",
+      valor: 0
+    },
+    {
+      tipoServico: "SILVER",
+      valor: 0
+    },
+    {
+      tipoServico: "GOLD",
+      valor: 0
     }
-  );
+    ]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,16 +56,43 @@ function AlterarValorPlanos() {
         const response = await exibirServicos();
         console.log(response);
 
-        const servicoResponse = {
-          precoCompra: response.precoCompra,
-          precoAluguel: response.precoAluguel,
-          precoBasic: response.precoBasic,
-          precoSilver: response.precoSilver,
-          precoGold: response.precoGold,
-          precoEnterro: response.precoEnterro,
-          precoManutencao: response.precoManutencao,
-          precoExumacao: response.precoExumacao
-        }
+        const servicoResponse = {};
+
+        response.forEach((item) => {
+          const { tipoServico, valor } = item;
+
+          switch (tipoServico) {
+            case "COMPRA":
+              servicoResponse.precoCompra = valor;
+              break;
+            case "ALUGUEL":
+              servicoResponse.precoAluguel = valor;
+              break;
+            case "PERSONALIZACAO":
+              servicoResponse.precoPersonalizacao = valor;
+              break;
+            case "MANUTENCAO":
+              servicoResponse.precoManutencao = valor;
+              break;
+            case "ENTERRO":
+              servicoResponse.precoEnterro = valor;
+              break;
+            case "EXUMACAO":
+              servicoResponse.precoExumacao = valor;
+              break;
+            case "BASIC":
+              servicoResponse.precoBasic = valor;
+              break;
+            case "SILVER":
+              servicoResponse.precoSilver = valor;
+              break;
+            case "GOLD":
+              servicoResponse.precoGold = valor;
+              break;
+            default:
+              break;
+          }
+        });
 
         setServicos(servicoResponse);
       } catch (error) {
@@ -59,9 +112,9 @@ function AlterarValorPlanos() {
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <Stack direction="column" spacing={2} divider={<Divider orientation="horizontal" flexItem />}>
-              <ServicoDisplay nomeServico="Compra" precoServico={servicos.precoCompra} />
-              <ServicoDisplay nomeServico="Aluguel" precoServico={servicos.precoAluguel} />
-              <ServicoDisplay nomeServico="Enterro" precoServico={servicos.precoEnterro} />
+              <ServicoDisplay nomeServico="COMPRA" precoServico={servicos.precoCompra} />
+              <ServicoDisplay nomeServico="ALUGUEL" precoServico={servicos.precoAluguel} />
+              <ServicoDisplay nomeServico="ENTERRO" precoServico={servicos.precoEnterro} />
             </Stack>
           </Grid>
           <Grid item xs={4}>
@@ -73,8 +126,8 @@ function AlterarValorPlanos() {
           </Grid>
           <Grid item xs={4}>
             <Stack direction="column" spacing={2} divider={<Divider orientation="horizontal" flexItem />}>
-              <ServicoDisplay nomeServico="Manutencao" precoServico={servicos.precoManutencao} />
-              <ServicoDisplay nomeServico="Exumacao" precoServico={servicos.precoExumacao} />
+              <ServicoDisplay nomeServico="MANUTENCAO" precoServico={servicos.precoManutencao} />
+              <ServicoDisplay nomeServico="EXUMACAO" precoServico={servicos.precoExumacao} />
             </Stack>
           </Grid>
         </Grid>

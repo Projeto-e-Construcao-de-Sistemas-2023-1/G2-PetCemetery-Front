@@ -21,6 +21,7 @@ const ServicoDisplay = ({ nomeServico, precoServico }) => {
     }, [nomeServico]);
 
     useEffect(() => {
+        console.log(precoServico);
         if (precoServico) {
             setPreco(precoServico);
             console.log("Preço do servico: " + precoServico);
@@ -61,7 +62,7 @@ const ServicoDisplay = ({ nomeServico, precoServico }) => {
             <ThemeProvider theme={mainTheme}>
                 <Paper elevation={3} sx={{ padding: 2, margin: 1 }}>
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <Typography variant="h5"> {nomeServico} </Typography>
+                        <Typography variant="h5"> {nomeServico.toLowerCase().charAt(0).toUpperCase() + nomeServico.slice(1).toLowerCase()} </Typography>
                         <Divider sx={{ width: '100%', marginBottom: 2 }} />
 
                         <TextField margin="normal" fullWidth value={preco} label="Valor do serviço" onKeyPress={handleKeyPress} onChange={handlePrecoChange} startAdornment={<InputAdornment position="start">R$</InputAdornment>} />

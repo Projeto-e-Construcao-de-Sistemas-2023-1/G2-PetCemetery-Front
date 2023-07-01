@@ -225,6 +225,8 @@ export const exibirServicos = async () => {
 //Passar um JSON no body com nome do servico e valor novo
 export const alterarValorServico = async (servico, valor) => {
     try {
+        console.log("entrou no alterarValorServico");
+        console.log("Servico: " + servico + " Valor: " + valor);
         const response = await apiCall.post(`/api/admin/servicos/alterar?servico=${servico}&valor=${valor}`);
         return response.data;
     } catch (error) {
@@ -260,14 +262,14 @@ export const relatorioInadimplente = async () => {
         console.log(error);
     }
 };
-    export const visualizarDespesas = async (cpf) => {
-        try {
-          const response = await apiCall.get(`/api/cliente/${cpf}/visualizar_despesas`);
-          return response.data;
-        } catch (error) {
-          console.error('Erro ao buscar despesas:', error);
-          return null;
-        }
+export const visualizarDespesas = async (cpf) => {
+    try {
+        const response = await apiCall.get(`/api/cliente/${cpf}/visualizar_despesas`);
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar despesas:', error);
+        return null;
+    }
 };
 
 export const getEnterros = async () => {
