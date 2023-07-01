@@ -85,7 +85,7 @@ const ListaJazigos = ({ cliente, admin }) => {
 
               {cliente && jazigo.nomePet != "" && (
                 <Stack spacing={2} direction='row' sx={{ margin: 2 }}>
-                  <Button variant="contained" color="primary" onClick={() => handleAgendarExumacao(jazigo.idJazigo)}> Agendar exumação </Button>
+                  <Button variant="contained" color="error" onClick={() => handleAgendarExumacao(jazigo.idJazigo)}> Agendar exumação </Button>
                   <Button variant="contained" color="secondary" onClick={() => handlePersonalizarJazigo(jazigo.idJazigo)}> Personalizar Jazigo </Button>
                 </Stack>
               )}

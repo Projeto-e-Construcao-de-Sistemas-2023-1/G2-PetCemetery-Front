@@ -13,7 +13,8 @@ function ItemHistorico({ dados }) {
             dataExumacao: ""
         }
     );
-
+//TODO mostrar mensagem de nao ha historico caso nao tenha  
+//Ver o merge  dps
     useEffect(() => {
         if (dados) {
             setDadosJazigo(dados);
@@ -27,7 +28,7 @@ function ItemHistorico({ dados }) {
         <React.Fragment>
             <Paper elevation={3} sx={{ padding: 2, margin: 1 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <Typography variant="h6">Nome do pet: {dadosJazigo.nomePet} </Typography>
+                    <Typography variant="h5">Nome do pet: {dadosJazigo.nomePet} </Typography>
                     <Divider orientation="vertical" sx={{ width: '100%' }} />
                     <Typography variant="h6">ID jazigo: {dadosJazigo.id_jazigo} </Typography>
                     <Typography variant="h6">Data de nascimento do pet: {dadosJazigo.dataNascimentoPet} </Typography>

@@ -24,7 +24,7 @@ function RelatorioInadimplente() {
         <ThemeProvider theme={mainTheme}>
             <CssBaseline />
             <NavBar isAdmin={true} />
-            <Titulo texto="Relatório Inadimplente" mW="md" />
+            <Titulo texto="Clientes Inadimplentes" mW="md" />
             <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Stack spacing={2} direction="column" divider={<Divider orientation="horizontal" flexItem />}>
                     <TableContainer>
