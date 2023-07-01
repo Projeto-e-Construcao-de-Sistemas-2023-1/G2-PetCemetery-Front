@@ -1,4 +1,4 @@
-import { Container, CssBaseline } from '@mui/material';
+import { Box, Container, CssBaseline, Typography } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
 import ItemHistorico from '../components/ItemHistorico';
@@ -34,14 +34,17 @@ function Historico() {
             <CssBaseline />
             <NavBar isAdmin={true} />
             <Titulo texto="Histórico" />
+            <Typography sx={{ textAlign: 'center', marginBottom: 2 }} variant="h5"> {"ID: " + id} </Typography>
             <Container component="main" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                 {dadosJazigos.map((dadoJazigo) => (
 
                     <ItemHistorico dados={dadoJazigo} />
 
                 ))}
-
             </Container>
+            {dadosJazigos.length == 0 &&
+                <Typography sx={{ textAlign: 'center' }} variant="h4"> Não há histórico para este jazigo </Typography>
+            }
         </ThemeProvider>
     );
 }
