@@ -60,6 +60,7 @@ function Login() {
       console.log("ERRO! motivo: " + resp[1]);
       if (resp[1] === "email_invalido") setErrMsg("Email inválido");
       else if (resp[1] === "senha_invalida") setErrMsg("Senha inválida");
+      else if (resp[1] === "conta_desativada") setErrMsg("Esta conta foi desativada");
     }
     else {
       console.log("Erro na formatacao de resposta do servidor");

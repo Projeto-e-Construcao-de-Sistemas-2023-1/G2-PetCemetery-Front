@@ -121,7 +121,7 @@ function AlterarPerfil() {
     }
     else if (resp[0] == "ERR") {
       console.log("ERRO! motivo: " + resp[1]);
-      if (resp[1] == "senhas_diferentes") { setErrMsg("As senhas digitadas não são iguais"); }
+      if (resp[1] == "senhas_nao_coincidem") { setErrMsg("As senhas digitadas não são iguais"); }
       else if (resp[1] == "email_invalido") { setErrMsg("O email digitado não é válido"); }
       else if (resp[1] == "email_ja_cadastrado") { setErrMsg("O email digitado já está cadastrado"); }
       else if (resp[1] == "campo_vazio") { setErrMsg("Preencha todos os campos"); }
