@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
 import { visualizarDespesas } from '../components/api';
+import ConfirmarCompra from './ConfirmarCompra';
 
 const mainTheme = createTheme({ palette: { mode: 'dark' } });
 
@@ -94,8 +95,7 @@ function VisualizarDespesas() {
                 {despesasNaoPagas.map((despesaNaoPaga, indexNaoPaga) => {
                   const labelId = `checkbox-list-label-${indexNaoPaga}`;
                   return (
-                    <ListItem key={indexNaoPaga} role={undefined} dense button onClick={() => handleToggle(indexNaoPaga)}>
-                      <Checkbox edge="start" checked={selectedDespesas.indexOf(indexNaoPaga) !== -1} tabIndex={-1} disableRipple inputProps={{ 'aria-labelledby': labelId }} />
+                    <ListItem key={indexNaoPaga} role={undefined}>
                       <ListItemText primary={`Despesa ${indexNaoPaga + 1}`} secondary={`Valor: ${despesaNaoPaga.valor} | Servico: ${despesaNaoPaga.tipoServico} | Ultimo Pagamento: ${handleDataUltimoPagamento(despesaNaoPaga)} | Data Vencimento: ${handleDataVencimento(despesaNaoPaga)}`} secondaryTypographyProps={{ noWrap: false }} />
                     </ListItem>
                   );
@@ -104,7 +104,7 @@ function VisualizarDespesas() {
             </Paper>
           </Grid>
         </Grid>
-        <Button variant="contained" color="primary" onClick={() => {/* Handle pay action */ }}>Pagar selecionados</Button>
+        <Button variant="contained" color="primary" onClick={() => { navigate("/ConfirmarCompra") }}>Ir para carrinho</Button>
       </Container>
     </ThemeProvider>
   );
