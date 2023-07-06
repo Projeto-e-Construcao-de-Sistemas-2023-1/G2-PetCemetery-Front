@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getEnterros } from '../components/api'; // Importando a função
-import { Box, Typography, Container, CssBaseline, Divider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { getEnterros, gerarPDFenterros } from '../components/api'; // Importando a função
+import { Box, Typography, Container, CssBaseline, Divider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
@@ -15,6 +15,10 @@ function VisualizarEnterros() {
         setEnterros(servicosDTO);
     };
 
+    const handleGerarPDF = async () => {
+        await gerarPDFenterros();
+    };
+
     useEffect(() => {
         pegaEnterros();
     }, []);
@@ -25,6 +29,9 @@ function VisualizarEnterros() {
             <NavBar isAdmin={true} />
             <Titulo texto="Enterros" mW="md" />
             <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <Box sx={{ my: 2 }}>
+                    <Button variant="contained" color="primary" onClick={handleGerarPDF}>Gerar PDF</Button>
+                </Box>
                 <Stack spacing={2} direction="column" divider={<Divider orientation="horizontal" flexItem />}>
                     <TableContainer>
                         <Table>

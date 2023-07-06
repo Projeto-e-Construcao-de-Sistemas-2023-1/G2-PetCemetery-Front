@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getJazigos } from '../components/api'; // Importando a função
-import { Box, Typography, Container, CssBaseline, Divider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { getJazigos, gerarPDFjazigos } from '../components/api'; // Importando a função
+import { Box, Typography, Container, CssBaseline, Divider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
@@ -15,6 +15,10 @@ function VisualizarJazigos() {
         setJazigos(jazigosDTO);
     };
 
+    const handleGerarPDF = async () => {
+        await gerarPDFjazigos();
+    };
+
     useEffect(() => {
         pegaJazigos();
     }, []);
@@ -25,6 +29,9 @@ function VisualizarJazigos() {
             <NavBar isAdmin={true} />
             <Titulo texto="Jazigos" mW="md" />
             <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <Box sx={{ my: 2 }}>
+                    <Button variant="contained" color="primary" onClick={handleGerarPDF}>Gerar PDF</Button>
+                </Box>
                 <Stack spacing={2} direction="column" divider={<Divider orientation="horizontal" flexItem />}>
                     <TableContainer>
                         <Table>
@@ -36,7 +43,6 @@ function VisualizarJazigos() {
                                     <TableCell>Plano</TableCell>
                                     <TableCell>Pet</TableCell>
                                     <TableCell>Especie</TableCell>
-                                    <TableCell>Mensagem</TableCell>
                                     <TableCell>DataNascimento</TableCell>
                                     <TableCell>DataEnterro</TableCell>
                                 </TableRow>
@@ -50,7 +56,6 @@ function VisualizarJazigos() {
                                         <TableCell>{jazigo.plano}</TableCell>
                                         <TableCell>{jazigo.nomePet}</TableCell>
                                         <TableCell>{jazigo.especie}</TableCell>
-                                        <TableCell>{jazigo.mensagem}</TableCell>
                                         <TableCell>{jazigo.dataNascimento}</TableCell>
                                         <TableCell>{jazigo.dataEnterro}</TableCell>
                                     </TableRow>

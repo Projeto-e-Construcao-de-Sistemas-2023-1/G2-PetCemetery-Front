@@ -292,7 +292,7 @@ export const getExumacoes = async () => {
 
 export const getJazigos = async () => {
     try {
-        const response = await apiCall.get('/api/get_jazigos');
+        const response = await apiCall.get('/api/admin/get_jazigos');
         return response.data;
     } catch (error) {
         console.log(error);
@@ -339,3 +339,58 @@ export const visualizarHistorico = async (id) => {
         console.log(error);
     }
 };
+
+export const gerarPDFenterros = async () => {
+    try {
+        await apiCall.get('/api/admin/gerar_pdf_enterros', { responseType: 'blob' })
+        .then(response => {
+            // Fazendo o download automático do arquivo PDF ao clicar no botão "Gerar PDF"
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'relatorio_enterros.pdf');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const gerarPDFexumacoes = async () => {
+    try {
+        await apiCall.get('/api/admin/gerar_pdf_exumacoes', { responseType: 'blob' })
+        .then(response => {
+            // Fazendo o download automático do arquivo PDF ao clicar no botão "Gerar PDF"
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'relatorio_exumacoes.pdf');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const gerarPDFjazigos = async () => {
+    try {
+        await apiCall.get('/api/admin/gerar_pdf_jazigos', { responseType: 'blob' })
+        .then(response => {
+            // Fazendo o download automático do arquivo PDF ao clicar no botão "Gerar PDF"
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'relatorio_jazigos.pdf');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
