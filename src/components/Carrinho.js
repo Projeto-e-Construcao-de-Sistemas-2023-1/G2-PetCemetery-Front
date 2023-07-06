@@ -23,6 +23,8 @@ const Carrinho = ({ cpf }) => {
     }, [cpf]);
 
     const removeServico = async (index) => {
+        if (cartItems[index].tipoServico !== "COMPRA" && cartItems[index].tipoServico !== "ALUGUEL") return;
+
         var resp = await removerItemCarrinho(cpf, cartItems[index].idJazigo);
 
         if (resp != null) resp = resp.split(';');
@@ -56,7 +58,9 @@ const Carrinho = ({ cpf }) => {
                         {cartItems.map((item, index) => (
                             <ListItem key={index}>
                                 <ListItemText primary={item.tipoServico} secondary={`$${item.valor}`} />
+                                {item.tipoServico === "COMPRA" || item.tipoServico === "ALUGUEL" ? (
                                 <Button variant="outlined" color="error" onClick={() => removeServico(index)}>Remover</Button>
+                                ) : null}
                             </ListItem>
                         ))}
                     </List>
