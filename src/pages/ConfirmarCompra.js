@@ -31,7 +31,7 @@ function ConfirmarCompra() {
 
 
   const handleCompra = async (e) => {
-    var resp;
+    var resp; 
     resp = await finalizarCompraCarrinho(cpf);
 
     console.log("resp: " + resp);
