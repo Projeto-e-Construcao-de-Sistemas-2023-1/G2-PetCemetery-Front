@@ -155,13 +155,7 @@ const PersonalizarJazigo = () => {
 
             <FormControl>
               <FormLabel id="demo-row-radio-buttons-group-label">Planos Disponíveis:</FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-                value={selectedPlano}
-                onChange={handlePlanoChange}
-              >
+              <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" value={selectedPlano} onChange={handlePlanoChange}>
                 <FormControlLabel value="BASIC" control={<Radio />} label="Basic" />
                 <FormControlLabel value="SILVER" control={<Radio />} label="Silver" />
                 <FormControlLabel value="GOLD" control={<Radio />} label="Gold" />
@@ -174,7 +168,6 @@ const PersonalizarJazigo = () => {
         </Box>
         <Box display="flex" justifyContent="center" gap={2} marginTop={4}>
           <Button variant="contained" color="primary" onClick={handleSubmit}>Alterar Informações</Button>
-
         </Box>
       </Box>
       <Typography variant="h5" color="error" align='center'>{errMsg}</Typography>
