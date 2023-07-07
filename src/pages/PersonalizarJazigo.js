@@ -146,9 +146,9 @@ const PersonalizarJazigo = () => {
 
           <Divider orientation="vertical" sx={{ marginLeft: 3, marginRight: 3 }} flexItem />
 
-          <Box flexBasis="50%" pl={2}>
+          <Box flexBasis="50%" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }} pl={2}>
             <Typography variant="h5">Plano Atual:</Typography>
-            <Typography variant="h3">{plano}</Typography>
+            <Typography sx={{ marginBottom: 2 }} variant="h3">{plano}</Typography>
 
             <FormControl>
               <FormLabel id="demo-row-radio-buttons-group-label">Planos Disponíveis:</FormLabel>
