@@ -299,6 +299,16 @@ export const getJazigos = async () => {
     }
 };
 
+export const getInfoPersonalizacao = async (cpf, id) => {
+    try {
+        const response = await apiCall.get(`/api/${cpf}/informacoes_jazigo/${id}`);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const getHorarios = async () => {
     console.log("entrou no getHorarios");
     try {
@@ -389,6 +399,16 @@ export const gerarPDFjazigos = async () => {
             link.click();
             document.body.removeChild(link);
             });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+export const alterarPlano = async (cpf, id, plano) => {
+    try {
+        const response = await apiCall.post(`/api/${cpf}/meus_jazigos/${id}/trocar_plano?tipo=${plano}`);
+        return response.data;
     } catch (error) {
         console.log(error);
     }

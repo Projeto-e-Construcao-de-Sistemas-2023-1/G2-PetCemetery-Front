@@ -8,8 +8,8 @@ import { getMeusJazigos, getJazigos } from './api';
 
 const ListaJazigos = ({ cliente, admin }) => {
   const cpf = sessionStorage.getItem('cpf');
-  const [jazigos, setJazigos] = useState([]);
   const navigate = useNavigate();
+  const [jazigos, setJazigos] = useState([]);
 
   const fetchJazigos = async () => {
     try {
@@ -52,7 +52,7 @@ const ListaJazigos = ({ cliente, admin }) => {
 
       <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         {jazigos.map((jazigo, index) => (
-          <Accordion key={index}>
+          <Accordion sx={{ width: '100%', backgroundColor: jazigo.nomePet ? '#471f1d' : '#262e26' }} key={index}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`panel${index + 1}-content`} id={`panel${index + 1}-header`}>
               <Typography variant="h6">Jazigo {jazigo.endereco}</Typography>
             </AccordionSummary>
@@ -73,7 +73,7 @@ const ListaJazigos = ({ cliente, admin }) => {
               )}
               <Typography variant="h6">Espécie: {jazigo.especie}</Typography>
               {jazigo.mensagem && (
-                <Typography variant="h6">Mensagem {(jazigo.mensagem)}</Typography>
+                <Typography variant="h6">Mensagem: {(jazigo.mensagem).replace(/"/g, '')}</Typography>
               )}
 
               {cliente && jazigo.nomePet == "" && (

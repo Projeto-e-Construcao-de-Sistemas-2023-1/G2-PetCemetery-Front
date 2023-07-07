@@ -1,25 +1,30 @@
-import { Box, Button, Card, CardContent, Divider, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, Divider, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField, Typography } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ModalOk from '../components/ModalOk';
 import NavBar from '../components/NavBar';
-import { personalizarJazigo } from '../components/api';
-import { useNavigate } from 'react-router-dom';
 import Titulo from '../components/Titulo';
+import { alterarPlano, getInfoPersonalizacao, personalizarJazigo } from '../components/api';
 import placeholder from '../placeholder.png';
+import { getUrlParams } from '../utils/utils';
 
 const mainTheme = createTheme({ palette: { mode: 'dark' } });
 
 const PersonalizarJazigo = () => {
   const cpf = sessionStorage.getItem('cpf');
-  const query = new URLSearchParams(useLocation().search);
-  const id = Number(query.get('id'));
+  const id = getUrlParams('id');
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedPlano, setSelectedPlano] = useState('');
+  const [plano, setPlano] = useState('');
   const [mensagem, setMensagem] = useState('');
   const [foto, setFoto] = useState();
   const [resultado, setResultado] = useState('');
+  const [errMsg, setErrMsg] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [textBoxDisabled, setTextBoxDisabled] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,6 +35,47 @@ const PersonalizarJazigo = () => {
       setFoto(cachedUrlFoto);
     }
   }, [id]);
+
+  const handlePlanoChange = (event) => {
+    setSelectedPlano(event.target.value);
+  };
+
+  const handleAlterarPlano = () => {
+    try {
+      alterarPlano(cpf, id, selectedPlano)
+      setModalOpen(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchInfoPersonalizacao = async () => {
+    try {
+      var resp = await getInfoPersonalizacao(cpf, id);
+      console.log(resp);
+
+      
+      if (resp != null) resp = resp.split(';');
+      else { console.log("Resposta do back = null"); setErrMsg("Erro na conexão com o servidor. Verifique sua rede"); return; }
+      
+      setPlano(resp[3]);
+      if (resp[1] != "null") {
+        setTextBoxDisabled(true);
+        setMensagem(resp[1].replace(/"/g, ''));
+        
+      }
+      else {
+        setMensagem("");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Erro na conexão com o back");
+    }
+  };
+
+  useEffect(() => {
+    fetchInfoPersonalizacao();
+  }, [cpf]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -90,16 +136,43 @@ const PersonalizarJazigo = () => {
 
           <Box flexBasis="50%" pl={2}>
             <Typography variant="h5">Mensagem na lápide</Typography>
-            <TextField multiline rows={4} fullWidth placeholder="Digite a mensagem da lápide" value={mensagem} onChange={(e) => setMensagem(e.target.value)} />
+            <TextField multiline rows={4} disabled={textBoxDisabled} fullWidth placeholder="Digite a mensagem da lápide" value={mensagem} onChange={(e) => setMensagem(e.target.value)} />
             <Typography variant="caption" color="textSecondary"> Limite de 80 caracteres </Typography>
           </Box>
+
+          <Divider orientation="vertical" sx={{ marginLeft: 3, marginRight: 3 }} flexItem />
+
+          <Box flexBasis="50%" pl={2}>
+            <Typography variant="h5">Plano Atual:</Typography>
+            <Typography variant="h3">{plano}</Typography>
+            
+            <FormControl>
+              <FormLabel id="demo-row-radio-buttons-group-label">Planos Disponíveis:</FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                  value={selectedPlano}
+                  onChange={handlePlanoChange}
+                >
+                  <FormControlLabel value="BASIC" control={<Radio />} label="Basic" />
+                  <FormControlLabel value="SILVER" control={<Radio />} label="Silver" />
+                  <FormControlLabel value="GOLD" control={<Radio />} label="Gold" />
+                </RadioGroup>
+                <Button variant="contained" color="secondary" onClick={handleAlterarPlano} >Alterar Plano</Button>
+                <ModalOk title="Troca de plano no carrinho" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="OK" bt1Href={handleHome}/>
+              </FormControl>
+          </Box>
+
         </Box>
-        <Box display="flex" justifyContent="center" marginTop={4}>
-          <Button variant="contained" color="primary" onClick={handleSubmit}> Alterar </Button>
+        <Box display="flex" justifyContent="center" gap={2} marginTop={4}>
+          <Button variant="contained" color="primary" onClick={handleSubmit}>Alterar Informações</Button>
+          
         </Box>
         {resultado && <Typography variant="subtitle1">{resultado}</Typography>}
       </Box>
-      <ModalOk title={'Mensagem editada com sucesso'} open={isModalOpen} bt1Text="Voltar" bt1Href={handleHome} />
+      <Typography variant="h6" color="error" align='center'>{errMsg}</Typography>
+      <ModalOk title={"Informações alteradas com sucesso"} open={isModalOpen} bt1Text="Voltar" bt1Href={handleHome} />
     </ThemeProvider>
   );
 };
