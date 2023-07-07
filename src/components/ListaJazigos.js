@@ -52,7 +52,7 @@ const ListaJazigos = ({ cliente, admin }) => {
 
       <Container component="main" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         {jazigos.map((jazigo, index) => (
-          <Accordion key={index}>
+          <Accordion sx={{ width: '100%', backgroundColor: jazigo.nomePet ? '#471f1d' : '#262e26' }} key={index}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`panel${index + 1}-content`} id={`panel${index + 1}-header`}>
               <Typography variant="h6">Jazigo {jazigo.endereco}</Typography>
             </AccordionSummary>
