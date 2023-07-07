@@ -59,7 +59,7 @@ const Carrinho = ({ cpf }) => {
                             <ListItem key={index}>
                                 <ListItemText primary={item.tipoServico} secondary={`$${item.valor}`} />
                                 {item.tipoServico === "COMPRA" || item.tipoServico === "ALUGUEL" ? (
-                                <Button variant="outlined" sx={{marginLeft: 10}} color="error" onClick={() => removeServico(index)}>Remover</Button>
+                                    <Button variant="outlined" sx={{ marginLeft: 10 }} color="error" onClick={() => removeServico(index)}>Remover</Button>
                                 ) : null}
                             </ListItem>
                         ))}

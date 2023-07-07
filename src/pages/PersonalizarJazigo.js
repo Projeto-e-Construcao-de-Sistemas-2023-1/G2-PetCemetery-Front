@@ -18,7 +18,6 @@ const PersonalizarJazigo = () => {
   const [mensagem, setMensagem] = useState('');
   const [foto, setFoto] = useState();
   const [urlFoto, setUrlFoto] = useState('');
-  const [resultado, setResultado] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [textBoxDisabled, setTextBoxDisabled] = useState(false);
@@ -44,12 +43,16 @@ const PersonalizarJazigo = () => {
       if (resp != null) resp = resp.split(';');
       else { console.log("Resposta do back = null"); setErrMsg("Erro na conexão com o servidor. Verifique sua rede"); return; }
 
-      if (resp[1] != "null") {
+      if (resp[1] === '""') resp[1] = "null";
+
+      if (resp[1] !== "null") {
+        console.log("Mensagem:" + resp[1] + ".");
         setTextBoxDisabled(true);
-        setMensagem(resp[1].replace(/"/g, ''));
+        setMensagem(resp[1].replace(/"/g, ""));
       }
       else {
         setMensagem("");
+        setTextBoxDisabled(false);
       }
     } catch (error) {
       console.log(error);
@@ -73,10 +76,10 @@ const PersonalizarJazigo = () => {
       if (response === 'OK;Mensagem_editada') {
         setIsModalOpen(true);
       } else {
-        setResultado('Erro ao editar a mensagem do jazigo.');
+        setErrMsg('Erro ao editar a mensagem do jazigo');
       }
     } catch (error) {
-      setResultado('Erro ao editar a mensagem do jazigo.');
+      setErrMsg('Erro ao editar a mensagem do jazigo');
     }
   };
 
@@ -129,9 +132,8 @@ const PersonalizarJazigo = () => {
         <Box display="flex" justifyContent="center" marginTop={4}>
           <Button variant="contained" color="primary" onClick={handleSubmit}>Alterar</Button>
         </Box>
-        {resultado && <Typography variant="subtitle1">{resultado}</Typography>}
       </Box>
-      <Typography variant="h6" color="error" align='center'>{errMsg}</Typography>
+      <Typography variant="h5" color="error" align='center'>{errMsg}</Typography>
       <ModalOk title={"Informações alteradas com sucesso"} open={isModalOpen} bt1Text="Voltar" bt1Href={handleHome} />
     </ThemeProvider>
   );
