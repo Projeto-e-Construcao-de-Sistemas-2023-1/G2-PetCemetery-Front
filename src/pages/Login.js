@@ -22,7 +22,6 @@ function Login() {
   const [errMsg, setErrMsg] = useState("");
 
   const handleCadastro = (e) => { navigate('/Cadastro'); }
-  const handleGoogle = (e) => { navigate('/Home'); }
 
   const handleEmail = (e) => {
     setEmailInput(e.target.value);
@@ -85,10 +84,6 @@ function Login() {
               <Button variant="contained" onClick={() => { handleLogin(); }}>Login</Button>
               <Button variant="contained" color="secondary" onClick={() => { handleCadastro(); }}>Cadastro</Button>
             </Stack>
-            <Divider orientation="horizontal" flexItem sx={{ margin: 2 }} />
-            <Box>
-              <Button variant="contained" onClick={() => { handleGoogle(); }}>Login com Google</Button>
-            </Box>
           </Box>
           <Typography variant="h6" color="error" align='center'>{errMsg}</Typography>
         </Box>

@@ -40,6 +40,7 @@ import VisualizarExumacoes from './pages/VisualizarExumacoes';
 import VisualizarJazigos from './pages/VisualizarJazigos';
 import VisualizarReuniao from './pages/VisualizarReuniao';
 import reportWebVitals from './reportWebVitals';
+import TimeSkip from './pages/TimeSkip';
 
 //TODO já criar o esqueleto de TODAS as paginas possiveis
 
@@ -192,6 +193,10 @@ const paginas = createBrowserRouter([
   , {
     path: "/RelatorioSelecao",
     element: <RelatorioSelecao />
+  }
+  , {
+    path: "/TimeSkip",
+    element: <TimeSkip />
   }
 ])
 

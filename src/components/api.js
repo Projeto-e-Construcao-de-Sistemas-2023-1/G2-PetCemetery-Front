@@ -404,7 +404,6 @@ export const gerarPDFjazigos = async () => {
     }
 }
 
-
 export const alterarPlano = async (cpf, id, plano) => {
     try {
         const response = await apiCall.post(`/api/${cpf}/meus_jazigos/${id}/trocar_plano?tipo=${plano}`);
@@ -414,3 +413,11 @@ export const alterarPlano = async (cpf, id, plano) => {
     }
 }
 
+export const alterarDataAtual = async (data) => {
+    try {
+        const response = await apiCall.post(`/api/admin/time_travel?data=${data}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
