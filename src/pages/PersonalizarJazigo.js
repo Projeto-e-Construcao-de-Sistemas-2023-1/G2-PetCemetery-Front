@@ -9,7 +9,8 @@ import { personalizarJazigo } from '../components/api';
 import { useNavigate } from 'react-router-dom';
 import Titulo from '../components/Titulo';
 import placeholder from '../placeholder.png';
-const mainTheme = createTheme({ palette: { mode: 'dark', }, });
+
+const mainTheme = createTheme({ palette: { mode: 'dark' } });
 
 const PersonalizarJazigo = () => {
   const cpf = sessionStorage.getItem('cpf');
@@ -17,31 +18,24 @@ const PersonalizarJazigo = () => {
   const id = Number(query.get('id'));
   const [mensagem, setMensagem] = useState('');
   const [foto, setFoto] = useState();
-  const [urlFoto, setUrlFoto] = useState('');
   const [resultado, setResultado] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("URLFOTO: " + urlFoto);
     // Recuperar a URL da imagem do armazenamento local
-    const cachedUrlFoto = localStorage.getItem('urlFoto');
-
-    console.log("Cachedurlfoto: " + cachedUrlFoto);
+    const cachedUrlFoto = localStorage.getItem(`urlFoto${id}`);
 
     if (cachedUrlFoto) {
-      setUrlFoto(cachedUrlFoto);
+      setFoto(cachedUrlFoto);
     }
-  }, [urlFoto]);
+  }, [id]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await personalizarJazigo(cpf, id, mensagem, urlFoto);
-
-      // Armazenar a URL da imagem selecionada no armazenamento local
-      localStorage.setItem('urlFoto', urlFoto);
+      const response = await personalizarJazigo(cpf, id, mensagem, foto);
 
       if (response === 'OK;Mensagem_editada') {
         setIsModalOpen(true);
@@ -59,14 +53,17 @@ const PersonalizarJazigo = () => {
     input.accept = 'image/*';
     input.onchange = (event) => {
       const file = event.target.files[0];
-      console.log("Imagem escolhida: " + file.name);
-      const url = URL.createObjectURL(file);
-      console.log("URL OBJECT CRIADO: " + url);
+      const reader = new FileReader();
 
-      // Armazenar a URL da imagem selecionada no estado e no armazenamento local
-      setFoto(url);
-      setUrlFoto(url);
-      localStorage.setItem('urlFoto', url);
+      reader.onload = (e) => {
+        const imageData = e.target.result;
+
+        // Armazenar os dados da imagem como uma string base64 no estado e no armazenamento local
+        setFoto(imageData);
+        localStorage.setItem(`urlFoto${id}`, imageData);
+      };
+
+      reader.readAsDataURL(file);
     };
     input.click();
   };
@@ -79,9 +76,8 @@ const PersonalizarJazigo = () => {
       <NavBar isLoggedIn={true} cpf={cpf} />
       <Titulo texto="Detalhes do Jazigo" mW="md" />
       <Box display="flex" flexDirection="column" alignItems="center">
-
         <Box display="flex" marginTop={2}>
-          <Box flexBasis="50%" sx={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
+          <Box flexBasis="50%" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }} >
             {foto ? (
               <img src={foto} alt="Imagem do Jazigo" width="40%" />
             ) : (
@@ -97,14 +93,13 @@ const PersonalizarJazigo = () => {
             <TextField multiline rows={4} fullWidth placeholder="Digite a mensagem da lápide" value={mensagem} onChange={(e) => setMensagem(e.target.value)} />
             <Typography variant="caption" color="textSecondary"> Limite de 80 caracteres </Typography>
           </Box>
-
         </Box>
         <Box display="flex" justifyContent="center" marginTop={4}>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>Alterar</Button>
+          <Button variant="contained" color="primary" onClick={handleSubmit}> Alterar </Button>
         </Box>
         {resultado && <Typography variant="subtitle1">{resultado}</Typography>}
       </Box>
-      <ModalOk title={"Mensagem editada com sucesso"} open={isModalOpen} bt1Text="Voltar" bt1Href={handleHome} />
+      <ModalOk title={'Mensagem editada com sucesso'} open={isModalOpen} bt1Text="Voltar" bt1Href={handleHome} />
     </ThemeProvider>
   );
 };
