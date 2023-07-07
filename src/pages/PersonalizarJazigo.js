@@ -9,7 +9,8 @@ import Titulo from '../components/Titulo';
 import { alterarPlano, getInfoPersonalizacao, personalizarJazigo } from '../components/api';
 import placeholder from '../placeholder.png';
 import { getUrlParams } from '../utils/utils';
-const mainTheme = createTheme({ palette: { mode: 'dark', }, });
+
+const mainTheme = createTheme({ palette: { mode: 'dark' } });
 
 const PersonalizarJazigo = () => {
   const cpf = sessionStorage.getItem('cpf');
@@ -20,23 +21,20 @@ const PersonalizarJazigo = () => {
   const [plano, setPlano] = useState('');
   const [mensagem, setMensagem] = useState('');
   const [foto, setFoto] = useState();
-  const [urlFoto, setUrlFoto] = useState('');
+  const [resultado, setResultado] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [textBoxDisabled, setTextBoxDisabled] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("URLFOTO: " + urlFoto);
     // Recuperar a URL da imagem do armazenamento local
-    const cachedUrlFoto = localStorage.getItem('urlFoto');
-
-    console.log("Cachedurlfoto: " + cachedUrlFoto);
+    const cachedUrlFoto = localStorage.getItem(`urlFoto${id}`);
 
     if (cachedUrlFoto) {
-      setUrlFoto(cachedUrlFoto);
+      setFoto(cachedUrlFoto);
     }
-  }, [urlFoto]);
+  }, [id]);
 
   const handlePlanoChange = (event) => {
     setSelectedPlano(event.target.value);
@@ -87,10 +85,7 @@ const PersonalizarJazigo = () => {
     event.preventDefault();
 
     try {
-      const response = await personalizarJazigo(cpf, id, mensagem, urlFoto);
-
-      // Armazenar a URL da imagem selecionada no armazenamento local
-      localStorage.setItem('urlFoto', urlFoto);
+      const response = await personalizarJazigo(cpf, id, mensagem, foto);
 
       if (response === 'OK;Mensagem_editada') {
         setIsModalOpen(true);
@@ -108,14 +103,17 @@ const PersonalizarJazigo = () => {
     input.accept = 'image/*';
     input.onchange = (event) => {
       const file = event.target.files[0];
-      console.log("Imagem escolhida: " + file.name);
-      const url = URL.createObjectURL(file);
-      console.log("URL OBJECT CRIADO: " + url);
+      const reader = new FileReader();
 
-      // Armazenar a URL da imagem selecionada no estado e no armazenamento local
-      setFoto(url);
-      setUrlFoto(url);
-      localStorage.setItem('urlFoto', url);
+      reader.onload = (e) => {
+        const imageData = e.target.result;
+
+        // Armazenar os dados da imagem como uma string base64 no estado e no armazenamento local
+        setFoto(imageData);
+        localStorage.setItem(`urlFoto${id}`, imageData);
+      };
+
+      reader.readAsDataURL(file);
     };
     input.click();
   };
@@ -128,9 +126,8 @@ const PersonalizarJazigo = () => {
       <NavBar isLoggedIn={true} cpf={cpf} />
       <Titulo texto="Detalhes do Jazigo" mW="md" />
       <Box display="flex" flexDirection="column" alignItems="center">
-
         <Box display="flex" marginTop={2}>
-          <Box flexBasis="50%" sx={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
+          <Box flexBasis="50%" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }} >
             {foto ? (
               <img src={foto} alt="Imagem do Jazigo" width="40%" />
             ) : (
