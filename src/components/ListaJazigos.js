@@ -8,8 +8,8 @@ import { getMeusJazigos, getJazigos } from './api';
 
 const ListaJazigos = ({ cliente, admin }) => {
   const cpf = sessionStorage.getItem('cpf');
-  const [jazigos, setJazigos] = useState([]);
   const navigate = useNavigate();
+  const [jazigos, setJazigos] = useState([]);
 
   const fetchJazigos = async () => {
     try {
@@ -73,7 +73,7 @@ const ListaJazigos = ({ cliente, admin }) => {
               )}
               <Typography variant="h6">Espécie: {jazigo.especie}</Typography>
               {jazigo.mensagem && (
-                <Typography variant="h6">Mensagem {(jazigo.mensagem)}</Typography>
+                <Typography variant="h6">Mensagem: {(jazigo.mensagem).replace(/"/g, '')}</Typography>
               )}
 
               {cliente && jazigo.nomePet == "" && (

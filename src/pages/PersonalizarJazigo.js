@@ -1,25 +1,27 @@
-import { Box, Button, Card, CardContent, Divider, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, Divider, TextField, Typography } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ModalOk from '../components/ModalOk';
 import NavBar from '../components/NavBar';
-import { personalizarJazigo } from '../components/api';
-import { useNavigate } from 'react-router-dom';
 import Titulo from '../components/Titulo';
+import { getInfoPersonalizacao, personalizarJazigo } from '../components/api';
 import placeholder from '../placeholder.png';
+import { getUrlParams } from '../utils/utils';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
 
 const PersonalizarJazigo = () => {
   const cpf = sessionStorage.getItem('cpf');
-  const query = new URLSearchParams(useLocation().search);
-  const id = Number(query.get('id'));
+  const id = getUrlParams('id');
+
   const [mensagem, setMensagem] = useState('');
   const [foto, setFoto] = useState();
   const [urlFoto, setUrlFoto] = useState('');
   const [resultado, setResultado] = useState('');
+  const [errMsg, setErrMsg] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [textBoxDisabled, setTextBoxDisabled] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,6 +35,31 @@ const PersonalizarJazigo = () => {
       setUrlFoto(cachedUrlFoto);
     }
   }, [urlFoto]);
+
+  const fetchInfoPersonalizacao = async () => {
+    try {
+      var resp = await getInfoPersonalizacao(cpf, id);
+      console.log(resp);
+
+      if (resp != null) resp = resp.split(';');
+      else { console.log("Resposta do back = null"); setErrMsg("Erro na conexão com o servidor. Verifique sua rede"); return; }
+
+      if (resp[1] != "null") {
+        setTextBoxDisabled(true);
+        setMensagem(resp[1].replace(/"/g, ''));
+      }
+      else {
+        setMensagem("");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Erro na conexão com o back");
+    }
+  };
+
+  useEffect(() => {
+    fetchInfoPersonalizacao();
+  }, [cpf]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -94,7 +121,7 @@ const PersonalizarJazigo = () => {
 
           <Box flexBasis="50%" pl={2}>
             <Typography variant="h5">Mensagem na lápide</Typography>
-            <TextField multiline rows={4} fullWidth placeholder="Digite a mensagem da lápide" value={mensagem} onChange={(e) => setMensagem(e.target.value)} />
+            <TextField multiline rows={4} disabled={textBoxDisabled} fullWidth placeholder="Digite a mensagem da lápide" value={mensagem} onChange={(e) => setMensagem(e.target.value)} />
             <Typography variant="caption" color="textSecondary"> Limite de 80 caracteres </Typography>
           </Box>
 
@@ -104,7 +131,8 @@ const PersonalizarJazigo = () => {
         </Box>
         {resultado && <Typography variant="subtitle1">{resultado}</Typography>}
       </Box>
-      <ModalOk title={"Mensagem editada com sucesso"} open={isModalOpen} bt1Text="Voltar" bt1Href={handleHome} />
+      <Typography variant="h6" color="error" align='center'>{errMsg}</Typography>
+      <ModalOk title={"Informações alteradas com sucesso"} open={isModalOpen} bt1Text="Voltar" bt1Href={handleHome} />
     </ThemeProvider>
   );
 };

@@ -299,6 +299,15 @@ export const getJazigos = async () => {
     }
 };
 
+export const getInfoPersonalizacao = async (cpf, id) => {
+    try {
+        const response = await apiCall.get(`/api/${cpf}/informacoes_jazigo/${id}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const getHorarios = async () => {
     console.log("entrou no getHorarios");
     try {
