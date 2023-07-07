@@ -54,18 +54,22 @@ const PersonalizarJazigo = () => {
       var resp = await getInfoPersonalizacao(cpf, id);
       console.log(resp);
 
-      
+
       if (resp != null) resp = resp.split(';');
       else { console.log("Resposta do back = null"); setErrMsg("Erro na conexão com o servidor. Verifique sua rede"); return; }
-      
+
+      if (resp[1] === '""') resp[1] = "null";
+
       setPlano(resp[3]);
-      if (resp[1] != "null") {
+
+      if (resp[1] !== "null") {
+        console.log("Mensagem:" + resp[1] + ".");
         setTextBoxDisabled(true);
-        setMensagem(resp[1].replace(/"/g, ''));
-        
+        setMensagem(resp[1].replace(/"/g, ""));
       }
       else {
         setMensagem("");
+        setTextBoxDisabled(false);
       }
     } catch (error) {
       console.log(error);
@@ -86,10 +90,10 @@ const PersonalizarJazigo = () => {
       if (response === 'OK;Mensagem_editada') {
         setIsModalOpen(true);
       } else {
-        setResultado('Erro ao editar a mensagem do jazigo.');
+        setErrMsg('Erro ao editar a mensagem do jazigo');
       }
     } catch (error) {
-      setResultado('Erro ao editar a mensagem do jazigo.');
+      setErrMsg('Erro ao editar a mensagem do jazigo');
     }
   };
 
@@ -145,33 +149,32 @@ const PersonalizarJazigo = () => {
           <Box flexBasis="50%" pl={2}>
             <Typography variant="h5">Plano Atual:</Typography>
             <Typography variant="h3">{plano}</Typography>
-            
+
             <FormControl>
               <FormLabel id="demo-row-radio-buttons-group-label">Planos Disponíveis:</FormLabel>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                  value={selectedPlano}
-                  onChange={handlePlanoChange}
-                >
-                  <FormControlLabel value="BASIC" control={<Radio />} label="Basic" />
-                  <FormControlLabel value="SILVER" control={<Radio />} label="Silver" />
-                  <FormControlLabel value="GOLD" control={<Radio />} label="Gold" />
-                </RadioGroup>
-                <Button variant="contained" color="secondary" onClick={handleAlterarPlano} >Alterar Plano</Button>
-                <ModalOk title="Troca de plano no carrinho" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="OK" bt1Href={handleHome}/>
-              </FormControl>
+              <RadioGroup
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="row-radio-buttons-group"
+                value={selectedPlano}
+                onChange={handlePlanoChange}
+              >
+                <FormControlLabel value="BASIC" control={<Radio />} label="Basic" />
+                <FormControlLabel value="SILVER" control={<Radio />} label="Silver" />
+                <FormControlLabel value="GOLD" control={<Radio />} label="Gold" />
+              </RadioGroup>
+              <Button variant="contained" color="secondary" onClick={handleAlterarPlano} >Alterar Plano</Button>
+              <ModalOk title="Troca de plano no carrinho" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="OK" bt1Href={handleHome} />
+            </FormControl>
           </Box>
 
         </Box>
         <Box display="flex" justifyContent="center" gap={2} marginTop={4}>
           <Button variant="contained" color="primary" onClick={handleSubmit}>Alterar Informações</Button>
-          
+
         </Box>
-        {resultado && <Typography variant="subtitle1">{resultado}</Typography>}
       </Box>
-      <Typography variant="h6" color="error" align='center'>{errMsg}</Typography>
+      <Typography variant="h5" color="error" align='center'>{errMsg}</Typography>
       <ModalOk title={"Informações alteradas com sucesso"} open={isModalOpen} bt1Text="Voltar" bt1Href={handleHome} />
     </ThemeProvider>
   );
