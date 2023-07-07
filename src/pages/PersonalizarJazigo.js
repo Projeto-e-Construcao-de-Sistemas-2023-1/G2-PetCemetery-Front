@@ -153,9 +153,9 @@ const PersonalizarJazigo = () => {
             <FormControl>
               <FormLabel id="demo-row-radio-buttons-group-label">Planos Disponíveis:</FormLabel>
               <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" value={selectedPlano} onChange={handlePlanoChange}>
-                <FormControlLabel value="BASIC" control={<Radio />} label="Basic" />
-                <FormControlLabel value="SILVER" control={<Radio />} label="Silver" />
-                <FormControlLabel value="GOLD" control={<Radio />} label="Gold" />
+                <FormControlLabel disabled={plano === "BASIC"} value="BASIC" control={<Radio />} label="Basic" />
+                <FormControlLabel disabled={plano === "SILVER"} value="SILVER" control={<Radio />} label="Silver" />
+                <FormControlLabel disabled={plano === "GOLD"} value="GOLD" control={<Radio />} label="Gold" />
               </RadioGroup>
               <Button variant="contained" color="secondary" onClick={handleAlterarPlano} >Alterar Plano</Button>
               <ModalOk title="Troca de plano no carrinho" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="OK" bt1Href={handleHome} />
