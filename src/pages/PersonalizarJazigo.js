@@ -1,4 +1,4 @@
-import { Box, Button, Divider, TextField, Typography } from '@mui/material';
+import { Box, Button, Divider, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField, Typography } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import ModalOk from '../components/ModalOk';
 import NavBar from '../components/NavBar';
 import Titulo from '../components/Titulo';
-import { getInfoPersonalizacao, personalizarJazigo } from '../components/api';
+import { alterarPlano, getInfoPersonalizacao, personalizarJazigo } from '../components/api';
 import placeholder from '../placeholder.png';
 import { getUrlParams } from '../utils/utils';
 const mainTheme = createTheme({ palette: { mode: 'dark', }, });
@@ -15,6 +15,9 @@ const PersonalizarJazigo = () => {
   const cpf = sessionStorage.getItem('cpf');
   const id = getUrlParams('id');
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedPlano, setSelectedPlano] = useState('');
+  const [plano, setPlano] = useState('');
   const [mensagem, setMensagem] = useState('');
   const [foto, setFoto] = useState();
   const [urlFoto, setUrlFoto] = useState('');
@@ -35,15 +38,31 @@ const PersonalizarJazigo = () => {
     }
   }, [urlFoto]);
 
+  const handlePlanoChange = (event) => {
+    setSelectedPlano(event.target.value);
+  };
+
+  const handleAlterarPlano = () => {
+    try {
+      alterarPlano(cpf, id, selectedPlano)
+      setModalOpen(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const fetchInfoPersonalizacao = async () => {
     try {
       var resp = await getInfoPersonalizacao(cpf, id);
       console.log(resp);
 
+
       if (resp != null) resp = resp.split(';');
       else { console.log("Resposta do back = null"); setErrMsg("Erro na conexão com o servidor. Verifique sua rede"); return; }
 
       if (resp[1] === '""') resp[1] = "null";
+
+      setPlano(resp[3]);
 
       if (resp[1] !== "null") {
         console.log("Mensagem:" + resp[1] + ".");
@@ -128,9 +147,34 @@ const PersonalizarJazigo = () => {
             <Typography variant="caption" color="textSecondary"> Limite de 80 caracteres </Typography>
           </Box>
 
+          <Divider orientation="vertical" sx={{ marginLeft: 3, marginRight: 3 }} flexItem />
+
+          <Box flexBasis="50%" pl={2}>
+            <Typography variant="h5">Plano Atual:</Typography>
+            <Typography variant="h3">{plano}</Typography>
+
+            <FormControl>
+              <FormLabel id="demo-row-radio-buttons-group-label">Planos Disponíveis:</FormLabel>
+              <RadioGroup
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="row-radio-buttons-group"
+                value={selectedPlano}
+                onChange={handlePlanoChange}
+              >
+                <FormControlLabel value="BASIC" control={<Radio />} label="Basic" />
+                <FormControlLabel value="SILVER" control={<Radio />} label="Silver" />
+                <FormControlLabel value="GOLD" control={<Radio />} label="Gold" />
+              </RadioGroup>
+              <Button variant="contained" color="secondary" onClick={handleAlterarPlano} >Alterar Plano</Button>
+              <ModalOk title="Troca de plano no carrinho" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="OK" bt1Href={handleHome} />
+            </FormControl>
+          </Box>
+
         </Box>
-        <Box display="flex" justifyContent="center" marginTop={4}>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>Alterar</Button>
+        <Box display="flex" justifyContent="center" gap={2} marginTop={4}>
+          <Button variant="contained" color="primary" onClick={handleSubmit}>Alterar Informações</Button>
+
         </Box>
       </Box>
       <Typography variant="h5" color="error" align='center'>{errMsg}</Typography>
