@@ -146,16 +146,16 @@ const PersonalizarJazigo = () => {
 
           <Divider orientation="vertical" sx={{ marginLeft: 3, marginRight: 3 }} flexItem />
 
-          <Box flexBasis="50%" pl={2}>
+          <Box flexBasis="50%" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }} pl={2}>
             <Typography variant="h5">Plano Atual:</Typography>
-            <Typography variant="h3">{plano}</Typography>
+            <Typography sx={{ marginBottom: 2 }} variant="h3">{plano}</Typography>
 
             <FormControl>
               <FormLabel id="demo-row-radio-buttons-group-label">Planos Disponíveis:</FormLabel>
               <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" value={selectedPlano} onChange={handlePlanoChange}>
-                <FormControlLabel value="BASIC" control={<Radio />} label="Basic" />
-                <FormControlLabel value="SILVER" control={<Radio />} label="Silver" />
-                <FormControlLabel value="GOLD" control={<Radio />} label="Gold" />
+                <FormControlLabel value="BASIC" control={<Radio />} label="Basic" checked={plano === 'BASIC'} />
+                <FormControlLabel value="SILVER" control={<Radio />} label="Silver" checked={plano === 'SILVER'} />
+                <FormControlLabel value="GOLD" control={<Radio />} label="Gold" checked={plano === 'GOLD'} />
               </RadioGroup>
               <Button variant="contained" color="secondary" onClick={handleAlterarPlano} >Alterar Plano</Button>
               <ModalOk title="Troca de plano no carrinho" open={modalOpen} onClose={() => setModalOpen(true)} bt1Text="OK" bt1Href={handleHome} />
